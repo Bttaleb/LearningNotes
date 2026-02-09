@@ -7,5 +7,6 @@ description: ""
 
 # {{Chapter 2}}
 
-1. Group Calls vs API vs Sys. Programs
-	Group Calls: 
+1. Sys. Calls vs API vs Sys. Programs
+	OS interface || Programming interface || Utility Program
+	Can User See? || No || No 
