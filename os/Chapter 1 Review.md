@@ -27,9 +27,9 @@ Operating System
 		Symmetric (SMP): Processors are peers, processors share memory and I/O, most modern
 		Asymmetric: Master-slave relationship, simpler but less efficient
 3. When do you use [[multiprogramming]] vs [[timesharing]]?
-	Multiprogramming for maximizing CPU utilization
+	Multiprogramming - maximizing CPU utilization
 	- Background tasks
-	Timesharing for minimizing response time
+    Timesharing - minimizing response time
 	- User experience
 	- Real-time feel
 4. Why is [[dual mode]] operation needed? How do transitions occur?
