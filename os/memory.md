@@ -9,8 +9,6 @@ description: "OS controls what's in memory, where, and who can access it"
 ---
 
 # Memory
-
-
 ## Requirements
 
 To execute a program:

@@ -7,7 +7,7 @@ source:
 description:
 ---
 # {{Ch. 1 Study Tips}}
-1. Memory hierarchy from fastest to slowest (7)
+1. Memory hierarchy from fastest to slowest (RCMSHOM) (7)
 	1. Registers (CPU Registers || [[Volatile]])
 	2. Cache (L1, L2, L3 || Volatile)
 	3. Main Memory (RAM , Fast || Volatile)
@@ -72,4 +72,15 @@ description:
 		- Manage I/O drivers
 		- Buffering - Store data temporarily while transferring
 		- Caching - Keep copies of frequently used data in faster storage
-		- Spooling - overlapping output of one job with in
+		- Spooling - overlapping output of one job with input of another job
+8. What is the difference between protection and security?
+	Protection: <mark style="background:#d3f8b6"> internal access controls </mark> 
+		- Only auth'd processes can access resources
+		- Implements access controls (read/write/execute)
+		- Uses dual mode
+	Security: <mark style="background:#d3f8b6"> defensing against external threats </mark> 
+		- User auth (passwords, biometrics)
+		- Protection against DOS-attacks
+		- Protection against worms, viruses, malware
+		- Network security (firewalls, encryption)
+	
