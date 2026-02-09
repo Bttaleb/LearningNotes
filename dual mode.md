@@ -2,8 +2,8 @@
 tags:
   - security
   - architecture
-source: "OS Class (Jan 2026)"
-description: "Restricting user access to hardware via kernel/user modes"
+source: OS Class (Jan 2026)
+description: Restricting user access to hardware via kernel/user modes
 ---
 
 # Dual-Mode Operation

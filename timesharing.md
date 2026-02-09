@@ -1,0 +1,1 @@
+logical extension of multiprogramming. CPU switches so frequently that the users interact with programs while they run

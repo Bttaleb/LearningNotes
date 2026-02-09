@@ -11,7 +11,7 @@
       "query": "path:os",
       "color": {
         "a": 1,
-        "rgb": 5431164
+        "rgb": 16711680
       }
     },
     {
@@ -32,7 +32,7 @@
       "query": "path:arch",
       "color": {
         "a": 1,
-        "rgb": 65408
+        "rgb": 16514816
       }
     }
   ],
@@ -41,11 +41,11 @@
   "textFadeMultiplier": 0,
   "nodeSizeMultiplier": 1,
   "lineSizeMultiplier": 1,
-  "collapse-forces": true,
+  "collapse-forces": false,
   "centerStrength": 0.5,
   "repelStrength": 10,
   "linkStrength": 1,
   "linkDistance": 250,
-  "scale": 1.288393722439577,
+  "scale": 1.706636659609883,
   "close": true
 }
