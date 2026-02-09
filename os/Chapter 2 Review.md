@@ -19,3 +19,13 @@ description: ""
 	2. Block/Table in memo. -- No limit, but slower
 	3. Stack -- no limit, most flexible, but slower + a lot of overhead
 3. 4 OS structures with pros + cons
+	1. Simple ([[Monolithic]])
+		<font color="#00b050">Pros</font>: Fast, efficient
+		<font color="#ff0000">Cons</font>: no well defined structure, all OS-components have direct access to hardware
+	2. UNIX
+4. Understanding trade-offs: Performance vs. reliability/maintainability
+5. Which languages are used for which parts of the OS
+6. How are system calls implemented (steps)
+7. Understand policy vs mechanism separation
+8. Categories of system programs with examples
+9. Microkernel vs Monolithic (key differences)

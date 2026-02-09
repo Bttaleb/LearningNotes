@@ -6,6 +6,9 @@ tags:
 source:
 description:
 ---
+Operating System
+ - A resource manager that manages ALL the resources in the system
+
 # {{Ch. 1 Study Tips}}
 1. Memory hierarchy from fastest to slowest (RCMSHOM) (7)
 	1. Registers (CPU Registers || [[Volatile]])
