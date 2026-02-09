@@ -67,7 +67,7 @@ description:
 		- dir management: organizing fies to dir structure
 		- mapping files to secondary storage
 		- track available disk space
-	I/<mark style="background:rgba(5, 117, 197, 0.2)">O</mark>:
+	I/O:
 		- Hide hardware details from user
 		- Manage I/O drivers
 		- Buffering - Store data temporarily while transferring
