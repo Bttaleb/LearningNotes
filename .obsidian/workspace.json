@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "os/Chapter 1 Review.md",
+                "file": "testing123.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Chapter 1 Review"
+              "title": "testing123"
             }
           }
         ]
@@ -176,8 +176,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -193,6 +192,7 @@
   },
   "active": "547a65eef17e1016",
   "lastOpenFiles": [
+    "os/Chapter 1 Review.md",
     "os/Chapter 2 Review.md",
     "testing123.md",
     "CLAUDE.md",
@@ -200,7 +200,6 @@
     "arch/data-vs-behavior.md",
     "user-input/swift-spritekit-gestures.md",
     "terms/dual mode.md",
-    "os/Chapter 1 Review.md",
     "_templates/note.md",
     "terms/timesharing.md",
     "_guide.md",
