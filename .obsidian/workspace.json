@@ -150,13 +150,23 @@
               "icon": "lucide-list",
               "title": "Outline of process-management"
             }
+          },
+          {
+            "id": "e6cc9a18275f3c22",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -166,10 +176,11 @@
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
       "markdown-importer:Open format converter": false,
-      "bases:Create new base": false
+      "bases:Create new base": false,
+      "obsidian-git:Open Git source control": false
     }
   },
-  "active": "e2d5ab292b88a872",
+  "active": "592561f9ba64001f",
   "lastOpenFiles": [
     "os/execution-models.md",
     "os/OS - Midterm Review.md",
