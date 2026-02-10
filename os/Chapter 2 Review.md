@@ -18,11 +18,19 @@ description: ""
 	1. Registers (CPU) -- Fastest, but limited
 	2. Block/Table in memo. -- No limit, but slower
 	3. Stack -- no limit, most flexible, but slower + a lot of overhead
-3. 4 OS structures with pros + cons
-	1. Simple ([[Monolithic]])
+3. <mark style="background:rgba(5, 117, 197, 0.2)">OS structures</mark> with pros + cons (4)
+	1. <mark style="background:rgba(5, 117, 197, 0.2)">Simple</mark> ([[Monolithic]])
 		<font color="#00b050">Pros</font>: Fast, efficient
-		<font color="#ff0000">Cons</font>: no well defined structure, all OS-components have direct access to hardware
-	2. UNIX
+		<font color="#ff0000">Cons</font>: Difficult to maintain/extend, no isolation, poor security
+	2. <mark style="background:rgba(5, 117, 197, 0.2)">UNIX</mark> (Layered-ish Monolithic)
+		<font color="#00b050">Pros</font>: Better structure, efficient, separation between kernel and user programs
+		<font color="#ff0000">Cons</font>: Kernel monolithic (limited modularity), difficult to maintain, limited protection
+	3. <mark style="background:rgba(5, 117, 197, 0.2)">Layered Approach</mark>
+		<font color="#00b050">Pros</font>: Modularity (easy debugging), info. hidings, maintainability, good for teaching + understanding
+		<font color="#ff0000">Cons</font>: Difficult to define layers, less efficient, rigid struct. (hard to change layer dependency)
+	4. <mark style="background:rgba(5, 117, 197, 0.2)">Microkernel</mark>
+		<font color="#00b050">Pros</font>: Easy to extend, reliable/secure, better fault isolation
+		<font color="#ff0000">Cons</font>: Slower, more user-kernel mode switches, complex inter-service comm., not as efficient as monolithic FOR GENERAL-PURPOSE SYSTEMS
 4. Understanding trade-offs: Performance vs. reliability/maintainability
 5. Which languages are used for which parts of the OS
 6. How are system calls implemented (steps)
