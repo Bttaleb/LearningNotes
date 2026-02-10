@@ -31,9 +31,22 @@ description: ""
 	4. <mark style="background:rgba(5, 117, 197, 0.2)">Microkernel</mark>
 		<font color="#00b050">Pros</font>: Easy to extend, reliable/secure, better fault isolation
 		<font color="#ff0000">Cons</font>: Slower, more user-kernel mode switches, complex inter-service comm., not as efficient as monolithic FOR GENERAL-PURPOSE SYSTEMS
-4. Understanding trade-offs: Performance vs. reliability/maintainability
+4. Trade-off Comparison between OS structures
+			Simple || UNIX || Layered || Microkernel
+		Performance
+			<font color="#00b050">Fastest</font> || <font color="#ffff00">Fast</font> || <font color="#de7802">Slower</font> || <font color="#ff0000">Slowest</font>
+		Reliability
+			<font color="#ff0000">Poor</font> || <font color="#de7802">Medium</font> || <font color="#ffff00">Good</font> || <font color="#00b050">Best</font>
+		Maintainability
+			<font color="#ff0000">Hard</font> || <font color="#de7802">Medium</font> || <font color="#ffff00">Easy</font> || <font color="#00b050">Easiest</font>
+		Modularity
+			<font color="#ff0000">None</font> || <font color="#de7802">Limited</font> || <font color="#ffff00">Good</font> || <font color="#00b050">Best</font>
 5. Which languages are used for which parts of the OS
-6. How are system calls implemented (steps)
+		Assembly: Low level hardware-specific code, max. performance, direct HW access
+		C: Most OS kernel, balance of performance and portability (low-level access)
+		C++: modern OS components, object oriented
+		High-Level: System utilities, python/java/C#, easier development + maintainability
+6. How are [[system calls]] implemented (steps)
 7. Understand policy vs mechanism separation
 8. Categories of system programs with examples
 9. Microkernel vs Monolithic (key differences)
