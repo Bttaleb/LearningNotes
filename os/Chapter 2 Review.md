@@ -46,7 +46,25 @@ description: ""
 		C: Most OS kernel, balance of performance and portability (low-level access)
 		C++: modern OS components, object oriented
 		High-Level: System utilities, python/java/C#, easier development + maintainability
-6. How are [[system calls]] implemented (steps)
-7. Understand policy vs mechanism separation
-8. Categories of system programs with examples
+6. How are [[system calls]] implemented (8 steps)
+	1. User invokes API function
+	2. API sets up parameters -> executes trap/software interrupt
+	3. Mode switches FROM User TO Kernel
+	4. CPU jumps to system call handler in OS
+	5. OS looks up system call # in system call table
+	6. OS executes corresponding kernel function
+	7. Result returned to user program
+	8. Mode switches BACK FROM Kernel TO User
+7. Understand <font color="#ffff00">policy</font> vs <font color="#de7802">mechanism</font> separation
+	<font color="#ffff00">Policy</font>: What will be done
+	<font color="#de7802">Mechanism</font>: How to do it
+	Separation allows flexibility - can change policy without changing mechanism
+8. Categories of system programs with examples (7)
+	1. File Management (create, delete, copy, rename, print; cp, rm, ls)
+	2. Status Info (Date, time, memory usage, disk space; date, ps, top, df)
+	3. File Modification (Text editors, search tools; vi, emacs, grep)
+	4. Programming Lang. support (compilers, assemblers, debuggers, interpreters; gcc, gdb)
+	5. Program Loading and Execution (Loaders, linkers, debuggers)
+	6. Communications (email, web browsers, remote login; ssh, ftp)
+	7. Background Services (Daemons, continuously running services)
 9. Microkernel vs Monolithic (key differences)
