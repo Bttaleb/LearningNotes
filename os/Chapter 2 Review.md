@@ -46,7 +46,7 @@ description: ""
 		C: Most OS kernel, balance of performance and portability (low-level access)
 		C++: modern OS components, object oriented
 		High-Level: System utilities, python/java/C#, easier development + maintainability
-6. How are [[system calls]] implemented (8 steps)
+6. How are [[system calls]] implemented? (8 steps)
 	1. User invokes API function
 	2. API sets up parameters -> executes trap/software interrupt
 	3. Mode switches FROM User TO Kernel
