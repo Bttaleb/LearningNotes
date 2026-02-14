@@ -123,4 +123,4 @@ Same concepts, different punctuation:
 
 ---
 
-**See also:** [[dfa|DFA Theory]]
+**See also:** [[theory/dfa|DFA Theory]]

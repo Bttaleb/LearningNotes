@@ -27,4 +27,11 @@ What do we know
 { w | w contains 0101 as a substring }
 What we know
 - string can start and end with anything
-- ![[DFA3]]
+![[DFA3]]
+
+Problem 4
+DFA that accepts all strings over {0,1} of length 2
+![[DFA4]]
+
+Problem 5
+Accepts any strings over {a,b} that DOES NOT contain the string ”aabb” in it
