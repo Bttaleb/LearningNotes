@@ -169,7 +169,13 @@
   "mdFontColor": "Black",
   "mdBorderColor": "Black",
   "mdCSS": "",
-  "scriptEngineSettings": {},
+  "scriptEngineSettings": {
+    "Downloaded/Palm Guard": {
+      "Goto fullscreen?": {
+        "value": true
+      }
+    }
+  },
   "previousRelease": "2.20.3",
   "showReleaseNotes": true,
   "compareManifestToPluginVersion": true,
@@ -178,7 +184,9 @@
   "latexPreambleLocation": "preamble.sty",
   "taskboneEnabled": false,
   "taskboneAPIkey": "",
-  "pinnedScripts": [],
+  "pinnedScripts": [
+    "Excalidraw/Scripts/Downloaded/Palm Guard.md"
+  ],
   "sidepanelTabs": [],
   "customPens": [
     {

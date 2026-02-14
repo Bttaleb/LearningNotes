@@ -16,6 +16,15 @@ Questions:
 - What happens to state if 0 is accepted first?
 - What do we do with 1’s after the first?
 ![[DFA1]]
-
-
 ## Problem 2
+{ w | w contains >= 3 1’s }
+What do we know
+- State wont be accepting if it’s LESS THAN 3
+- Doesn’t care about 0’s
+![[DFA2]]
+
+## Problem 3
+{ w | w contains 0101 as a substring }
+What we know
+- string can start and end with anything
+- 
