@@ -27,4 +27,4 @@ What do we know
 { w | w contains 0101 as a substring }
 What we know
 - string can start and end with anything
-- 
+- ![[DFA3]]
