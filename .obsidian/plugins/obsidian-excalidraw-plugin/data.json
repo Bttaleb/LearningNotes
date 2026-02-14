@@ -113,7 +113,54 @@
     "type": "excalidrawlib",
     "version": 2,
     "source": "https://github.com/zsviczian/obsidian-excalidraw-plugin/releases/tag/2.20.3",
-    "libraryItems": []
+    "libraryItems": [
+      {
+        "status": "unpublished",
+        "elements": [
+          {
+            "id": "9aumb4rw",
+            "type": "text",
+            "x": 285.4210209838403,
+            "y": -323.3084068207214,
+            "width": 454.63111913354203,
+            "height": 20,
+            "angle": 0,
+            "strokeColor": "#1e1e1e",
+            "backgroundColor": "transparent",
+            "fillStyle": "solid",
+            "strokeWidth": 0.5,
+            "strokeStyle": "solid",
+            "roughness": 1,
+            "opacity": 100,
+            "groupIds": [],
+            "frameId": null,
+            "index": "b2d",
+            "roundness": null,
+            "seed": 327466186,
+            "version": 161,
+            "versionNonce": 551982026,
+            "isDeleted": false,
+            "boundElements": [],
+            "updated": 1771036924459,
+            "locked": false,
+            "text": "{ w | w begins with a 1 and ends with a 0}",
+            "rawText": "{ w | w begins with a 1 and ends with a 0}",
+            "fontSize": 16,
+            "fontFamily": 5,
+            "textAlign": "left",
+            "verticalAlign": "top",
+            "containerId": null,
+            "originalText": "{ w | w begins with a 1 and ends with a 0}",
+            "autoResize": false,
+            "lineHeight": 1.25,
+            "hasTextLink": false,
+            "link": null
+          }
+        ],
+        "id": "mTtrimfEk7amGvB1X5IWF",
+        "created": 1771036936918
+      }
+    ]
   },
   "imageElementNotice": true,
   "mdSVGwidth": 500,
