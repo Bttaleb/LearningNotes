@@ -9,7 +9,6 @@ description: "A DFA diagram is already an algorithm — code it with a 2D array 
 
 # Implementing a DFA in Code
 
-
 ## How It Works
 
 A state machine in code is three things:
