@@ -35,3 +35,7 @@ DFA that accepts all strings over {0,1} of length 2
 
 Problem 5
 Accepts any strings over {a,b} that DOES NOT contain the string ”aabb” in it
+Part 1
+![[DFA5]]
+Part 2
+![[DFA5b]]
