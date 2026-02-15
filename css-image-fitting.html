@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Image Fitting — What's Going Wrong</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0d1117;
+            color: #c9d1d9;
+            line-height: 1.7;
+            padding: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        h1 { color: #f0f6fc; font-size: 1.8rem; margin-bottom: 0.5rem; }
+        h2 { color: #58a6ff; font-size: 1.3rem; margin: 2rem 0 1rem; border-bottom: 1px solid #21262d; padding-bottom: 0.4rem; }
+        h3 { color: #f0f6fc; font-size: 1.1rem; margin-bottom: 0.5rem; }
+        p { margin-bottom: 0.8rem; }
+        .subtitle { color: #8b949e; font-size: 1rem; margin-bottom: 2rem; }
+
+        /* Code blocks */
+        .code-block {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 1rem 1.2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            white-space: pre;
+        }
+        .line-bad { color: #f85149; }
+        .line-good { color: #3fb950; }
+        .line-neutral { color: #c9d1d9; }
+        .line-comment { color: #8b949e; }
+
+        /* Demo containers */
+        .demo-row {
+            display: flex;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        .demo-box {
+            flex: 1;
+            min-width: 280px;
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 1.2rem;
+        }
+        .demo-box h3 { margin-bottom: 0.3rem; }
+        .demo-box .label { color: #8b949e; font-size: 0.85rem; margin-bottom: 1rem; }
+
+        /* The actual image demos using placeholder gradients */
+        .img-placeholder {
+            background: linear-gradient(135deg, #1f6feb 0%, #58a6ff 40%, #0d1117 60%, #3fb950 100%);
+            border-radius: 6px;
+            border: 1px solid #30363d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f0f6fc;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+            position: relative;
+            overflow: hidden;
+        }
+        /* This mimics a tall portrait photo (400x600 natural) */
+        .img-placeholder::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='400'%3E%3Crect fill='%23161b22' width='280' height='400'/%3E%3Ccircle cx='140' cy='120' r='50' fill='%2358a6ff' opacity='0.4'/%3E%3Crect x='80' y='180' width='120' height='200' rx='10' fill='%231f6feb' opacity='0.3'/%3E%3Ctext x='140' y='350' text-anchor='middle' fill='%238b949e' font-size='14'%3EBottom of photo%3C/text%3E%3Ctext x='140' y='40' text-anchor='middle' fill='%238b949e' font-size='14'%3ETop of photo%3C/text%3E%3C/svg%3E");
+            background-size: cover;
+        }
+
+        /* Broken version: YOUR current CSS */
+        .demo-broken .img-placeholder {
+            width: 280px;
+            height: 200px;
+            object-fit: cover; /* doesn't apply to divs, but let's show the concept */
+        }
+
+        /* Fixed version */
+        .demo-fixed .img-placeholder {
+            max-width: 100%;
+            height: auto;
+            aspect-ratio: auto;
+        }
+
+        /* Callout box */
+        .callout {
+            background-color: #1f6feb1a;
+            border-left: 3px solid #58a6ff;
+            border-radius: 0 8px 8px 0;
+            padding: 1rem 1.2rem;
+            margin: 1.5rem 0;
+        }
+        .callout strong { color: #58a6ff; }
+
+        .problem-tag {
+            display: inline-block;
+            background-color: #f8514933;
+            color: #f85149;
+            padding: 0.15rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-right: 0.3rem;
+        }
+        .fix-tag {
+            display: inline-block;
+            background-color: #3fb95033;
+            color: #3fb950;
+            padding: 0.15rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-right: 0.3rem;
+        }
+
+        /* Visual comparison using actual img elements */
+        .visual-compare {
+            display: flex;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+        .visual-card {
+            flex: 1;
+            min-width: 300px;
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 1.2rem;
+        }
+        .visual-card h3 { margin-bottom: 0.8rem; }
+
+        /* SVG-based image simulations */
+        .sim-container {
+            position: relative;
+            border: 2px dashed #30363d;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 0.5rem 0;
+        }
+        .sim-container .crop-label {
+            position: absolute;
+            bottom: 4px;
+            right: 6px;
+            background: rgba(0,0,0,0.7);
+            color: #f85149;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* Interactive demo */
+        .toggle-section {
+            margin: 2rem 0;
+            text-align: center;
+        }
+        .toggle-btn {
+            background-color: #1f6feb;
+            color: #f0f6fc;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .toggle-btn:hover { background-color: #388bfd; }
+
+        .live-demo-gallery {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        /* Broken state (default) */
+        .live-demo-gallery.broken img {
+            width: 280px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid #f85149;
+            transition: all 0.4s ease;
+        }
+
+        /* Fixed state */
+        .live-demo-gallery.fixed img {
+            max-width: 45%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+            border: 2px solid #3fb950;
+            transition: all 0.4s ease;
+        }
+
+        .state-label {
+            text-align: center;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+        .state-label.broken-label { color: #f85149; }
+        .state-label.fixed-label { color: #3fb950; }
+
+        /* Property table */
+        .prop-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background-color: #161b22;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .prop-table th {
+            background-color: #21262d;
+            text-align: left;
+            padding: 0.6rem 1rem;
+            color: #f0f6fc;
+            font-size: 0.85rem;
+        }
+        .prop-table td {
+            padding: 0.6rem 1rem;
+            border-top: 1px solid #21262d;
+            font-size: 0.9rem;
+        }
+        .prop-table code {
+            background: #1f6feb1a;
+            color: #79c0ff;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Why Your Images Are Cut Off</h1>
+    <p class="subtitle">The 3 CSS properties causing the crop — and how to fix them</p>
+
+    <!-- ============================== -->
+    <h2>The Problem: Your Current CSS</h2>
+
+    <p>Here's what you have right now in <code style="color:#79c0ff">style.css</code> (lines 135–141):</p>
+
+    <div class="code-block"><span class="line-neutral">.image-gallery img {</span>
+<span class="line-bad">    width: 280px;          /* forces every image to exactly 280px wide */</span>
+<span class="line-bad">    height: 200px;         /* forces every image to exactly 200px tall */</span>
+<span class="line-bad">    object-fit: cover;     /* scales image UP to fill the box, CROPS the rest */</span>
+<span class="line-neutral">    border-radius: 8px;</span>
+<span class="line-neutral">    border: 1px solid #30363d;</span>
+<span class="line-neutral">}</span></div>
+
+    <p>Three properties are working together to create the crop:</p>
+
+    <div class="demo-row">
+        <div class="demo-box">
+            <h3><span class="problem-tag">1</span> Fixed width: 280px</h3>
+            <p>Forces the image container to be exactly 280px wide — regardless of the photo's natural width. If the photo is 800px wide, it gets squeezed.</p>
+        </div>
+        <div class="demo-box">
+            <h3><span class="problem-tag">2</span> Fixed height: 200px</h3>
+            <p>Forces the container to be exactly 200px tall. A tall portrait photo (say 600px tall) now has to cram into 200px. Something has to give.</p>
+        </div>
+    </div>
+
+    <div class="callout">
+        <strong>So what does <code style="color:#79c0ff">object-fit: cover</code> do?</strong><br>
+        It's the tiebreaker. When the image doesn't match the box dimensions, <code style="color:#79c0ff">cover</code> says: "Scale the image so it <em>completely fills</em> the box, then <strong>crop anything that overflows.</strong>" That's why your photos look squared and cut off — the tops, bottoms, or sides are being sliced away.
+    </div>
+
+    <!-- ============================== -->
+    <h2>Visual: What <code style="color:#79c0ff">object-fit</code> Actually Does</h2>
+
+    <p>Think of it like framing a poster that's too big for the frame:</p>
+
+    <table class="prop-table">
+        <thead>
+            <tr>
+                <th>Value</th>
+                <th>Behavior</th>
+                <th>Result</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>cover</code></td>
+                <td>Scale to fill the entire box, crop the overflow</td>
+                <td style="color:#f85149;">Image fills box but parts are hidden</td>
+            </tr>
+            <tr>
+                <td><code>contain</code></td>
+                <td>Scale to fit entirely inside the box, add empty space if needed</td>
+                <td style="color:#3fb950;">Full image visible, may have letterboxing</td>
+            </tr>
+            <tr>
+                <td><code>fill</code></td>
+                <td>Stretch/squish to exactly match box dimensions</td>
+                <td style="color:#f85149;">Image distorted (squashed or stretched)</td>
+            </tr>
+            <tr>
+                <td><code>none</code></td>
+                <td>Ignore the box, show image at its natural size</td>
+                <td style="color:#8b949e;">May overflow or be way too big</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ============================== -->
+    <h2>Interactive Demo: Toggle the Fix</h2>
+    <p>These use placeholder images to simulate what your photos experience. Click the button to switch between your broken CSS and the fix:</p>
+
+    <div class="toggle-section">
+        <button class="toggle-btn" onclick="toggleDemo()">Toggle: Broken ↔ Fixed</button>
+    </div>
+
+    <div class="live-demo-gallery broken" id="liveDemo">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='600'%3E%3Cdefs%3E%3ClinearGradient id='g1' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%231f6feb'/%3E%3Cstop offset='100%25' stop-color='%230d1117'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23g1)' width='400' height='600'/%3E%3Ccircle cx='200' cy='150' r='60' fill='%2358a6ff' opacity='0.5'/%3E%3Crect x='120' y='230' width='160' height='250' rx='12' fill='%23388bfd' opacity='0.35'/%3E%3Ctext x='200' y='50' text-anchor='middle' fill='%23f0f6fc' font-size='18' font-family='sans-serif'%3E↑ TOP (cropped by cover)%3C/text%3E%3Ctext x='200' y='560' text-anchor='middle' fill='%23f0f6fc' font-size='18' font-family='sans-serif'%3E↓ BOTTOM (cropped by cover)%3C/text%3E%3Ctext x='200' y='310' text-anchor='middle' fill='white' font-size='22' font-weight='bold' font-family='sans-serif'%3Ebass1.jpg%3C/text%3E%3Ctext x='200' y='340' text-anchor='middle' fill='%238b949e' font-size='14' font-family='sans-serif'%3E(400 × 600 portrait)%3C/text%3E%3C/svg%3E" alt="Simulated portrait photo 1">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='350'%3E%3Cdefs%3E%3ClinearGradient id='g2' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23238636'/%3E%3Cstop offset='100%25' stop-color='%230d1117'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23g2)' width='500' height='350'/%3E%3Ccircle cx='150' cy='175' r='50' fill='%233fb950' opacity='0.4'/%3E%3Ccircle cx='350' cy='175' r='50' fill='%2358a6ff' opacity='0.4'/%3E%3Ctext x='10' y='30' fill='%23f0f6fc' font-size='16' font-family='sans-serif'%3E← LEFT (cropped)%3C/text%3E%3Ctext x='340' y='30' fill='%23f0f6fc' font-size='16' font-family='sans-serif'%3ERIGHT (cropped) →%3C/text%3E%3Ctext x='250' y='180' text-anchor='middle' fill='white' font-size='22' font-weight='bold' font-family='sans-serif'%3Ebass2.jpg%3C/text%3E%3Ctext x='250' y='210' text-anchor='middle' fill='%238b949e' font-size='14' font-family='sans-serif'%3E(500 × 350 landscape)%3C/text%3E%3C/svg%3E" alt="Simulated landscape photo 2">
+    </div>
+    <p class="state-label broken-label" id="stateLabel">Currently: BROKEN (your CSS) — images cropped to 280×200 box</p>
+
+    <!-- ============================== -->
+    <h2>The Fix</h2>
+
+    <p>Replace lines 135–141 in your <code style="color:#79c0ff">style.css</code> with:</p>
+
+    <div class="code-block"><span class="line-neutral">.image-gallery img {</span>
+<span class="line-good">    max-width: 48%;        /* each image takes up ~half the gallery */</span>
+<span class="line-good">    height: auto;          /* let the image decide its own height */</span>
+<span class="line-comment">    /* no object-fit needed — natural aspect ratio is preserved */</span>
+<span class="line-neutral">    border-radius: 8px;</span>
+<span class="line-neutral">    border: 1px solid #30363d;</span>
+<span class="line-neutral">}</span></div>
+
+    <div class="callout">
+        <strong>Why this works:</strong><br>
+        <span class="fix-tag">max-width: 48%</span> Instead of a rigid pixel width, each image fills about half the gallery row — responsive and flexible.<br><br>
+        <span class="fix-tag">height: auto</span> This is the key line. It tells the browser: "calculate the height from the image's natural aspect ratio." No more forced 200px box = no more cropping.<br><br>
+        <span class="fix-tag">No object-fit</span> When width and height respect the image's natural ratio, you don't need <code style="color:#79c0ff">object-fit</code> at all. The image just... fits.
+    </div>
+
+    <!-- ============================== -->
+    <h2>Quick Reference: When to Use What</h2>
+
+    <table class="prop-table">
+        <thead>
+            <tr>
+                <th>You Want</th>
+                <th>Use This</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Full image visible, natural proportions</td>
+                <td><code>max-width: 48%; height: auto;</code></td>
+            </tr>
+            <tr>
+                <td>Uniform grid (all same size), OK with cropping</td>
+                <td><code>width: 280px; height: 200px; object-fit: cover;</code></td>
+            </tr>
+            <tr>
+                <td>Uniform grid, no cropping (letterbox OK)</td>
+                <td><code>width: 280px; height: 200px; object-fit: contain;</code></td>
+            </tr>
+            <tr>
+                <td>Full-width hero image</td>
+                <td><code>width: 100%; height: auto;</code></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        let isBroken = true;
+        function toggleDemo() {
+            const gallery = document.getElementById('liveDemo');
+            const label = document.getElementById('stateLabel');
+            isBroken = !isBroken;
+            if (isBroken) {
+                gallery.className = 'live-demo-gallery broken';
+                label.className = 'state-label broken-label';
+                label.textContent = 'Currently: BROKEN (your CSS) — images cropped to 280×200 box';
+            } else {
+                gallery.className = 'live-demo-gallery fixed';
+                label.className = 'state-label fixed-label';
+                label.textContent = 'Currently: FIXED — full images visible, natural aspect ratio';
+            }
+        }
+    </script>
+
+</body>
+</html>
