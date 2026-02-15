@@ -9,7 +9,8 @@ description: "Recognizing regular languages with finite states and deterministic
 
 # Deterministic Finite Automata (DFA)
 
-
+Takes in a string as an input
+	For every symbol in the input, we always know where to go next
 ## Definition
 
 A DFA is a 5-tuple: **(Q, Σ, δ, q₀, F)**
