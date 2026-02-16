@@ -33,3 +33,4 @@ An NFA **accepts** a string if **at least one** path through all the branching p
 DFA:
 ![[DFAvsNFA|DFAvsNFA]]
 NFA:
+![[NFAvsDFA]]
