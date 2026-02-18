@@ -11,10 +11,28 @@ Three types of sockets
 3. MulticastSocket class -> Can be sent to multiple recipients
 
 Pipes
+- A conduit allowing for two processes to communicate
+Q's
+- Unidirectional or Bidirectional?
+- If 2-way communication, half or full duplex?
+		Half -> one directional data travel @ a.g.t.
+		Full -> both directional at same time
+- Relation (parent-child) between communication processes?
+- Can be used over network?
 
-[[Ordinary Pipes]]
+[[Ordinary Pipes]] (NO access from outside process that created it)
+- Parent process creates a pipe -> Uses it to communicate with a child process that created it
 
-[[Named Pipes]] (more powerful than ordinary)
+[[Named Pipes]] (access without parent-child relationship)
 - Bidirectional
 - NO parent-child relationship is necessary between communication
 - Exists after communicating processes have finished
+
+Process Control Block (PCB)
+- Data structure used by OS to store information about a specific process (unique identifier)
+- Contains data such as:
+	- Process ID
+	- Process state
+	- Program counter : Address of next instruction to be executed
+	- Registers : 
+	- Memory management information
