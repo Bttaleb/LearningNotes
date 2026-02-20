@@ -67,8 +67,8 @@ sem_post(&empty);              // 5. Signal — I freed up a slot
 | index  | 0      | 1      | 2      | 3      | 4      | 5      |
 
 What is the index of "in" and "out" if a producer inserts 3 items and a consumer removes 1?
-Index of "in" is 3
-Index of "out" is 1
+- Index of "in" is 3
+- Index of "out" is 1
 
 **Two Variables**
 1. <font color="#00b050">In</font> (points to where NEXT item is INSERTED)
