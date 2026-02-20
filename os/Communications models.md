@@ -14,8 +14,8 @@ Shared memory
 Interprocess Communication
 
 ### Synchronization
-	Blocking <—> Non-blocking
-Blocking: Synchronous
+	[[Blocking]] <—> Non-blocking
+[[Blocking]]: Synchronous
 	- Blocking send — sender is blocked until message is received
 	- Blocking receive — receiver is blocked until message is available (NOT SENT!)
 Non-blocking: Asynchronous
