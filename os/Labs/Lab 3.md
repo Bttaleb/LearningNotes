@@ -2,7 +2,7 @@
 tags:
   - producer/consumer
   - sychronization
-source: ""
+source: OS Class (Jan 2026)
 description: ""
 date: 2026-02-20
 ---
@@ -62,3 +62,23 @@ pthread_mutex_unlock(&mutex);  // 4. Unlock — others can access now
 sem_post(&empty);              // 5. Signal — I freed up a slot
 ```
 
+| buffer | [____] | [____] | [____] | [____] | [____] | [____] |
+| ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+| index  | 0      | 1      | 2      | 3      | 4      | 5      |
+
+What is the index of "in" and "out" if a producer inserts 3 items and a consumer removes 1?
+Index of "in" is 3
+Index of "out" is 1
+
+**Two Variables**
+1. <font color="#00b050">In</font> (points to where next item is inserted)
+2. <font color="#d83931">Out</font> (points to where next item gets removed)
+```
+PRODUCER:
+buffer[in] = item;
+in = (in + 1) % BUFFER_SIZE
+
+CONSUMER:
+*item = buffer[out];
+out = (out + 1) % BUFFER_SIZE
+```
