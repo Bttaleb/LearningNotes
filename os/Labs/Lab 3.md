@@ -28,3 +28,28 @@ date: 2026-02-20
 -  increments counter by 1
 - if ANY thread was sleeping waiting on it, wake one of them up
 
+Real World Analogy
+- Every car entering (wait) reduced the sign by 1
+- Ever car leaving (post) increases the sign by 1
+- IF sign reads 0, cars have to wait in line until someone leave
+
+## Semaphore vs Mutex
+- Semaphore allows multiple threads through
+- Mutex allows one at a time (bathroom lock)
+
+Producer MUST do three things (<font color="#d83931">Does order matter?</font>)
+1. <mark style="background:#fff88f"> Wait on empty </mark> semaphore
+2. <mark style="background:#ff4d4f"> Lock the mutex </mark>
+3. <mark style="background:rgba(205, 244, 105, 0.55)"> Insert the item, unlock mutex, signal full </mark>
+<font color="#d83931">ABSOLUTELY</font>
+
+## Deadlock can occur if the system is out of order
+1. Buffer <font color="#00b050">FULL</font> (5 slots taken)
+2. Producer <font color="#ff0000">LOCKS MUTEX</font>
+3. Producer calls <mark style="background:#fff88f"> sem_wait </mark> (empty) -> but empty = 0, producer goes to sleep while holding mutex
+4. Consumer wants to remove (must lock mutex to remove item) but producer is holding it and sleeping!
+5. Consumer can never remove an item -> empty never gets signaled -> producer never wakes up
+
+# GOLDEN RULE
+Always wait on the semaphore before grabbing mutex (why?)
+- You never hold the mutex while sleeping
