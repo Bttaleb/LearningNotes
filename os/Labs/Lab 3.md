@@ -51,5 +51,14 @@ Producer MUST do three things (<font color="#d83931">Does order matter?</font>)
 5. Consumer can never remove an item -> empty never gets signaled -> producer never wakes up
 
 # GOLDEN RULE
-Always wait on the semaphore before grabbing mutex (why?)
+ALWAYS wait on the semaphore before grabbing mutex (why?)
 - You never hold the mutex while sleeping
+
+```
+sem_wait(&full);              // 1. Wait — is there an item to take?
+pthread_mutex_lock(&mutex);    // 2. Lock — I need exclusive access
+// remove item from buffer        // 3. Do the work
+pthread_mutex_unlock(&mutex);  // 4. Unlock — others can access now
+sem_post(&empty);              // 5. Signal — I freed up a slot
+```
+
