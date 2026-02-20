@@ -71,8 +71,8 @@ Index of "in" is 3
 Index of "out" is 1
 
 **Two Variables**
-1. <font color="#00b050">In</font> (points to where next item is inserted)
-2. <font color="#d83931">Out</font> (points to where next item gets removed)
+1. <font color="#00b050">In</font> (points to where NEXT item is INSERTED)
+2. <font color="#d83931">Out</font> (points to where NEXT item gets REMOVED)
 ```
 PRODUCER:
 buffer[in] = item;
