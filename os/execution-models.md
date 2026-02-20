@@ -19,7 +19,7 @@ description: "Evolution: Batch → Multiprogramming → Time-Sharing"
 
 **Solution:** Keep multiple jobs in memory, switch between them.
 
-e### Program Execution Flow
+### Program Execution Flow
 
 ```
 Disk (exe file)

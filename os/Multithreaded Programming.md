@@ -3,20 +3,18 @@ tags:
   - concurrency
   - parallelism
   - threads
-  - performance
 source: Chapter 4
-description: "Thread-level parallelism: multiple execution paths on multicore hardware"
+description: ""
 date: 2026-02-19
 ---
 #Parallelism -> implies a system can perform more than one task SIMULTANEOUSLY
 #Concurrency -> supports more than one task making progress
-	Single-core = concurrent (via [[execution-models|time-sharing]]) but NOT parallel
 
 Types of Parallelism (Software)
 	**Data**: ==distributes subsets of same data across multiple cores==, *same operation on each*
 	**Task**: ==distributing threads across cores==, *threads perform unique operation*
 As number of threads grows, architectural support for threading grows as well (Hardware)
-	CPU's have cores and hardware threads
+	CPU’s have cores and hardware threads
 
 #Amdahls-Law - What does it identify?
 	Performance gains from adding additional cores to an application THAT HAS BOTH serial and parallel components
@@ -25,52 +23,38 @@ As number of threads grows, architectural support for threading grows as well (H
 $$
 Speedup <= 1 / (S+((1-S)/N)
 $$
-	Serial portion = bottleneck. 25% serial → max 4x speedup even with ∞ cores
-	Thread synchronization adds to serial portion ([[memory#Cache Coherence (Multi-CPU)|cache coherence]])
 
----
-
-User Threads and Kernel Threads (kernel mode = unrestricted access, [[Chapter 1 Review|dual mode]])
+User Threads and Kernel Threads (kernel mode = unrestricted access)
 #Thread-library -> provides programmer with API for creating and managing threads
 #User-threads -> management done by user-level threads library
 #Kernel-threads -> Supported by Kernel
 
 - Threads do NOT have parent child processes
 - Any system that support UNIX or LINUX, must support POSIX
-
+- 
 [3 Primary thread libraries]
 	1. POSIX Pthreads (User and Kernel)
 	2. Windows threads (Kernel)
 	3. Java threads (User but depends on hosting OS)
-
+	
 User-Threads <font color="#00b050">Advantages</font>:
-- thread switching doesn't require kernel mode
+- thread switching doesn’t require kernel mode
 - User level thread can run on ANY OS
 - Scheduling can be app specific in the user level thread
 - User level thread are fast to create and manage
 User-Threads <font color="#ff0000">Disadvantages</font>:
-- Most systems calls are [[blocking]] — 1 user thread blocks → ENTIRE process blocks
+- Most systems calls are [[blocking]]
 - Multithreaded apps cannot use multiprocessing
 
 Kernel-Thread <font color="#00b050">Advantages</font>:
-- Simultaneously schedule multiple threads from the same process on multiple processors
+- Simultaneously schedule multiple threaded from the same process on multiple processors
 - If 1 thread is BLOCKED, Kernel can schedule another thread of same process
 - Kernel routines can be multithreaded
 Kernel-Thread <font color="#ff0000">Disadvantages</font>:
-- Generally slower to create and manage
+- Generally slower to create and manager
 - Transfer of control from one thread to another (within the same process) requires mode switch TO Kernel
 
-Same tradeoff as [[Chapter 2 Review|microkernel vs monolithic]] — more kernel = better capability but more overhead
-
----
-
 One thread MUST FINISH its job before the main thread exits
-
-Threads share [[memory]] (same address space) → need synchronization → risk of [[process-management#Deadlock|deadlock]]
-	[[Lab 3|Semaphores]] for threads, [[clustered-systems|DLM]] for cluster nodes = same pattern, different scope
-	Thread waiting on mutex = [[blocking|blocking receive]] on a shared resource ([[Communications models#Synchronization]])
-
----
 
 # Threading Issues
 <font color="#00b0f0">Signals</font> -> Used in UNIX to notify a process that an event occurred
@@ -80,11 +64,9 @@ Threads share [[memory]] (same address space) → need synchronization → risk 
 3. Signal is<font color="#f79646"> handled by one of two signal handlers</font>
 	1. <font color="#9bbb59">Default</font>
 	2. <font color="#9bbb59">User-defined</font>
-<font color="#00b0f0">Signal Handling</font>:
+<font color="#00b0f0">Signal Handling</font>: 
 4. <font color="#ffff00">Sync</font>: signal handled immediately after generation
 5. <font color="#ffff00">Async</font>: signal handled after some time being generated
-
-In multithreaded: *which thread receives the signal?* → the one that caused it, every thread, or a designated handler thread
 
 Thread Cancellation
 - You can invoke a thread cancellation request, but actual cancellation depends on thread state
@@ -93,12 +75,8 @@ Thread Cancellation
 | ------------ | -------- | ----------- |
 | Off          | Disabled | -           |
 | Deferred     | Enabled  | Deferred    |
-| Asynchronous | Enabled  | Asynchronous |
+| Asynchronous | Enabled  | Asynchonous |
 If the thread has cancellation DISABLED, cancellation REMAINS PENDING until enabled
 Default type = deferred
 pthread_testcancel()
-	Deferred = cooperative ("I'll check when ready"), Async = preemptive ("stop NOW")
 
----
-
-[[process-management]] | [[execution-models]] | [[memory]] | [[clustered-systems]] | [[Communications models]] | [[blocking]] | [[Lab 3]] | [[Sockets]] | [[weak-self-closures]]
