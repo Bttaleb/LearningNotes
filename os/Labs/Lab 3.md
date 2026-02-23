@@ -54,25 +54,38 @@ Producer MUST do three things (<font color="#d83931">Does order matter?</font>)
 ALWAYS wait on the semaphore before grabbing mutex (why?)
 - You never hold the mutex while sleeping
 
+**Producer**:
 ```
-sem_wait(&full);              // 1. Wait — is there an item to take?
-pthread_mutex_lock(&mutex);    // 2. Lock — I need exclusive access
-// remove item from buffer        // 3. Do the work
-pthread_mutex_unlock(&mutex);  // 4. Unlock — others can access now
-sem_post(&empty);              // 5. Signal — I freed up a slot
+1. sem_wait(&empty)     — "Is there an empty slot?" (blocks if buffer full)
+2. mutex_lock(&mutex)   — "Let me have exclusive access"
+3. buffer[in] = item    — do the work
+4. in = (in+1) % SIZE
+5. mutex_unlock(&mutex) — "Done, others can access"
+6. sem_post(&full)      — "Hey consumers, there's one more item now"
 ```
+
+**Consumer**:
+```
+1. sem_wait(&full)      — "Is there an item to take?" (blocks if buffer empty)
+2. mutex_lock(&mutex)   — "Let me have exclusive access"
+3. item = buffer[out]   — do the work
+4. out = (out+1) % SIZE
+5. mutex_unlock(&mutex) — "Done, others can access"
+6. sem_post(&empty)     — "Hey producers, there's one more empty slot now"
+```
+
 
 | buffer | [____] | [____] | [____] | [____] | [____] | [____] |
 | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
 | index  | 0      | 1      | 2      | 3      | 4      | 5      |
 
 What is the index of "in" and "out" if a producer inserts 3 items and a consumer removes 1?
-Index of "in" is 3
-Index of "out" is 1
+- Index of "in" is 3
+- Index of "out" is 1
 
 **Two Variables**
-1. <font color="#00b050">In</font> (points to where next item is inserted)
-2. <font color="#d83931">Out</font> (points to where next item gets removed)
+1. <font color="#00b050">In</font> (points to where NEXT item is INSERTED)
+2. <font color="#d83931">Out</font> (points to where NEXT item gets REMOVED)
 ```
 PRODUCER:
 buffer[in] = item;
