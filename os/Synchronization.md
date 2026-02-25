@@ -46,7 +46,7 @@ do {
 # Solutions to Critical-Section Problem
 1. <mark style="background:#b1ffff">Mutual Exclusion</mark> - process P<sub>i</sub> is executing in its critical section, NO OTHER PROCESSES can be executing in THEIR critical section
 2. <mark style="background:#b1ffff">Progress</mark> - if NO process is in critical section, processes wishing to enter cannot be postponed indefinitely
-3. <mark style="background:#b1ffff">Bounded Waiting</mark> - Must be strict limit on how many times other processes can enter critical sections after a process requested entry(will/could one of the processes wait for an unlimited time?)
+3. <mark style="background:#b1ffff">Bounded Waiting</mark> - Must be strict limit on how many times other processes can enter critical sections after a process request(will/could one of the processes wait for an unlimited time?)
 
 ANYTIME YOU ACCESS SHARED DATA, YOU MUST PUT IT IN A <mark style="background:rgba(240, 200, 0, 0.2)">CRITICAL SECTION</mark> (with entry and exit)
 	- When you use the bathroom, you go inside (lock), use the bathroom, exit (unlock)
