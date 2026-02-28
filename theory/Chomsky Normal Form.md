@@ -10,13 +10,10 @@ Context Free Grammars (CFG)
 - A -> x, where x can be anything (A->bCdeFGh…)
 Can we simplify this? 
 
-CNF is a restriction on the right hand side
-	What is the restriction?
-1.  Only rule that can make the “empty string” is the starting variable (S -> ϵ ) 
-2. A -> a
-	Any variable can make a single terminal and nothing else
-	A = V, A = E
-3. A  -> BC
-	Variable A makes two varibles
-	B and C are not starting variables
-	
+![[CNF restriction]]
+
+We can convert ANY CFG into CNF
+
+1. Ensure the starting variable <font color="#ff0000">IS NOT</font> On the RHS of any rule
+
+Original start var. > <font color="#de7802">S —> ……</font>
