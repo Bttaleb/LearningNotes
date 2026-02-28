@@ -61,7 +61,7 @@ S → aSb | bSa | SS | λ
 - ab: S ⇒ aSb ⇒ ab. #a = 1, #b = 1
 - ba: S ⇒ bSa ⇒ ba. #a = 1, #b = 1
 - aabb: S ⇒ aSb ⇒ aaSbb ⇒ aabb. #a = 2, #b = 2
-- abba: S ⇒ aSb ⇒ abSab ⇒ abba. #a = 2, #b = 2
+- abba: S ⇒ SS ⇒ aSbS ⇒ abS ⇒ abbSa ⇒ abba. #a = 2, #b = 2
 - abab: S ⇒ SS ⇒ aSbS ⇒ abS ⇒ abaSb ⇒ abab. #a = 2, #b = 2
 
 **Step 3 — Spot the pattern:**
@@ -191,7 +191,9 @@ C → CB | CA | C | 1B
 
 ### STEP 2: Eliminate unit productions
 
-**Unit productions are:** S₀ → S, S → A, S → 1, C → C
+**Unit productions are:** S₀ → S, S → A, C → C
+
+Note: S → 1 is NOT a unit production — it has a terminal on the right side, not a variable. Single-terminal productions like A → a are already valid in CNF.
 
 C → C is trivially useless — just delete it.
 
