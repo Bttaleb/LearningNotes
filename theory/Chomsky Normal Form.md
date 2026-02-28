@@ -16,4 +16,7 @@ CNF is a restriction on the right hand side
 2. A -> a
 	Any variable can make a single terminal and nothing else
 	A = V, A = E
+3. A  -> BC
+	Variable A makes two varibles
+	B and C are not starting variables
 	
