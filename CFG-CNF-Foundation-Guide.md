@@ -315,65 +315,57 @@ A grammar is **ambiguous** if there exists at least one string that has **two or
 
 ### Finding Two Derivations of `a$aa`
 
-**Derivation 1 — wrap with S₁ first, then extend with S:**
+**Derivation 1 — the rightmost `a` comes from S → Sa:**
 ```
 S ⇒ Sa ⇒ S₁a ⇒ aS₁aa ⇒ aTaa ⇒ a$aa
 ```
-Parse tree structure: S produces Sa at the top level; the inner S becomes S₁ which wraps to get aS₁a, then S₁ → T → $.
+Breakdown:
+- S → Sa (adds the last `a`)
+- S → S₁ (switch to S₁)
+- S₁ → aS₁a (wraps with `a...a`, giving `a S₁ a` + the outer `a` = `a S₁ aa`)
+- S₁ → T (switch to T)
+- T → $ (base case)
 
-**Derivation 2 — extend S further before using S₁:**
-```
-S ⇒ Sa ⇒ Saa ⇒ S₁aa ⇒ Taa ⇒ Taaa → ...
-```
-Hmm, let me re-derive carefully:
-```
-S ⇒ Sa ⇒ Saa ⇒ S₁aa ⇒ Taa ⇒ T$aa...
-```
-Wait — let me think about this more carefully.
-
-Actually, here are two clean derivations:
-
-**Derivation 1:**
-```
-S ⇒ Sa ⇒ S₁a ⇒ aS₁aa ⇒ aTaa ⇒ a$aa
-```
-Tree: Top-level S → Sa. Left S → S₁ → aS₁a. Inner S₁ → T. T → $.
-
-**Derivation 2:**
-```
-S ⇒ Sa ⇒ Saa ⇒ S₁aa ⇒ Taa ⇒ Taaa ⇒ ...
-```
-This path doesn't work cleanly. Let me try:
-
+**Derivation 2 — the rightmost `a` comes from T → Ta:**
 ```
 S ⇒ S₁ ⇒ aS₁a ⇒ aTa ⇒ aTaa ⇒ a$aa
 ```
-Tree: S → S₁ → aS₁a. Inner S₁ → T. T → Ta. Ta → $a. Then the outer a gives a$aa.
+Breakdown:
+- S → S₁ (go directly to S₁, no S → Sa used)
+- S₁ → aS₁a (wraps with `a...a`)
+- S₁ → T (switch to T)
+- T → Ta (T adds an `a` on the right, so `aTa` becomes `a(Ta)a` = `aTaa`)
+- T → $ (base case)
 
-So:
-- **Tree 1:** The *outer* `a` on the right comes from **S → Sa**, and `aS₁a` provides one `a` on each side.
-- **Tree 2:** The *outer* `a` on the right comes from **T → Ta**, and `aS₁a` provides one `a` on each side, and S → S₁ directly.
+**Key difference:**
+- **Tree 1:** The rightmost `a` is produced by **S → Sa** at the top level.
+- **Tree 2:** The rightmost `a` is produced by **T → Ta** deep inside the tree, and S goes directly to S₁ (never uses S → Sa).
 
 These two trees have different structures at the root — that's your proof of ambiguity.
 
 ### How to Draw Parse Trees
 
 ```
-Tree 1:                    Tree 2:
-    S                          S
-   / \                         |
-  S   a                       S₁
-  |                          / | \
-  S₁                        a  S₁  a
- /|\                           |
-a S₁ a                        T
-  |                           / \
-  T                          T   a
-  |                          |
-  $                          $
+Tree 1 (S → Sa at root):       Tree 2 (S → S₁ at root):
+
+      S                              S
+     / \                             |
+    S   a  ← from S→Sa              S₁
+    |                              / | \
+    S₁                            a  S₁  a  ← from S₁→aS₁a
+   /|\                               |
+  a  S₁  a  ← from S₁→aS₁a         T
+     |                              / \
+     T                             T   a  ← from T→Ta
+     |                             |
+     $   ← from T→$               $  ← from T→$
+
+Leaves: a $ a a                  Leaves: a $ a a
 ```
 
-In Tree 1, the rightmost `a` is a child of the top-level S (via S → Sa). In Tree 2, the rightmost `a` comes from inside the T (via T → Ta). Different structures, same string → **ambiguous**.
+**Tree 1:** The rightmost `a` is a direct child of the root S (via S → Sa).
+**Tree 2:** The rightmost `a` is a child of T (via T → Ta), and S goes straight to S₁.
+Same string, different tree structures → **grammar is ambiguous**.
 
 ### General Skill: Proving Ambiguity
 
