@@ -65,7 +65,7 @@ S → aSb | bSa | SS | λ
 - abab: S ⇒ SS ⇒ aSbS ⇒ abS ⇒ abaSb ⇒ abab. #a = 2, #b = 2
 
 **Step 3 — Spot the pattern:**
-Every generated string has **equal numbers of a's and b's**.
+Every generated string has an **equal number of a's and b's**.
 
 **The language is: L = { w ∈ {a,b}* : #a(w) = #b(w) }**
 All strings over {a,b} where the count of a's equals the count of b's.
