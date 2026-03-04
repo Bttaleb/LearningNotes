@@ -9,4 +9,7 @@ P<sub>1</sub>                   24
 P<sub>2</sub>                   3
 P<sub>3</sub>                   3
 
-Suppose processes arrive in order, Suppose processes arrive in order, 
+Suppose processes arrive in order:  P<sub>1</sub> , P<sub>2</sub> , P<sub>3</sub> 
+Gantt Chart for schedule is
+[                 P<sub>1</sub>                         |       P<sub>2</sub>      |     P<sub>3</sub>    ]
+0					                        24              27         30
