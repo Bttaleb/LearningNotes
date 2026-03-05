@@ -2,6 +2,19 @@
 source: OS Class (Jan 2026)
 date: 2026-03-03
 ---
+**Overarching Concept**
+CPU Scheduling
+- traffic control system (juggling multiple tasks)
+
+Problems
+- limited processing power
+- decide what gets your attention and when
+
+A process's <font color="#00b050">life</font> inside a computer is **essentially** bouncing back and forth between 2 distinct states (<font color="#92cddc">CPU I/O Burst Cycle</font>)
+	1. Process is executing on CPU (CPU Burst)
+	2. Waiting for some type of input/output (I/O) Burst
+
+
 First-Come, First-Served (FCFS) Scheduling
 
 Process  |   Burst Time
