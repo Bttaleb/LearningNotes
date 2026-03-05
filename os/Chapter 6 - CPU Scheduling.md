@@ -12,8 +12,11 @@ Problems
 
 A process's <font color="#00b050">life</font> inside a computer is **essentially** bouncing back and forth between 2 distinct states (<font color="#92cddc">CPU I/O Burst Cycle</font>)
 	1. Process is executing on CPU (CPU Burst)
-	2. Waiting for some type of input/output (I/O) Burst
+	2. Waiting for some input/output (I/O Burst) 
 
+POV: you're in a kitchen
+CPU Burst - Period where the chef is actively chopping vegetables, searing meat, and plating a dish (Undivided attention, processing power)
+I/O Burst - Pot of stock on the back burner, waiting 3 hours for it to simmer (not actively doing anything to the stock)
 
 First-Come, First-Served (FCFS) Scheduling
 
