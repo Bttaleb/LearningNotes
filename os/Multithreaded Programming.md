@@ -11,7 +11,7 @@ date: 2026-02-19
 #Concurrency -> supports more than one task making progress
 
 Types of Parallelism (Software)
-	**Data**: ==distributes subsets of same data across multiple cores==, *same operation on each*
+	**Data**: ==distributes subsets of the same data across multiple cores==, *same operation on each*
 	**Task**: ==distributing threads across cores==, *threads perform unique operation*
 As number of threads grows, architectural support for threading grows as well (Hardware)
 	CPU’s have cores and hardware threads
@@ -38,10 +38,11 @@ User Threads and Kernel Threads (kernel mode = unrestricted access)
 	3. Java threads (User but depends on hosting OS)
 	
 User-Threads <font color="#00b050">Advantages</font>:
-- thread switching doesn’t require kernel mode
-- User level thread can run on ANY OS
-- Scheduling can be app specific in the user level thread
+- Thread switching doesn’t require kernel mode
+- User-level thread can run on ANY OS
+- Scheduling can be app-specific at the user level thread
 - User level thread are fast to create and manage
+
 User-Threads <font color="#ff0000">Disadvantages</font>:
 - Most systems calls are [[blocking]]
 - Multithreaded apps cannot use multiprocessing
@@ -50,6 +51,7 @@ Kernel-Thread <font color="#00b050">Advantages</font>:
 - Simultaneously schedule multiple threaded from the same process on multiple processors
 - If 1 thread is BLOCKED, Kernel can schedule another thread of same process
 - Kernel routines can be multithreaded
+
 Kernel-Thread <font color="#ff0000">Disadvantages</font>:
 - Generally slower to create and manager
 - Transfer of control from one thread to another (within the same process) requires mode switch TO Kernel
