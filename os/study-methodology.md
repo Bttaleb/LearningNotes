@@ -94,7 +94,7 @@ Process states are the skeleton of everything else. Every scheduling algorithm, 
 - **Running → Waiting:** The process called a blocking I/O operation. Connect to your [[Communications models]] note — blocking send/receive causes exactly this transition
 - **Running → Ready:** Preemption. Your [[Synchronization]] note distinguishes preemptive vs non-preemptive kernels — this is where that matters
 
-**Level up:** Once you can draw the basic diagram from memory, add the thread dimension. A process can be "running" but have threads in different states. Your [[Multithreaded Programming]] note on user vs kernel threads matters here — the kernel only sees kernel thread states, not user thread states.
+**Level up:** Once you can draw the basic diagram from memory, add the thread dimension. A process can be "running" even if its threads are in different states. Your [[Multithreaded Programming]] note on user vs. kernel threads, the kernel only sees kernel thread states, not user thread states.
 
 ---
 
