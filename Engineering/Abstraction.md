@@ -21,6 +21,7 @@ What are some key benefits?
 
 Ex. The more methods “Main” can see AND call inside “StudentAccountService”, the more tightly coupled they are.
 - tight coupling is a problem that gets worse over time.
+- See [[Encapsulation]] for how `private` enforces these boundaries in practice.
 
 
 Refactoring Example in code
