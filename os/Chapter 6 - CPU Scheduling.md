@@ -2,6 +2,8 @@
 source: OS Class (Jan 2026)
 date: 2026-03-03
 ---
+
+
 **Overarching Concept**
 CPU Scheduling
 - traffic control system (juggling multiple tasks)
@@ -28,4 +30,19 @@ P<sub>3</sub>                   3
 Suppose processes arrive in order:  P<sub>1</sub> , P<sub>2</sub> , P<sub>3</sub> 
 Gantt Chart for schedule is
 [                 P<sub>1</sub>                         |       P<sub>2</sub>      |     P<sub>3</sub>    ]
-0					                        24              27         30
+0					                         24              27          30
+
+![[Symmetric-Asymmetric Processes]]
+
+For real-time scheduling, scheduler MUST be
+1. Preemptive
+2. Priority based
+
+Hard real-time processes MUST be able to meet deadlines
+ 
+ 0 <= t (time) <= d (deadline) < = p (period)
+ Rate of periodic task = 1/p
+
+Rate Monotonic Schedulling
+Longer period - short priority
+Short period - longer 
