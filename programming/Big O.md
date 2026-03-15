@@ -22,3 +22,7 @@ ___O(n) Space___ = new set/list/dict. that grows with input size
 ___O(n^2) Space___ = 2D grid/matrix that scales with input squared
 - grid = [[0]*n for _ in range(n)]
 
+## 3 Rules
+1. Drop constants: O(2n) -> O(n)
+2. Drop smaller terms: O(n^2 + n) -> O(n^2)
+3. Different inputs = different variables: O(a * b), NOT O(n^2)
