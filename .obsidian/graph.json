@@ -1,11 +1,11 @@
 {
-  "collapse-filter": false,
+  "collapse-filter": true,
   "search": "thread",
   "showTags": true,
   "showAttachments": true,
   "hideUnresolved": false,
   "showOrphans": true,
-  "collapse-color-groups": false,
+  "collapse-color-groups": true,
   "colorGroups": [
     {
       "query": "path:os",
@@ -46,6 +46,6 @@
   "repelStrength": 10,
   "linkStrength": 0.56725933908046,
   "linkDistance": 250,
-  "scale": 1.0082240672532619,
-  "close": false
+  "scale": 1.387026704917787,
+  "close": true
 }

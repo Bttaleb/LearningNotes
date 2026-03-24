@@ -8,10 +8,9 @@ description: ""
 date: 2026-02-12
 ---
 
-Message passing
-Shared memory
+See [[IPC Models]] for the full comparison of shared memory vs message passing (trade-offs, when to use each).
 
-Interprocess Communication
+## Interprocess Communication
 
 ### Synchronization
 	[[Blocking]] <—> Non-blocking
