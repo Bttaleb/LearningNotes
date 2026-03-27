@@ -23,22 +23,22 @@ result: ""
 
 ## Pre-Trade Thesis (Conditional Chain)
 
-<!-- Write this BEFORE you enter. Follow the format exactly. -->
 
 > **Given** [HTF context / narrative / where price sits in the larger range]
->
+> - Given bearish monthly (SMT, CRT)
 > **If** [structural condition that must already be true on the chart]
->
+> - If retrace into NEWLY created weekly KL
 > **And then** [the real-time trigger / event you're waiting for]
->
+>- PO3 alignment (Day of Week, Time of Day)
 > **I expect** [target — where price should go and why]
->
+>- Classic sell Daily -> Weekly
 > **I'm wrong if** [logical invalidation — not just your stop, but what breaks the thesis]
+>- Bullish key level supports
 
 ### Thesis in one sentence:
 <!-- Force yourself to compress the above into a single "Given X, if Y then Z" sentence. If you can't, you don't have a clear thesis. -->
 
-
+Given bearish monthly, if we retrace into weekly/daily KL, then we will see a classic weekly/daily sell candle
 ### Ambiguity Check:
 <!-- What is unclear or conflicting about this setup RIGHT NOW? Name it before you enter. -->
 
@@ -53,27 +53,27 @@ result: ""
 
 ### Monthly / Weekly (Narrative Bias)
 
-| Field | Value |
-|-------|-------|
-| **Trend Direction** | *(Bullish / Bearish / Ranging)* |
-| **Key Monthly High** | |
-| **Key Monthly Low** | |
-| **Key Weekly High** | |
-| **Key Weekly Low** | |
-| **Premium / Discount** | *(Price relative to range)* |
-| **Narrative** | |
+| Field                  | Value                 |
+| ---------------------- | --------------------- |
+| **Trend Direction**    | Ranging -> Slow death |
+| **Key Monthly High**   | December              |
+| **Key Monthly Low**    | January               |
+| **Key Weekly High**    |                       |
+| **Key Weekly Low**     |                       |
+| **Premium / Discount** | Premium               |
+| **Narrative**          |                       |
 
 ### Daily (Directional Bias)
 
-| Field | Value |
-|-------|-------|
-| **Previous Day High** | |
-| **Previous Day Low** | |
-| **Previous Day Close** | |
-| **Daily Open** | |
-| **Daily Bias** | *(Bullish / Bearish)* |
-| **Open Type** | *(Open LH → bearish / Open HL → bullish)* |
-| **Key Daily Level(s)** | |
+| Field                  | Value                                     |
+| ---------------------- | ----------------------------------------- |
+| **Previous Day High**  | 24,507                                    |
+| **Previous Day Low**   |                                           |
+| **Previous Day Close** |                                           |
+| **Daily Open**         |                                           |
+| **Daily Bias**         | *(Bullish / Bearish)*                     |
+| **Open Type**          | *(Open LH → bearish / Open HL → bullish)* |
+| **Key Daily Level(s)** |                                           |
 
 ### H4 / H1 (Execution Window)
 
