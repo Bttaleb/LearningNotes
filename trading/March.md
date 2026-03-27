@@ -4,20 +4,20 @@ tags:
   - crt
 source: ""
 description: ""
-date: {{date}}
+date: 2026-03-27
 result: ""
 ---
 
-# CRT Trade — {{ticker}} | {{date}}
+# CRT Trade — {{ticker}} | March 27, 2026
 
 ## Timeframe & Context
 
-| Field | Value |
-|-------|-------|
-| **Candle Being Traded** | *(Monthly / Weekly / Daily)* |
-| **Direction** | *(Long / Short)* |
-| **Entry Time** | |
-| **Exit Time** | |
+| Field                   | Value   |
+| ----------------------- | ------- |
+| **Candle Being Traded** | Monthly |
+| **Direction**           | Short   |
+| **Entry Time**          |         |
+| **Exit Time**           |         |
 
 ---
 
@@ -34,22 +34,22 @@ result: ""
 
 <!-- C1 establishes the playing field. Your only job here is to identify the high and low. -->
 
-| Field | Value |
-|-------|-------|
-| **C1 High** | |
-| **C1 Low** | |
-| **C1 Open** | |
-| **C1 Close** | |
-| **C1 Body Type** | *(Doji / Small body / Indecision)* |
-| **Range Size (pips/points)** | |
+| Field                        | Value        |
+| ---------------------------- | ------------ |
+| **C1 High**                  | 26,329.25    |
+| **C1 Low**                   | 25,101.50    |
+| **C1 Open**                  | 25943.50     |
+| **C1 Close**                 | 25,648.25    |
+| **C1 Body Type**             | Small bodied |
+| **Range Size (pips/points)** | 1,2227       |
 
 ### C1 Gate — Is the range set?
 
-| # | IF | THEN | ✓ |
-|---|-----|------|---|
-| 1.1 | C1 has a defined high and low | Range is established → mark levels | ☐ |
-| 1.2 | C1 body is relatively small / indecisive compared to prior candles | Compression present → supports CRT | ☐ |
-| 1.3 | C1 high or low sits near a HTF key level (PD array, liquidity) | Range is meaningful, not random → proceed | ☐ |
+| #   | IF                                                                 | THEN                                      | ✓   |
+| --- | ------------------------------------------------------------------ | ----------------------------------------- | --- |
+| 1.1 | C1 has a defined high and low                                      | Range is established → mark levels        | ☐   |
+| 1.2 | C1 body is relatively small / indecisive compared to prior candles | Compression present → supports CRT        | ✓   |
+| 1.3 | C1 high or low sits near a HTF key level (PD array, liquidity)     | Range is meaningful, not random → proceed | ☐   |
 
 > **If any fail →** Range is unclear. Wait for it to develop.
 
@@ -60,23 +60,23 @@ result: ""
 <!-- C2 sweeps one side of C1's range to grab liquidity, then reverses.
      This is the trap. Identify WHICH side got swept and WHERE price reversed. -->
 
-| Field | Value |
-|-------|-------|
-| **Side Swept** | *(C1 High / C1 Low)* |
-| **Sweep Price** | |
-| **Reversal Price** | |
-| **C2 Open** | |
-| **C2 Close** | |
-| **Did C2 close back inside C1 range?** | *(Y/N)* |
+| Field                                  | Value    |
+| -------------------------------------- | -------- |
+| **Side Swept**                         | C1H      |
+| **Sweep Price**                        |          |
+| **Reversal Price**                     | 26562.75 |
+| **C2 Open**                            | 25673.75 |
+| **C2 Close**                           | 25852.50 |
+| **Did C2 close back inside C1 range?** | Y        |
 
 ### C2 Gate — Is the manipulation confirmed?
 
-| # | IF | THEN | ✓ |
-|---|-----|------|---|
-| 2.1 | C2 sweeps beyond C1 high or C1 low (wick through the level) | Liquidity has been taken → proceed | ☐ |
-| 2.2 | C2 reverses and closes back inside or near the opposite side of C1 range | Manipulation is confirmed, not a breakout → proceed | ☐ |
-| 2.3 | The sweep aligns with taking out resting liquidity (stops above/below) | Smart money narrative present → proceed | ☐ |
-| 2.4 | Bearish: C2 swept C1 high → enter above C1 open / Bullish: C2 swept C1 low → enter below C1 open | Entry side is defined → prepare for C3 | ☐ |
+| #   | IF                                                                                               | THEN                                                | ✓   |
+| --- | ------------------------------------------------------------------------------------------------ | --------------------------------------------------- | --- |
+| 2.1 | C2 sweeps beyond C1 high or C1 low (wick through the level)                                      | Liquidity has been taken → proceed                  | ✓   |
+| 2.2 | C2 reverses and closes back inside or near the opposite side of C1 range                         | Manipulation is confirmed, not a breakout → proceed | ✓   |
+| 2.3 | The sweep aligns with taking out resting liquidity (stops above/below)                           | Smart money narrative present → proceed             | ✓   |
+| 2.4 | Bearish: C2 swept C1 high → enter above C1 open / Bullish: C2 swept C1 low → enter below C1 open | Entry side is defined → prepare for C3              | ✓   |
 
 > **If 2.1 fails →** No sweep happened. CRT is not active.
 > **If 2.2 fails →** This might be a legitimate breakout, not manipulation. Do not fade.
@@ -93,22 +93,22 @@ result: ""
 <!-- C3 is the payoff. Fast move, thick body, short wicks.
      If you're not in by the time C3 starts displacing, don't chase. -->
 
-| Field | Value |
-|-------|-------|
-| **C3 Open** | |
-| **C3 Close** | |
-| **C3 Body Size** | |
-| **C3 Wick Ratio** | *(Short wicks / thick body = clean distribution)* |
-| **Did C3 reach the opposite side of C1?** | *(Y/N)* |
-| **Did C3 exceed C1 range?** | *(Y/N)* |
+| Field                                     | Value    |
+| ----------------------------------------- | -------- |
+| **C3 Open**                               | 25743.75 |
+| **C3 Close**                              | 25166.25 |
+| **C3 Body Size**                          | Big      |
+| **C3 Wick Ratio**                         | Equal    |
+| **Did C3 reach the opposite side of C1?** | Y        |
+| **Did C3 exceed C1 range?**               | Y        |
 
 ### C3 Gate — Is distribution clean?
 
-| # | IF | THEN | ✓ |
-|---|-----|------|---|
-| 3.1 | C3 moves aggressively in the expected direction (thick body) | Distribution is underway → hold or manage | ☐ |
-| 3.2 | C3 has short wicks relative to body | Conviction is strong → trust the move | ☐ |
-| 3.3 | C3 reaches or exceeds opposite side of C1 range | Full CRT complete → target hit zone | ☐ |
+| #   | IF                                                           | THEN                                      | ✓   |
+| --- | ------------------------------------------------------------ | ----------------------------------------- | --- |
+| 3.1 | C3 moves aggressively in the expected direction (thick body) | Distribution is underway → hold or manage | ✓   |
+| 3.2 | C3 has short wicks relative to body                          | Conviction is strong → trust the move     | ✓   |
+| 3.3 | C3 reaches or exceeds opposite side of C1 range              | Full CRT complete → target hit zone       | ✓   |
 
 > **If C3 stalls or produces long wicks →** Distribution is weak. Consider early exit or tighter management.
 
@@ -123,11 +123,11 @@ result: ""
 
 *(Use when trading the monthly candle)*
 
-| CRT Phase | Maps To | Date Range | Notes |
-|-----------|---------|------------|-------|
-| **C1 (Range)** | Week 1 | | *Month opens, range establishes* |
-| **C2 (Manipulation)** | Week 2 | | *Sweep of Week 1 high or low* |
-| **C3 (Distribution)** | Week 3–4 | | *Expansion toward monthly target* |
+| CRT Phase             | Maps To  | Date Range | Notes                             |
+| --------------------- | -------- | ---------- | --------------------------------- |
+| **C1 (Range)**        | Week 1   |            | *Month opens, range establishes*  |
+| **C2 (Manipulation)** | Week 2   |            | *Sweep of Week 1 high or low*     |
+| **C3 (Distribution)** | Week 3–4 |            | *Expansion toward monthly target* |
 
 | Field | Value |
 |-------|-------|
