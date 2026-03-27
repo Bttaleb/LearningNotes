@@ -5,6 +5,6 @@
   "readableLineLength": true,
   "strictLineBreaks": false,
   "defaultViewMode": "preview",
-  "attachmentFolderPath": "attachments",
+  "attachmentFolderPath": ".attachments",
   "promptDelete": false
 }

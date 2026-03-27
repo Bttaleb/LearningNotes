@@ -1,1 +1,0 @@
-type of software architecture where functional components (UI, business logic, data access) are interconnected and bundled into a <mark style="background:rgba(5, 117, 197, 0.2)">single unified codebase</mark>
