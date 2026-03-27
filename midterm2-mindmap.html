@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OS Midterm 2 — Mind Map</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0d1117;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #c9d1d9;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  #canvas {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    cursor: grab;
+  }
+  #canvas.dragging { cursor: grabbing; }
+
+  svg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .node {
+    position: absolute;
+    border-radius: 12px;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, opacity 0.3s;
+    z-index: 1;
+    white-space: nowrap;
+    user-select: none;
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards;
+  }
+  .node:hover {
+    transform: scale(1.08);
+    z-index: 10;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  /* Chapter colors */
+  .ch3 { background: #1a3a2a; border: 2px solid #3fb950; color: #7ee787; }
+  .ch3:hover { box-shadow: 0 0 20px rgba(63,185,80,0.4); }
+
+  .ch4 { background: #1a2a3a; border: 2px solid #58a6ff; color: #79c0ff; }
+  .ch4:hover { box-shadow: 0 0 20px rgba(88,166,255,0.4); }
+
+  .ch5 { background: #3a1a2a; border: 2px solid #f778ba; color: #f9a8d4; }
+  .ch5:hover { box-shadow: 0 0 20px rgba(247,120,186,0.4); }
+
+  .ch6 { background: #3a2a1a; border: 2px solid #d29922; color: #e3b341; }
+  .ch6:hover { box-shadow: 0 0 20px rgba(210,153,34,0.4); }
+
+  .center-node {
+    background: #21262d;
+    border: 3px solid #8b949e;
+    color: #f0f6fc;
+    font-size: 16px;
+    font-weight: 800;
+    padding: 16px 24px;
+    border-radius: 16px;
+    z-index: 5;
+  }
+  .center-node:hover { box-shadow: 0 0 30px rgba(139,148,158,0.5); }
+
+  .has-note {
+    position: relative;
+  }
+  .has-note::after {
+    content: '📝';
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    font-size: 12px;
+  }
+
+  .note-badge {
+    display: inline-block;
+    background: #30363d;
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-size: 10px;
+    margin-left: 6px;
+    color: #8b949e;
+    font-weight: 400;
+  }
+
+  /* Tooltip */
+  .tooltip {
+    position: fixed;
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    padding: 14px 18px;
+    max-width: 360px;
+    font-size: 12.5px;
+    line-height: 1.55;
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    color: #c9d1d9;
+  }
+  .tooltip.visible { opacity: 1; }
+  .tooltip h3 {
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #f0f6fc;
+  }
+  .tooltip .from-notes {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #30363d;
+    color: #7ee787;
+    font-size: 11.5px;
+  }
+  .tooltip .gap-warning {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #30363d;
+    color: #f78166;
+    font-size: 11.5px;
+  }
+
+  /* Legend */
+  #legend {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    padding: 14px 18px;
+    z-index: 50;
+    font-size: 12px;
+  }
+  #legend h4 { margin-bottom: 8px; color: #f0f6fc; font-size: 13px; }
+  .legend-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 5px 0;
+  }
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .legend-row .note-icon { font-size: 12px; }
+
+  /* Controls */
+  #controls {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 8px;
+    z-index: 50;
+  }
+  #controls button {
+    background: #21262d;
+    border: 1px solid #30363d;
+    color: #c9d1d9;
+    border-radius: 8px;
+    padding: 8px 14px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+  #controls button:hover { background: #30363d; }
+  #controls button.active { background: #388bfd33; border-color: #58a6ff; color: #58a6ff; }
+
+  /* Title */
+  #title {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 50;
+    font-size: 18px;
+    font-weight: 800;
+    color: #f0f6fc;
+  }
+  #title span { color: #8b949e; font-weight: 400; font-size: 13px; display: block; margin-top: 2px; }
+
+  /* Gap panel */
+  #gap-panel {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    background: #161b22;
+    border: 1px solid #f7816644;
+    border-radius: 10px;
+    padding: 14px 18px;
+    max-width: 280px;
+    z-index: 50;
+    font-size: 12px;
+    display: none;
+  }
+  #gap-panel h4 { color: #f78166; margin-bottom: 8px; font-size: 13px; }
+  #gap-panel li {
+    color: #c9d1d9;
+    margin: 4px 0 4px 16px;
+    line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+
+<div id="title">OS Midterm 2 Mind Map<span>Hover nodes for details · Drag to pan · Scroll to zoom</span></div>
+
+<div id="controls">
+  <button onclick="filterChapter('all')" class="active" data-ch="all">All</button>
+  <button onclick="filterChapter('ch3')" data-ch="ch3">Ch 3 — IPC</button>
+  <button onclick="filterChapter('ch4')" data-ch="ch4">Ch 4 — Threads</button>
+  <button onclick="filterChapter('ch5')" data-ch="ch5">Ch 5 — Sync</button>
+  <button onclick="filterChapter('ch6')" data-ch="ch6">Ch 6 — Scheduling</button>
+  <button onclick="toggleGaps()" id="gap-btn">Gaps</button>
+</div>
+
+<div id="legend">
+  <h4>Legend</h4>
+  <div class="legend-row"><div class="legend-dot" style="background:#3fb950"></div> Ch 3 — IPC</div>
+  <div class="legend-row"><div class="legend-dot" style="background:#58a6ff"></div> Ch 4 — Threads</div>
+  <div class="legend-row"><div class="legend-dot" style="background:#f778ba"></div> Ch 5 — Synchronization</div>
+  <div class="legend-row"><div class="legend-dot" style="background:#d29922"></div> Ch 6 — CPU Scheduling</div>
+  <div class="legend-row"><span class="note-icon">📝</span> You have notes on this</div>
+  <div class="legend-row"><div class="legend-dot" style="background:#f78166"></div> Gap — no notes yet</div>
+</div>
+
+<div id="gap-panel">
+  <h4>Knowledge Gaps</h4>
+  <p style="margin-bottom:8px;color:#8b949e;">Midterm topics you don't have notes on yet:</p>
+  <ul id="gap-list"></ul>
+</div>
+
+<div id="canvas">
+  <svg id="lines"></svg>
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+const CX = 2400, CY = 1600;
+
+const nodes = [
+  // Center
+  { id: 'center', label: 'Midterm 2', x: CX, y: CY, ch: 'center',
+    tip: 'CSC 4420 — Chapters 3-6. 4 questions: definitions, 2 programming, 1 scheduling.', hasNote: false },
+
+  // ─── CHAPTER 3: IPC (top-left cluster) ───
+  { id: 'ipc', label: 'Inter-Process Communication', x: CX-700, y: CY-500, ch: 'ch3',
+    tip: 'Two models for processes to exchange data: shared memory and message passing.', hasNote: false,
+    noteTip: '', gapTip: 'No dedicated IPC overview note — consider creating one.' },
+  { id: 'sharedmem', label: 'Shared Memory', x: CX-950, y: CY-620, ch: 'ch3',
+    tip: 'Processes share a region of memory. Fast, but requires synchronization.', hasNote: false,
+    gapTip: 'No note on shared memory IPC model.' },
+  { id: 'msgpass', label: 'Message Passing', x: CX-500, y: CY-640, ch: 'ch3',
+    tip: 'Processes communicate via send/receive. Easier but slower (kernel involved).', hasNote: false,
+    gapTip: 'No note on message passing model.' },
+  { id: 'sockets', label: 'Sockets', x: CX-380, y: CY-760, ch: 'ch3',
+    tip: 'Endpoint for communication. IP + port. Works across machines.', hasNote: false,
+    gapTip: 'No note on sockets.' },
+  { id: 'pipes', label: 'Pipes', x: CX-600, y: CY-780, ch: 'ch3',
+    tip: 'Unidirectional conduit. Ordinary pipes: parent-child. Named pipes: no relationship needed.',
+    hasNote: true, noteTip: 'Your note: "Ordinary pipes are unidirectional, require parent-child relationship. Producer writes, consumer reads."' },
+  { id: 'prodcons', label: 'Producer-Consumer', x: CX-850, y: CY-430, ch: 'ch3',
+    tip: 'Classic IPC pattern: producer creates data, consumer removes it. Needs buffer + synchronization.',
+    hasNote: true, noteTip: 'Your Lab 3 note covers this in depth — buffer[in]/buffer[out], circular indexing, semaphore coordination.' },
+  { id: 'blocking', label: 'Blocking vs Non-blocking', x: CX-930, y: CY-310, ch: 'ch3',
+    tip: 'Blocking (synchronous): sender/receiver waits. Non-blocking (async): continues without waiting. Both blocking = rendezvous.',
+    hasNote: true, noteTip: 'Your note: "Blocking send — sender blocked until received. Blocking receive — blocked until available. Both = rendezvous."' },
+  { id: 'bidirectional', label: 'Bidirectional vs Full Duplex', x: CX-1100, y: CY-500, ch: 'ch3',
+    tip: 'Bidirectional: data can flow both ways (maybe one at a time). Full duplex: simultaneous both-way flow.', hasNote: false,
+    gapTip: 'Assignment Q1 asks this. No note yet.' },
+
+  // ─── CHAPTER 4: Threads (top-right cluster) ───
+  { id: 'threads', label: 'Threads & Parallelism', x: CX+700, y: CY-500, ch: 'ch4',
+    tip: 'Threads are lightweight execution units within a process. Share code, data, files — own stack + registers.',
+    hasNote: true, noteTip: 'Your process-management note: "Thread = execution path within a process. Multiple threads share same process memory."' },
+  { id: 'threadvsproc', label: 'Thread vs Process', x: CX+950, y: CY-620, ch: 'ch4',
+    tip: 'Process: own address space, heavy to create. Thread: shared space, lightweight. Creating a thread ~10x faster.', hasNote: false,
+    gapTip: 'No dedicated comparison note.' },
+  { id: 'concpar', label: 'Concurrency vs Parallelism', x: CX+500, y: CY-650, ch: 'ch4',
+    tip: 'Concurrency: managing multiple tasks (can be 1 core via time-slicing). Parallelism: actually running simultaneously (needs multiple cores).',
+    hasNote: true, noteTip: 'Your notes touch this: "System runs many processes concurrently across one or more CPUs" + "multiplexing — rapidly switching."' },
+  { id: 'parallelism', label: 'Data vs Task Parallelism', x: CX+400, y: CY-790, ch: 'ch4',
+    tip: 'Data parallelism: same operation on different data chunks. Task parallelism: different operations in parallel.', hasNote: false,
+    gapTip: 'Assignment Q5 is about this. No dedicated note.' },
+  { id: 'amdahl', label: "Amdahl's Law", x: CX+850, y: CY-400, ch: 'ch4',
+    tip: 'Speedup ≤ 1 / (S + (1-S)/N). S = serial fraction. Diminishing returns as cores increase.', hasNote: false,
+    gapTip: 'Assignment Q4 tests this formula. Create a note with worked examples.' },
+  { id: 'userkernel', label: 'User vs Kernel Threads', x: CX+1050, y: CY-480, ch: 'ch4',
+    tip: 'User threads: managed by library, invisible to OS. Kernel threads: managed by OS, can run on separate cores.', hasNote: false,
+    gapTip: 'No note on threading models (many-to-one, one-to-one, many-to-many).' },
+  { id: 'multichallenge', label: 'Multithreading Challenges', x: CX+700, y: CY-300, ch: 'ch4',
+    tip: 'Signal handling, thread-safe fork/exec, cancellation, thread-local storage, scheduler activations.', hasNote: false,
+    gapTip: 'No note yet.' },
+
+  // ─── CHAPTER 5: Synchronization (bottom-left cluster) ───
+  { id: 'sync', label: 'Synchronization', x: CX-700, y: CY+500, ch: 'ch5',
+    tip: 'Coordinating concurrent access to shared resources to prevent race conditions.', hasNote: true,
+    noteTip: 'Your blocking note touches sync. Lab 3 covers semaphores + mutex in detail.' },
+  { id: 'racecond', label: 'Race Condition', x: CX-500, y: CY+640, ch: 'ch5',
+    tip: 'Multiple threads access shared data concurrently and the outcome depends on execution order.',
+    hasNote: true, noteTip: 'Your deadlock note in process-management covers the concept: "2 people, 1 pencil, 1 paper."' },
+  { id: 'critical', label: 'Critical Section Problem', x: CX-900, y: CY+640, ch: 'ch5',
+    tip: '3 requirements: Mutual Exclusion, Progress, Bounded Waiting. Entry/exit sections guard the critical region.', hasNote: false,
+    gapTip: 'Key exam topic. No dedicated note on the 3 requirements.' },
+  { id: 'mutex', label: 'Mutex Locks', x: CX-1050, y: CY+500, ch: 'ch5',
+    tip: 'Simplest sync tool. acquire() before critical section, release() after. Busy waiting (spinlock).',
+    hasNote: true, noteTip: 'Your Lab 3: "Mutex allows one at a time (bathroom lock)." Covered in producer-consumer context.' },
+  { id: 'semaphore', label: 'Semaphores', x: CX-850, y: CY+380, ch: 'ch5',
+    tip: 'Integer variable with atomic wait()/signal(). Counting semaphore: multiple resources. Binary: 0 or 1.',
+    hasNote: true, noteTip: 'Strong note! "Counter with special rules" — full/empty/mutex, sem_wait = "Can I go?", sem_post = "I\'m done." Golden Rule: wait semaphore BEFORE mutex.' },
+  { id: 'semimpl', label: 'Semaphore Implementations', x: CX-1100, y: CY+340, ch: 'ch5',
+    tip: 'Busy-waiting (spinlock) vs sleep-queue. Spinlock: wastes CPU but no context switch. Sleep: efficient but overhead.',
+    hasNote: false, gapTip: 'Assignment Q2 asks for both implementations in detail. Critical gap.' },
+  { id: 'hardware', label: 'Hardware Instructions', x: CX-600, y: CY+400, ch: 'ch5',
+    tip: 'test_and_set(), compare_and_swap() — atomic operations. Building blocks for locks.', hasNote: false,
+    gapTip: 'Need to know pseudocode for test_and_set and compare_and_swap.' },
+  { id: 'classical', label: 'Classical Problems', x: CX-450, y: CY+500, ch: 'ch5',
+    tip: 'Bounded Buffer (you know this!), Readers-Writers, Dining Philosophers.', hasNote: true,
+    noteTip: 'Your Lab 3 is essentially the Bounded Buffer problem. Readers-Writers and Dining Philosophers may need notes.' },
+  { id: 'deadlock', label: 'Deadlock', x: CX-700, y: CY+700, ch: 'ch5',
+    tip: 'Circular wait. Your note: buffer full → producer locks mutex → waits on empty → consumer can\'t lock mutex → stuck.',
+    hasNote: true, noteTip: 'Covered in Lab 3 AND process-management. "Both hold one resource, need the other, won\'t release."' },
+  { id: 'preemptcs', label: 'Preemptive vs Non-preemptive Kernels', x: CX-350, y: CY+350, ch: 'ch5',
+    tip: 'Preemptive kernel: can interrupt process in kernel mode. Non-preemptive: runs until exits kernel. Affects race conditions.', hasNote: false,
+    gapTip: 'Assignment Q3 topic. Connects to Ch 6 scheduling.' },
+
+  // ─── CHAPTER 6: CPU Scheduling (bottom-right cluster) ───
+  { id: 'scheduling', label: 'CPU Scheduling', x: CX+700, y: CY+500, ch: 'ch6',
+    tip: 'Decides which process in the ready queue gets the CPU next. Core OS responsibility.',
+    hasNote: true, noteTip: 'Your execution-models note covers the "why": "CPU is fast; I/O is slow. Instead of waiting, do something else."' },
+  { id: 'criteria', label: 'Scheduling Criteria', x: CX+500, y: CY+380, ch: 'ch6',
+    tip: 'CPU utilization, throughput, turnaround time, waiting time, response time. Trade-offs between them.', hasNote: true,
+    noteTip: 'Round Robin insights: "Turnaround = completion - arrival. Waiting = turnaround - burst. Derive, don\'t memorize."' },
+  { id: 'fcfs', label: 'FCFS', x: CX+400, y: CY+630, ch: 'ch6',
+    tip: 'First Come First Served. Simple but convoy effect: short jobs stuck behind long ones. Non-preemptive.', hasNote: false,
+    gapTip: 'No dedicated note.' },
+  { id: 'sjf', label: 'SJF / SRTF', x: CX+550, y: CY+730, ch: 'ch6',
+    tip: 'Shortest Job First (optimal for avg wait time). SRTF = preemptive version. Problem: predicting burst length.', hasNote: false,
+    gapTip: 'No note. Important for Gantt chart questions.' },
+  { id: 'roundrobin', label: 'Round Robin', x: CX+750, y: CY+700, ch: 'ch6',
+    tip: 'Time quantum Q. Each process gets Q time, then goes to back of queue. Fair but Q choice matters.',
+    hasNote: true, noteTip: 'Detailed insights note! Variable naming, loop logic, integer division gotchas, "break vs continue" in C implementation.' },
+  { id: 'priority', label: 'Priority Scheduling', x: CX+900, y: CY+650, ch: 'ch6',
+    tip: 'Each process gets priority. Can cause starvation — solved by aging. Can be preemptive or not.', hasNote: false,
+    gapTip: 'No note.' },
+  { id: 'multilevel', label: 'Multilevel Queue', x: CX+1050, y: CY+550, ch: 'ch6',
+    tip: 'Multiple queues with different algorithms. Foreground (RR for responsiveness) + background (FCFS for throughput).', hasNote: false,
+    gapTip: 'No note on multilevel or feedback queues.' },
+  { id: 'preemptive', label: 'Preemptive vs Non-preemptive', x: CX+950, y: CY+400, ch: 'ch6',
+    tip: 'Preemptive: OS can interrupt running process. Non-preemptive: process runs until it voluntarily yields. Assignment Q3.',
+    hasNote: true, noteTip: 'Your execution-models note: time-sharing preempts processes ("gets preempted and waits for next turn"). Dual-mode note: timers prevent CPU hogging.' },
+  { id: 'realtime', label: 'Real-Time Scheduling', x: CX+1100, y: CY+400, ch: 'ch6',
+    tip: 'Hard RT: must meet deadline. Soft RT: priority but no guarantee. Rate Monotonic and EDF algorithms.', hasNote: false,
+    gapTip: 'Assignment Q7 is a full RM + EDF problem. Needs a note.' },
+  { id: 'rm', label: 'Rate Monotonic (RM)', x: CX+1150, y: CY+280, ch: 'ch6',
+    tip: 'Static priority: shorter period = higher priority. May miss deadlines if utilization > ~69% for 2 tasks.', hasNote: false,
+    gapTip: 'Assignment Q7 requires Gantt chart + utilization calc.' },
+  { id: 'edf', label: 'Earliest Deadline First', x: CX+950, y: CY+260, ch: 'ch6',
+    tip: 'Dynamic priority: closest deadline runs first. Optimal — can use 100% CPU. But more complex.', hasNote: false,
+    gapTip: 'Assignment Q7 requires comparison with RM.' },
+  { id: 'algeval', label: 'Algorithm Evaluation', x: CX+700, y: CY+350, ch: 'ch6',
+    tip: 'Deterministic modeling, queuing models, simulation, implementation. Assignment Q8 asks about simulation vs implementation.', hasNote: false,
+    gapTip: 'Assignment Q8 topic. No note.' },
+  { id: 'quantum', label: 'Time Quantum Effects', x: CX+600, y: CY+550, ch: 'ch6',
+    tip: 'Q too large → FCFS. Q too small → too many context switches. Rule of thumb: 80% of bursts < Q.',
+    hasNote: true, noteTip: 'Your RR insights cover the implementation deeply. Consider adding theory on Q selection.' },
+  { id: 'multiprocessor', label: 'Multiprocessor Scheduling', x: CX+450, y: CY+470, ch: 'ch6',
+    tip: 'Symmetric vs asymmetric. Processor affinity (warm cache). NUMA. Load balancing (push vs pull migration).',
+    hasNote: true, noteTip: 'Ch 1 Review note: "Symmetric: processors are peers, shared memory. Asymmetric: master-slave."' },
+];
+
+// Edges: [from, to, style]
+// style: 'solid' = direct hierarchy, 'dashed' = cross-chapter connection
+const edges = [
+  // Center to chapter hubs
+  ['center', 'ipc', 'solid'],
+  ['center', 'threads', 'solid'],
+  ['center', 'sync', 'solid'],
+  ['center', 'scheduling', 'solid'],
+
+  // Ch3 tree
+  ['ipc', 'sharedmem', 'solid'],
+  ['ipc', 'msgpass', 'solid'],
+  ['ipc', 'pipes', 'solid'],
+  ['ipc', 'prodcons', 'solid'],
+  ['ipc', 'blocking', 'solid'],
+  ['ipc', 'bidirectional', 'solid'],
+  ['msgpass', 'sockets', 'solid'],
+
+  // Ch4 tree
+  ['threads', 'threadvsproc', 'solid'],
+  ['threads', 'concpar', 'solid'],
+  ['threads', 'amdahl', 'solid'],
+  ['threads', 'userkernel', 'solid'],
+  ['threads', 'multichallenge', 'solid'],
+  ['concpar', 'parallelism', 'solid'],
+
+  // Ch5 tree
+  ['sync', 'racecond', 'solid'],
+  ['sync', 'critical', 'solid'],
+  ['sync', 'mutex', 'solid'],
+  ['sync', 'semaphore', 'solid'],
+  ['sync', 'hardware', 'solid'],
+  ['sync', 'classical', 'solid'],
+  ['sync', 'preemptcs', 'solid'],
+  ['semaphore', 'semimpl', 'solid'],
+  ['racecond', 'deadlock', 'solid'],
+  ['classical', 'deadlock', 'solid'],
+
+  // Ch6 tree
+  ['scheduling', 'criteria', 'solid'],
+  ['scheduling', 'fcfs', 'solid'],
+  ['scheduling', 'sjf', 'solid'],
+  ['scheduling', 'roundrobin', 'solid'],
+  ['scheduling', 'priority', 'solid'],
+  ['scheduling', 'multilevel', 'solid'],
+  ['scheduling', 'preemptive', 'solid'],
+  ['scheduling', 'realtime', 'solid'],
+  ['scheduling', 'algeval', 'solid'],
+  ['scheduling', 'quantum', 'solid'],
+  ['scheduling', 'multiprocessor', 'solid'],
+  ['realtime', 'rm', 'solid'],
+  ['realtime', 'edf', 'solid'],
+
+  // *** CROSS-CHAPTER CONNECTIONS ***
+  ['prodcons', 'semaphore', 'dashed'],       // producer-consumer uses semaphores
+  ['prodcons', 'classical', 'dashed'],        // it IS a classical problem
+  ['blocking', 'sync', 'dashed'],             // blocking is synchronization
+  ['mutex', 'critical', 'dashed'],            // mutex solves critical section
+  ['concpar', 'preemptive', 'dashed'],        // concurrency needs preemptive scheduling
+  ['threads', 'racecond', 'dashed'],          // threads cause race conditions
+  ['preemptcs', 'preemptive', 'dashed'],      // preemptive kernels ↔ preemptive scheduling
+  ['deadlock', 'mutex', 'dashed'],            // deadlock from mutex misuse
+  ['amdahl', 'multiprocessor', 'dashed'],     // Amdahl's law applies to multiprocessor
+  ['concpar', 'scheduling', 'dashed'],        // concurrency implemented via scheduling
+  ['sharedmem', 'racecond', 'dashed'],        // shared memory → race conditions
+];
+
+// Build the mind map
+const canvas = document.getElementById('canvas');
+const svg = document.getElementById('lines');
+const tooltip = document.getElementById('tooltip');
+
+let scale = 0.45;
+let panX = -CX * scale + window.innerWidth / 2;
+let panY = -CY * scale + window.innerHeight / 2;
+
+function updateTransform() {
+  const inner = document.getElementById('inner');
+  if (inner) inner.style.transform = `translate(${panX}px, ${panY}px) scale(${scale})`;
+  const svgInner = document.getElementById('svg-inner');
+  if (svgInner) svgInner.setAttribute('transform', `translate(${panX}, ${panY}) scale(${scale})`);
+}
+
+// Create inner container
+const inner = document.createElement('div');
+inner.id = 'inner';
+inner.style.cssText = 'position:absolute;top:0;left:0;transform-origin:0 0;';
+canvas.appendChild(inner);
+
+// Create SVG group
+const svgG = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+svgG.id = 'svg-inner';
+svg.appendChild(svgG);
+
+// Create node elements
+const nodeEls = {};
+nodes.forEach((n, i) => {
+  const el = document.createElement('div');
+  el.className = `node ${n.ch === 'center' ? 'center-node' : n.ch}${n.hasNote ? ' has-note' : ''}`;
+  el.style.left = (n.x - 80) + 'px';
+  el.style.top = (n.y - 18) + 'px';
+  el.style.animationDelay = (i * 0.03) + 's';
+  el.dataset.ch = n.ch;
+  el.dataset.id = n.id;
+  el.innerHTML = n.label;
+  el.addEventListener('mouseenter', (e) => showTooltip(e, n));
+  el.addEventListener('mouseleave', hideTooltip);
+  el.addEventListener('mousemove', moveTooltip);
+  inner.appendChild(el);
+  nodeEls[n.id] = el;
+});
+
+// Create edges
+const nodeMap = {};
+nodes.forEach(n => nodeMap[n.id] = n);
+
+edges.forEach(([fromId, toId, style]) => {
+  const f = nodeMap[fromId], t = nodeMap[toId];
+  if (!f || !t) return;
+  const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+  line.setAttribute('x1', f.x);
+  line.setAttribute('y1', f.y);
+  line.setAttribute('x2', t.x);
+  line.setAttribute('y2', t.y);
+  const color = style === 'dashed' ? '#484f58' : '#30363d';
+  line.setAttribute('stroke', color);
+  line.setAttribute('stroke-width', style === 'dashed' ? '1.5' : '2');
+  if (style === 'dashed') line.setAttribute('stroke-dasharray', '8,6');
+  line.dataset.from = fromId;
+  line.dataset.to = toId;
+  line.dataset.ch = `${nodeMap[fromId].ch},${nodeMap[toId].ch}`;
+  svgG.appendChild(line);
+});
+
+updateTransform();
+
+// Pan & zoom
+let isDragging = false, startX, startY;
+canvas.addEventListener('mousedown', (e) => {
+  if (e.target.classList.contains('node')) return;
+  isDragging = true;
+  startX = e.clientX - panX;
+  startY = e.clientY - panY;
+  canvas.classList.add('dragging');
+});
+window.addEventListener('mousemove', (e) => {
+  if (!isDragging) return;
+  panX = e.clientX - startX;
+  panY = e.clientY - startY;
+  updateTransform();
+});
+window.addEventListener('mouseup', () => {
+  isDragging = false;
+  canvas.classList.remove('dragging');
+});
+canvas.addEventListener('wheel', (e) => {
+  e.preventDefault();
+  const oldScale = scale;
+  scale *= e.deltaY < 0 ? 1.1 : 0.9;
+  scale = Math.max(0.15, Math.min(2, scale));
+  // Zoom toward cursor
+  panX = e.clientX - (e.clientX - panX) * (scale / oldScale);
+  panY = e.clientY - (e.clientY - panY) * (scale / oldScale);
+  updateTransform();
+}, { passive: false });
+
+// Tooltip
+function showTooltip(e, n) {
+  let html = `<h3>${n.label}</h3><p>${n.tip}</p>`;
+  if (n.hasNote && n.noteTip) html += `<div class="from-notes">📝 From your notes: ${n.noteTip}</div>`;
+  if (!n.hasNote && n.gapTip) html += `<div class="gap-warning">⚠️ Gap: ${n.gapTip}</div>`;
+  tooltip.innerHTML = html;
+  tooltip.classList.add('visible');
+  moveTooltip(e);
+  // Highlight connected
+  highlightConnected(n.id);
+}
+function hideTooltip() {
+  tooltip.classList.remove('visible');
+  unhighlightAll();
+}
+function moveTooltip(e) {
+  let tx = e.clientX + 16, ty = e.clientY + 16;
+  if (tx + 370 > window.innerWidth) tx = e.clientX - 380;
+  if (ty + 200 > window.innerHeight) ty = e.clientY - 200;
+  tooltip.style.left = tx + 'px';
+  tooltip.style.top = ty + 'px';
+}
+
+function highlightConnected(id) {
+  svgG.querySelectorAll('line').forEach(l => {
+    if (l.dataset.from === id || l.dataset.to === id) {
+      l.setAttribute('stroke', l.getAttribute('stroke-dasharray') ? '#8b949e' : '#58a6ff');
+      l.setAttribute('stroke-width', '3');
+    }
+  });
+}
+function unhighlightAll() {
+  svgG.querySelectorAll('line').forEach(l => {
+    const isDashed = l.getAttribute('stroke-dasharray');
+    l.setAttribute('stroke', isDashed ? '#484f58' : '#30363d');
+    l.setAttribute('stroke-width', isDashed ? '1.5' : '2');
+  });
+}
+
+// Chapter filter
+function filterChapter(ch) {
+  document.querySelectorAll('#controls button[data-ch]').forEach(b => b.classList.remove('active'));
+  document.querySelector(`#controls button[data-ch="${ch}"]`).classList.add('active');
+
+  inner.querySelectorAll('.node').forEach(el => {
+    if (ch === 'all' || el.dataset.ch === ch || el.dataset.ch === 'center') {
+      el.style.opacity = '1';
+      el.style.pointerEvents = 'auto';
+    } else {
+      el.style.opacity = '0.12';
+      el.style.pointerEvents = 'none';
+    }
+  });
+  svgG.querySelectorAll('line').forEach(l => {
+    const chs = l.dataset.ch.split(',');
+    if (ch === 'all' || chs.includes(ch) || chs.includes('center')) {
+      l.style.opacity = '1';
+    } else {
+      l.style.opacity = '0.08';
+    }
+  });
+}
+
+// Gap panel
+const gaps = nodes.filter(n => !n.hasNote && n.gapTip && n.ch !== 'center');
+const gapList = document.getElementById('gap-list');
+gaps.forEach(g => {
+  const li = document.createElement('li');
+  li.textContent = g.label;
+  gapList.appendChild(li);
+});
+
+function toggleGaps() {
+  const panel = document.getElementById('gap-panel');
+  const btn = document.getElementById('gap-btn');
+  if (panel.style.display === 'block') {
+    panel.style.display = 'none';
+    btn.classList.remove('active');
+  } else {
+    panel.style.display = 'block';
+    btn.classList.add('active');
+  }
+}
+</script>
+</body>
+</html>

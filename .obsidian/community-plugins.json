@@ -1,6 +1,8 @@
 [
   "obsidian-git",
-  "obsidian-excalidraw-plugin",
   "editing-toolbar",
-  "virtual-linker"
+  "virtual-linker",
+  "obsidian-excalidraw-plugin",
+  "smart-connections-visualizer",
+  "templater-obsidian"
 ]
