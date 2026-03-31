@@ -8,14 +8,13 @@ description: ""
 date: 2026-02-12
 ---
 
-Message passing
-Shared memory
+See [[IPC Models]] for the full comparison of shared memory vs message passing (trade-offs, when to use each).
 
-Interprocess Communication
+## Interprocess Communication
 
 ### Synchronization
-	Blocking <—> Non-blocking
-Blocking: Synchronous
+	[[Blocking]] <—> Non-blocking
+[[Blocking]]: Synchronous
 	- Blocking send — sender is blocked until message is received
 	- Blocking receive — receiver is blocked until message is available (NOT SENT!)
 Non-blocking: Asynchronous
