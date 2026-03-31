@@ -2,5 +2,7 @@
   "obsidian-git",
   "obsidian-excalidraw-plugin",
   "editing-toolbar",
-  "virtual-linker"
+  "virtual-linker",
+  "templater-obsidian",
+  "dataview"
 ]
