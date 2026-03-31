@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls /Users/basseltaleb/Desktop/LearningNotes/os/*.md)",
+      "Bash(git checkout:*)"
+    ]
+  }
+}
