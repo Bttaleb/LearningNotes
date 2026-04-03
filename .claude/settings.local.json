@@ -2,7 +2,16 @@
   "permissions": {
     "allow": [
       "Bash(ls /Users/basseltaleb/Desktop/LearningNotes/os/*.md)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(cp -R '/Users/basseltaleb/Desktop/GitHub/Atelier/'* '/Users/basseltaleb/Desktop/GitHub/Couler/')",
+      "Bash(cp -R '/Users/basseltaleb/Desktop/GitHub/Atelier/'.* '/Users/basseltaleb/Desktop/GitHub/Couler/')",
+      "Bash(gh repo:*)",
+      "Bash(brew list:*)",
+      "Bash(/opt/homebrew/bin/gh --version)",
+      "Bash(/usr/local/bin/gh --version)",
+      "Read(//opt/homebrew/Cellar/gh/2.89.0/bin/**)",
+      "Bash(/opt/homebrew/bin/gh auth:*)",
+      "Bash(/opt/homebrew/bin/gh repo:*)"
     ]
   }
 }
