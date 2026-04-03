@@ -35,6 +35,8 @@ description: "Maps abstract CS/OS concepts to real-world applications and coding
 
 **Why it matters:** NFAs model problems where you have to explore multiple possibilities before knowing the answer — that's backtracking algorithms, search, and AI decision trees.
 
+**Practice exercise:** `c_state_machines/01_dfa_validator/` — turn a DFA diagram directly into a transition table array and a switch statement.
+
 ---
 
 ### PDA → Stack-Based Parsing & Code Structure
@@ -47,6 +49,8 @@ description: "Maps abstract CS/OS concepts to real-world applications and coding
 - **HTML/XML parsing** — `<div><p></p></div>` is a context-free language. A PDA validates nesting by pushing open tags and popping matching close tags
 
 **Why it matters:** Any time you see nested structure (brackets, function calls, undo history), there's a PDA concept underneath. If you can recognize "this is a stack problem," you jump straight to the right data structure.
+
+**Practice exercises:** `c_state_machines/03_lexer/` (DFA tokenizer) and `c_state_machines/04_pda_bracket_checker/` (PDA with explicit stack).
 
 ---
 
