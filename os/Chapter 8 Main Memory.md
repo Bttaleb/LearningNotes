@@ -133,9 +133,12 @@ total frames     = physical memory size / page size
 ```
 
 
-**Two level Paging**
+**Two level Paging** (forward mapped page table)
 Logical address -> divided into
 1. page number of 22 bits
 2. page offset consisting of 10 bits (2^10 bits = 1024 bits or 1k)
-Since page table is paged,
+Since page table is paged, page number further divided into:
+- 12 bit page number
+- 10 bit page offset
+
 
