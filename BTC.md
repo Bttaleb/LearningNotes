@@ -1,10 +1,12 @@
 ---
 date: 2026-04-10
-pair: US30
+pair:
+  - BTC
 htf_timeframe:
   - 3M
-candle_type: bullish
-po3_phase:
+candle_shape: classic
+candle:
+  - bullish
 tags:
   - candle-profile
   - po3
@@ -13,10 +15,13 @@ tags:
 # Candle Profile Study — {{pair}} {{htf_timeframe}} {{date}}
 
 ## Chart
-<!-- Paste/embed your screenshot — HTF candle with LTF breakdown visible -->
-
+Quarterly sponsorship (bullish)
+![[Pasted image 20260410150526.png]]
 ![[screenshot.png]]
+Quarterly sponsorship into monthly target (fvg->brkr) 
+![[Pasted image 20260410150648.png]]
 
+![[Pasted image 20260410152144.png]]
 ## What I See
 <!-- Break down what's in the image -->
 

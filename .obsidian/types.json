@@ -5,6 +5,8 @@
     "tags": "tags",
     "date": "date",
     "pair": "multitext",
-    "htf_timeframe": "multitext"
+    "htf_timeframe": "multitext",
+    "candle_expectation": "multitext",
+    "candle": "multitext"
   }
 }
