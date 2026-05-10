@@ -2,7 +2,7 @@ format strings -> printf, scanf
 d -> displays an integer in decimal (base 10), where p indicates minimum number of digits to display
 e -> displays a floating point number in exponential format, where p indicates how many digits should appear after the decimal point
 f -> displays a floating oint number in "fixed decimal" format without an exponent, where p has the same meaning as 'e' identifier
-g -> displays a floating point number in 
+g -> displays a floating point number in either exponential format or fixed decimal format, where p indicates the maximum number of significant digits (unlike f, g doesnt show trailing 0's)
 
 take the following code for example
 
