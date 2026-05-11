@@ -11,7 +11,7 @@ Format: prediction → actual → reflection. Verify by compiling small `.c` pro
 
 ---
 
-## Predict the printf output
+## 1) Predict the printf output
 
 ### a) `printf("%6d,%4d", 86, 1040);`
 
@@ -37,14 +37,19 @@ Format: prediction → actual → reflection. Verify by compiling small `.c` pro
 - **Why:** [[Ch03 - Formatted Input-Output#%g — general float (smart)|%g]] picks exponential (exponent < −4). 2 sig figs → `1.0e-06`, trailing zero stripped → `1e-06` (5 chars), then 1 trailing space (left-justified, width 6).
 - **Actual:** `1e-06␣` ✅
 
-## write calls of printf that display a float variable x in the following formats
+## 2) Write calls of printf that display a float variable x in the following formats
 
 ### a) `exponential notation; left-justified in a field of size 8; one digit after the decimal point`
-- printf('%-8.1g')
+- printf('%-8.1e')
 ### b) `exponential notation; right justified in a filed of size 10; six digits after the decimal point`
-- printf('%10.6g')
-### c) `fixed deimcla `
-
+- printf('%10.6e')
+### c) `fixed decimal notation; left justified in a field of size 8 three digits after the decimal point`
+- printf("%-8.3f")
+### d) `fixed decimal noation; right justified in a field of size 6; no digits after the decimal`
+- printf("%6f")
+## 3) For each of the following pairs of scanf format strings, indicate whether or not the two strings are equal, if not show how they can be distinguished
+### a) "%d" versus "     %d"
+- 
 ## Reflection
 
 What I want to remember:
