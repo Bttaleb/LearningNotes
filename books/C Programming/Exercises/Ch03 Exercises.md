@@ -43,7 +43,7 @@ Format: prediction → actual → reflection. Verify by compiling small `.c` pro
 - printf('%-8.1g')
 ### b) `exponential notation; right justified in a filed of size 10; six digits after the decimal point`
 - printf('%10.6g')
----
+### c) `fixed deimcla `
 
 ## Reflection
 
