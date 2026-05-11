@@ -78,3 +78,18 @@ Space efficiency -> how much extra memory it uses
 
 Programming an algorithm presents both a `peril` and an `opportunity`
 - peril lies in the possibility of making the transition from an algorithm to a program either `incorrectly` or very `inefficiently`
+
+## Problem Types
+### `Sorting` -- Rearrange items of a given list
+Some special properties
+- Stable -> preserves relative order of any 2 equal elements in its input
+	- Before sort = 1, 2, 5, 3<sub>a</sub>, 4, 3<sub>b</sub>
+	- Stable algorithm MUST preserve order of `a` and `b` after the sort;
+	- After sort = 1, 2, 3<sub>a</sub>, 3<sub>b</sub>, 4, 5
+- In-Place -> if it DOES NOT require extra memory (or an extra array for the sort)
+### `Searching` -- Find given value, called a search key, in a given set
+### `String Processing` -- 
+### `Graph Problems` -- 
+### `Combinatorial Problems` -- 
+### `Geometric Problems` -- 
+### `Numerical Problems` -- 
