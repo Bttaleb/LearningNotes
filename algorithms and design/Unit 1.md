@@ -40,5 +40,41 @@ Algorithms are considered to be procedural solutions to problems
 These 'solutions' are NOT answers, but specific instructions for getting answers
 
 ### Deciding computational means
+If central assumption is that instructions are executed one after another;
 - Sequential Algorithm -> Instructions executed one after another, one operation at a time
-- Parallel Algorithm ->
+Central assumption of RAM model doesn't hold for some newer computers that can execute concurrently
+- Parallel Algorithm -> Operations executed concurrently
+
+### Next Principle Decision
+Solve problem exactly(exact algorithm)? 
+or 
+Solve problem approximately(approximation algorithm)?
+
+**Why opt for an approximation algorithm?**
+1. Important problems that cannot be solved exactly for most of their instances
+	- Extracting square roots
+2. Available algorithms for solving problem exactly can be slow because of problem's intrinsic complexity
+	- Very large number of choices
+3. Approximation algorithm can be part of more sophisticated algorithm that solved problem exactly
+
+Algorithm design technique (or "strategy" or "paradigm") is a general approach to solving problems algorithmically, applicable to variety of problems
+General design techniques:
+- Brute force and exhaustive
+- Decrease-and-conquer
+- Divide-and-conquer
+- Transform-and-conquer
+- Space and time trade-offs
+- Dynamic programming
+- Greedy technique
+- Iterative improvement
+### Prove The Algorithms Correctness
+Prove the algo. yields a required result for every legitimate input in a finite amount of time
+### Analyzing the Algorithm
+Time efficiency -> how fast it can run
+Space efficiency -> how much extra memory it uses
+**Desirable Characteristics**
+`Simplicity`-> easier to understand and program
+`Generality` -> designed to solve a whole class of similar problems
+
+Programming an algorithm presents both a `peril` and an `opportunity`
+- peril lies in the possibility of making the transition from an algorithm to a program either `incorrectly` or very `inefficiently`
