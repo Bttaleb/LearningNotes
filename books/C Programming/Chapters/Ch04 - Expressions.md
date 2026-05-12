@@ -34,12 +34,10 @@ Definition. Mental model. Minimal example.
 ## Implementation-Defined Behavior
 Parts of C language are unspecified, an "implementation" (software needed to compile, link, and execute programs) will fill in the details
 
-| Unary (one operand) | Binary (two operands) | Binary           |     |
-| ------------------- | --------------------- | ---------------- | --- |
-|                     | `Additive`            | `Multiplicative` |     |
-| +Unary plus         | + Addition            | * Multiplication |     |
-| - Unary minus       | - Subtraction         | % Remainder      |     |
-|                     |                       | / Division       |     |
+| Unary (one operand)          | Binary (two operands)       | Binary (two operands)                         |
+| ---------------------------- | --------------------------- | --------------------------------------------- |
+|                              | `Additive`                  | `Multiplicative`                              |
+| +Unary plus<br>- Unary minus | + Addition<br>- Subtraction | * Multiplication<br>% Remainder<br>/ Division |
 When an `int` and `float` operands are mixed, result has *type* `float`
 
 ## 4.2 Assignment Operators
@@ -93,7 +91,30 @@ printf("i is %d\n", i++); /* prints "i is 1" */
 printf("i is %d\n", i); /* prints "i is 2" */
 ```
 
-## 4.3
+## 4.4 Expression Evaluation
+
+| Precedence | Name                                                                | Symbol(s)        | Associativity |
+| ---------- | ------------------------------------------------------------------- | ---------------- | ------------- |
+| 1          | increment(postfix)<br>decrement(postfix)                            | ++<br>--         | left          |
+| 2          | increment(prefix)<br>decrement(prefix)<br>unary plus<br>unary minus | ++<br>--         | right         |
+| 3          | multiplicative                                                      | * / %            | left          |
+| 4          | additive                                                            | + -              | left          |
+| 5          | assignment                                                          | = *= /= %= += -= | right         |
+
+How would we understand an expression like
+`a + b += c++ - d + --e / -f`
+- express using *subexpressions*
+1. highest precedence is increment(postfix)
+	`a + b += (c++) - d + --e / -f
+2.  then decrement(prefix) and unary minus operator (both precedence 2)
+	`a + b += (c++) - d + (--e) / (-f)`
+3. multiplicative `/` operator
+	`a = b += (c++) - d) + ((--e) / (-f))`
+4. - and + additive operators
+	`a = b += (((c++) - d) + ((--e)) / (-f)))`
+5. = and += assignment operators (group from right to left)
+	`(a = b ( += (((c++) - d) ((--e) / (-f))))`
+
 ---
 
 ## Worked examples
