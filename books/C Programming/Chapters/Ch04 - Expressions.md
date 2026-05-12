@@ -31,9 +31,17 @@ Definition. Mental model. Minimal example.
 // code
 ```
 
-## Concept name 2
+## Implementation-Defined Behavior
+Parts of C language are unspecified, an "implementation" (software needed to compile, link, and execute programs) will fill in the details
 
-...
+| Unary (one operand) | Binary (two operands) | Binary           |
+| ------------------- | --------------------- | ---------------- |
+|                     | `Additive`            | `Multiplicative` |
+| +Unary plus         | + Addition            | * Multiplication |
+| - Unary minus       | - Subtraction         | % Remainder      |
+|                     |                       | / Division       |
+When an int and float operands are mixed, result has type float
+
 
 ---
 
@@ -51,8 +59,8 @@ Definition. Mental model. Minimal example.
 ## Quick reference
 
 | Thing | Meaning |
-|---|---|
-|   |   |
+| ----- | ------- |
+|       |         |
 
 ---
 
