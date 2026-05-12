@@ -54,6 +54,18 @@ WRONG:
 12 = i;
 i + j = 0;
 -i = j;
+### Compound Assignment
+Allows us to shorted statements which may look like
+i = i + 2;
+which turns into
+i += 2;
+- `v += e`, adds v to e, storing the result in v
+- `v -= e`, subtracts e from v, storing the result in v
+- `v *=  e` multiplies b by e, storing the result in v
+- `v /= e` divided v by e, storing the result in v
+- `v %= e` computes the remainder when v is divided by e, storing the result in v
+
+
 
 ---
 
