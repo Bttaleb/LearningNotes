@@ -34,16 +34,15 @@ Definition. Mental model. Minimal example.
 ## Implementation-Defined Behavior
 Parts of C language are unspecified, an "implementation" (software needed to compile, link, and execute programs) will fill in the details
 
-| Unary (one operand) | Binary (two operands) | Binary           |
-| ------------------- | --------------------- | ---------------- |
-|                     | `Additive`            | `Multiplicative` |
-| +Unary plus         | + Addition            | * Multiplication |
-| - Unary minus       | - Subtraction         | % Remainder      |
-|                     |                       | / Division       |
-|                     |                       |                  |
-When an int and float operands are mixed, result has type float
+| Unary (one operand) | Binary (two operands) | Binary           |     |
+| ------------------- | --------------------- | ---------------- | --- |
+|                     | `Additive`            | `Multiplicative` |     |
+| +Unary plus         | + Addition            | * Multiplication |     |
+| - Unary minus       | - Subtraction         | % Remainder      |     |
+|                     |                       | / Division       |     |
+When an `int` and `float` operands are mixed, result has *type* `float`
 
-## Assignment Operators
+## 4.2 Assignment Operators
 Once value of expression is computed, store it in a variable for later use
 ### L-Values
 - an assignment operator REQUIRES an 'l-value' as its left operand
@@ -64,7 +63,13 @@ i += 2;
 - `v *=  e` multiplies b by e, storing the result in v
 - `v /= e` divided v by e, storing the result in v
 - `v %= e` computes the remainder when v is divided by e, storing the result in v
+Compound operators DO NOT mean equivalence -> because of *operator precedence*: `i *= j + k` isn't the same as `i = i * j + k`
+- v += e **is NOT** equivalent to v = v + e
 
+Compound assignment operators have same properties as ` =` operator
+- i += j += k; means i += (j += k);
+
+## 4.3 Increment and Decrement Operators
 
 
 ---
