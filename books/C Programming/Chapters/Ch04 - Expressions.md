@@ -70,8 +70,30 @@ Compound assignment operators have same properties as ` =` operator
 - i += j += k; means i += (j += k);
 
 ## 4.3 Increment and Decrement Operators
+Incrementing and Decrementing
+Allow us to condense the statements;
+i = i + 1 to i += 1
+j = j - 1 to j -= 1
+Shortened even further using `++ (increment)` or `-- (decrement)`
+### Prefix: `++i or --j`
+- the increment/decrement happens *before* using i or j
 
+```
+i = 1;
+printf("i is %d\n", ++i); /* prints "i is 2" */
+printf("i is %d\n", i); /* prints "i is 2" */
+```
 
+### Postfix: `i++ or j--`
+- the increment/decrement happens *after* using i or j
+
+```
+i = 1;
+printf("i is %d\n", i++); /* prints "i is 1" */
+printf("i is %d\n", i); /* prints "i is 2" */
+```
+
+## 4.3
 ---
 
 ## Worked examples
