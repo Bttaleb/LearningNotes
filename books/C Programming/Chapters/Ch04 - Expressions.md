@@ -16,11 +16,14 @@ related: []
 
 ## TL;DR
 
-One-paragraph summary of the chapter.
+Expressions are formulas that show how to compute a value-rather than statements. The simplest forms of expressions are variables and constants. `variable` represents a value to be computed as the program runs; a `constant` represents a value that doesn't change.
 
 ---
 
-## Concept name
+## Types of operators
+a) **Arithmetic operators** -> including addition, subtraction, multiplication, division
+b) **Relational operators** -> to perform comparisons such as "i is greater than 0"
+c) **Logical operators** -> to build conditions such as "*i* is greater than 0 AND *i* is less than 10"
 
 Definition. Mental model. Minimal example.
 
