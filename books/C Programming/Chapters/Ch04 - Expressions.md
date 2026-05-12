@@ -40,8 +40,20 @@ Parts of C language are unspecified, an "implementation" (software needed to com
 | +Unary plus         | + Addition            | * Multiplication |
 | - Unary minus       | - Subtraction         | % Remainder      |
 |                     |                       | / Division       |
+|                     |                       |                  |
 When an int and float operands are mixed, result has type float
 
+## Assignment Operators
+Once value of expression is computed, store it in a variable for later use
+### L-Values
+- an assignment operator REQUIRES an 'l-value' as its left operand
+- represents an object stored in computer's memory
+	- **NOT** a `constant` or  `result` of a computation
+- variables ARE L-Values; expressions such as `10` or `2 * i`are not
+WRONG:
+12 = i;
+i + j = 0;
+-i = j;
 
 ---
 
