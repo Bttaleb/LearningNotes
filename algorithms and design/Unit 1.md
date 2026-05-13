@@ -93,3 +93,20 @@ Some special properties
 ### `Combinatorial Problems` -- 
 ### `Geometric Problems` -- 
 ### `Numerical Problems` -- 
+
+## Linear Data Structures
+Array
+Linked List
+Stack
+Queue
+### Graphs
+A collection of points in a plane (**vertices/nodes**)
+- Some connected by line segments (**edges**)
+Graph *G = <V,E>* -> defined by pair of two sets
+1. Finite non empty set 'V' of items (**vertices**)
+2. Set 'E' of pairs of these items (**edges**)
+Undirected / Directed
+A graph is 
+	Complete if -> Every pair of its vertices connected by an edge
+	Dense if -> Relatively few possible edges missing
+	Sparse if -> Few edges relative to number of vertices
