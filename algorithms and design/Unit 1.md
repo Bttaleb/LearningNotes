@@ -105,8 +105,21 @@ A collection of points in a plane (**vertices/nodes**)
 Graph *G = <V,E>* -> defined by pair of two sets
 1. Finite non empty set 'V' of items (**vertices**)
 2. Set 'E' of pairs of these items (**edges**)
-Undirected / Directed
-A graph is 
-	Complete if -> Every pair of its vertices connected by an edge
-	Dense if -> Relatively few possible edges missing
-	Sparse if -> Few edges relative to number of vertices
+can be Undirected / Directed
+A *graph G* is 
+	**Complete** if -> Every pair of its vertices connected by an edge
+	**Dense** if -> Relatively few possible edges missing
+	**Sparse** if -> Few edges relative to number of vertices
+A graph can be represented in 2 ways
+- Adjacency matrix (dense graph)
+	- A graph with `n` vertices is an `n * n` Boolean matrix with 1 row and 1 column for each of it's vertices
+	- element in i<sub>th</sub> row and j<sub>th</sub> column = 
+		1, if there exists an edge from i<sub>th</sub> vertex to  j<sub>th</sub> vertex
+		0, if there is no such edge
+- Adjacency lists (sparse graph)
+### Weighted Graphs
+### Paths
+### Cycles
+## Trees
+### Binary Trees
+### Sets
