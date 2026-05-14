@@ -41,16 +41,15 @@ Precedence of relational operators is lower than arithmetic and left associative
 
 ### Equality Operators
 Have lower precedence than relational operators
-i < j == (j < k)
+i < j <font color="#00b0f0">==</font> (j < k)
 is equivalent to
-(i < j) == (j < k)
+(i < j) <font color="#00b0f0">==</font> (j < k)
 
 | Symbol | Meaning      |
 | ------ | ------------ |
 | ==     | equal to     |
 | !=     | not equal to |
-Left associative, produce either 0 (false) or 1 (true)
-
+Left associative, produce either 0 (false) or 1 (true) 
 ### Logical Operators
 Building more complicated logical expressions
 
@@ -85,7 +84,7 @@ if (i <  0 || i >= n)
 If we want an *if* statement to control two or more statements; has the form ->  
 `{ statements }`
 { line_num = 0; page_num++; }
-Compound statement when used inside and if statement
+Compound statement when used inside an if statement
 if (line_num == MAX_LINES) {
 	line_num = 0;
 	page_num++;
@@ -129,7 +128,6 @@ else
 		printf("n is equal to 0\n");
 	else
 		printf("n is greater than 0\n");
-
 ```
 
 ## Conditional Expressions
@@ -138,8 +136,8 @@ else
 - expr1 ? expr2 : expr3 -> read: "`if` expr1 **then** expr2 *else* expr3"
 Considered a `ternary` operator instead of `conditional expression` as it requires **3 operands** instead of 1 or 2
 Expressions are evaluated in stages
-- expr1 is evaluated first; if value != 0 -> then expr2 is evaluated, and its value is the value of the entire conditional expression
-- if value of expr1 == 0, then value of expr3 is the value of the conditional
+- expr1 is evaluated first; if value (of expr1) != 0 (or true) -> then expr2 is evaluated, and its value is the value of the entire conditional expression
+- if value of expr1 == 0 (false), then value of expr3 is the value of the conditional
 
 ```c
 int i, j, k;
@@ -149,7 +147,29 @@ k = i > j ? i : j;         /* k is now 2 */
 k = (i >= 0 ? i : 0) + j;  /*k is now 3 */
 ```
 
-Since `i = 1` and `j = 2`, the comparison fails (i > j). 
+- Since `i = 1` and `j = 2`, the comparison (*i > j*) fails. The value of the conditional (*2*) is then assigned to `k`. 
+- In the second assignment, we'll say "if `i` is greater than or equal to 0, then `i`, else 0)". This results in the value of 1 being added to j, equaling 3
+
+Conditionals can be shortened such as return statements like;
+
+```c
+if (i < j)
+	return i;
+else
+	return j;
+//can be shortened to
+return i < j ? i : j;
+
+//printf calls can also benefit from conditional expressions
+if (i > j)
+	printf("%d\n", i);
+else
+	printf("%$d\n", j);
+//turns into
+printf("%d\n", i > j ? i : j);
+```
+
+
 
 
 
