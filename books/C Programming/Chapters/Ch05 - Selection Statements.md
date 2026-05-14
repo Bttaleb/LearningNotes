@@ -93,7 +93,18 @@ if (line_num == MAX_LINES) {
 
 ### The *else* Clause
 if (expression) statement *else* statement
-the Statement that 
+The statement that follows *else*, is executed if the expression in the parenthesis has the value 0
+Example
+if (i > j)
+	max = i;
+else
+	max = j;
+### Cascaded *if* Statements
+To test a series of conditions, stopping as soon as one of them is true
+The following tests whether n is less than 0, equal to 0, or greater than 0
+if (n < 0)
+	printf("n is less th)
+
 ...
 
 ---
