@@ -102,10 +102,37 @@ else
 ### Cascaded *if* Statements
 To test a series of conditions, stopping as soon as one of them is true
 The following tests whether n is less than 0, equal to 0, or greater than 0
-if (n < 0)
-	printf("n is less th)
 
-...
+```c
+if (n < 0)
+	printf("n is less than 0\n");
+else
+	if (n == 0)
+		printf("n is equal to 0\n");
+	else
+		printf("n is greater than 0\n");
+
+```
+
+## Conditional Expressions
+**Conditional Operator** -> an operator that allows an expression to produce one of two values depending on the value of a condition
+- consists of 2 symbols (? and :)
+- expr1 ? expr2 : expr3 -> read: "`if` expr1 **then** expr2 *else* expr3"
+Considered a `ternary` operator instead of `conditional expression` as it requires **3 operands** instead of 1 or 2
+Expressions are evaluated in stages
+- expr1 is evaluated first; if value != 0 -> then expr2 is evaluated, and its value is the value of the entire conditional expression
+- if value of expr1 == 0, then value of expr3 is the value of the conditional
+
+```c
+int i, j, k;
+i = 1;
+j = 2;
+k = i > j ? i : j;         /* k is now 2 */
+k = (i >= 0 ? i : 0) + j;  /*k is now 3 */
+```
+
+Since *i* = *1* and *j* = *2*;
+i > j comparison fails (1 > 2 = false/0), value of the conditional is 2, which is assigned to *k*
 
 ---
 
