@@ -99,6 +99,24 @@ if (i > j)
 	max = i;
 else
 	max = j;
+
+The following program uses *if* statements to find the largest of the following numbers stored in i, j, and k and stores that value in max
+```c
+if (i > j) { // is i greater than j? if true, move on
+	if (i > k) { // is i greater than k? if true, i is bigger than both
+		max = i; // set max to the value of i
+	} else { // i is greater than j but less than k
+		max = k; // so set max to the value of k
+	}	
+} else { // i is less than j, check j
+	if (j > k) { // is j greater than k?
+		max = j; // set max to the value of j
+	} else { // j is less than the value of k
+		max = k; // set max to the value of j
+	}
+}
+```
+
 ### Cascaded *if* Statements
 To test a series of conditions, stopping as soon as one of them is true
 The following tests whether n is less than 0, equal to 0, or greater than 0
@@ -131,22 +149,10 @@ k = i > j ? i : j;         /* k is now 2 */
 k = (i >= 0 ? i : 0) + j;  /*k is now 3 */
 ```
 
-Since *i* = *1* and *j* = *2*;
-i > j comparison fails (1 > 2 = false/0), value of the conditional is 2, which is assigned to *k*
+Since `i = 1` and `j = 2`, the comparison fails (i > j). 
 
-The following program uses *if* statements to find the largest of the following numbers stored in i, j, and k and stores that value in max
 
-```c
-if (i > j) { // is i greater than j? if true, move on
-	if (i > k) { // is i greater than k? if true, i is bigger than both
-		max = i; // set max to the value of i
-	} else { // i is neither greater than j or k
-		max = k; // 
-	}	
-} else {
-	if (j > k)
 
-```
 
 
 ---
