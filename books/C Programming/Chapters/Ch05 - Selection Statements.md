@@ -134,6 +134,21 @@ k = (i >= 0 ? i : 0) + j;  /*k is now 3 */
 Since *i* = *1* and *j* = *2*;
 i > j comparison fails (1 > 2 = false/0), value of the conditional is 2, which is assigned to *k*
 
+The following program uses *if* statements to find the largest of the following numbers stored in i, j, and k and stores that value in max
+
+```c
+if (i > j) { // is i greater than j? if true, move on
+	if (i > k) { // is i greater than k? if true, i is bigger than both
+		max = i; // set max to the value of i
+	} else { // i is neither greater than j or k
+		max = k; // 
+	}	
+} else {
+	if (j > k)
+
+```
+
+
 ---
 
 ## Worked examples
