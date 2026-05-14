@@ -68,16 +68,32 @@ These operators evaluate the left operand, then the right
 If the value of the expression can be deduced from the value of the left operand alone, then the right operand isn't evaluated
 
 ## 5.2 The *If* Statement
-Allows for a program to choose between two alternatives by testing the value of an expression
+Allows for a program to choose between two alternatives by testing the value of an expression; has the form -> `if (expression) statement`
 Don't confuse == (equality) with = (assignment)
 `if (i == 0)` -> tests whether i is equal to 0
 `if (i = 0)` -> assigns 0 to i, then tests whether the result is non-zero
+
 ```c
-// code
+// if we wanted to test whether a variable falls within a range of values (0 <= i <= n), we'd write
+if (0 <= && i < n)
+
+// to test the opposite condition (i is outside the range)
+if (i <  0 || i >= n)
 ```
 
-## Concept name 2
+## Compound Statements
+If we want an *if* statement to control two or more statements; has the form ->  
+`{ statements }`
+{ line_num = 0; page_num++; }
+Compound statement when used inside and if statement
+if (line_num == MAX_LINES) {
+	line_num = 0;
+	page_num++;
+}
 
+### The *else* Clause
+if (expression) statement *else* statement
+the Statement that 
 ...
 
 ---
