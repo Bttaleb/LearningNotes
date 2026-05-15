@@ -130,6 +130,30 @@ else
 		printf("n is greater than 0\n");
 ```
 
+### Dangling else
+When `if` statements are nested, watch out for the following
+```c
+if (y != 0)
+	if (x != 0)
+		result = x / y;
+else // C follows the rule that and "else" belongs to the nearest "if"
+	printf("Error: y is equal to 0\n");
+// which looks like the following:
+if (y != 0)
+	if (x != 0)
+		result = x / y;
+	else
+		printf("Error: y is equal to 0\n");
+// if you want the "else" to be paired with the outer "if":
+if (y != 0) {
+	if (x != 0) // enclose the inner "if" with braces
+		result = x / y;
+}   else
+		printf("Error: y is equal to 0\n");
+	
+
+```
+
 ## Conditional Expressions
 **Conditional Operator** -> an operator that allows an expression to produce one of two values depending on the value of a condition
 - consists of 2 symbols (? and :)
@@ -150,7 +174,7 @@ k = (i >= 0 ? i : 0) + j;  /*k is now 3 */
 - Since `i = 1` and `j = 2`, the comparison (*i > j*) fails. The value of the conditional (*2*) is then assigned to `k`. 
 - In the second assignment, we'll say "if `i` is greater than or equal to 0, then `i`, else 0)". This results in the value of 1 being added to j, equaling 3
 
-Conditionals can be shortened such as return statements like;
+Conditionals can be shortened such as `return` statements like;
 
 ```c
 if (i < j)
@@ -169,31 +193,32 @@ else
 printf("%d\n", i > j ? i : j);
 ```
 
-### Dangling else
-When `if` statements are nested, watch out for the following
-
-## Boolean Values (C89)
-Declare an int variable and assign it to either 0 or 1
-int flag;
-flag = 0;
-flag = 1;
-Problem: Its not obvious that flag is to be assigned only Boolean values and that 0 and 1 represent false and true
-
-```c
-// Instead, define macros such as 
-#define TRUE 1;
-#define FALSE 0;
-```
-
-Now assignments to flag are more natural
-flag = FALSE;
-flag = TRUE;
-To test whether a flag is true, we can write:
-if (flag == TRUE)
+## Boolean Values
+### (C89)
+Declare an int variable and assign it to either `0` or `1`
+`int flag;`
+`flag = 0;`
+`flag = 1;`
+**Problem**: Its not obvious that flag is to be assigned only Boolean values and that 0 and 1 represent false and true. Instead, define *macros* such as:
+`#define TRUE 1;`
+`#define FALSE 0;`
+Now, assignments to *flag(s)* are more natural:
+`flag = FALSE;`
+`flag = TRUE;`
+To test whether a *flag* is `TRUE`, we can write:
+`if (flag == TRUE)     ||     if (flag == FALSE)`
 or 
-if (flag) <- better, more concise 
-
-
+`if (flag)     ||      if (!flag)` <- better, more concise 
+Carrying over, we can assign *macros* that can be used as a *type*:
+`#define BOOL int` -> `BOOL` can take `int`'s place:
+`BOOL flag;` -> makes it clear that flag **isn't** an ordinary `int` variable, but represents a `BOOL` condition
+### (C99)
+Provides the `_Bool` type, can be declared by writing:
+`_Bool flag;`
+- an integer type (more precisely, an **unsigned** integer type)
+- can only be assigned `0` or `1` 
+- attempting to store a nonzero will cause the variable to be assigned 1
+`flag = 5;` -> flag is assigned 1
 
 
 ---
