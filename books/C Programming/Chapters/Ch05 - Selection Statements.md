@@ -21,7 +21,7 @@ Most of C's statements fall into three categories *depending on how they affect 
 - **Iteration statements** — the `while`, `do`, and `for` statements support iteration (looping). See [[Ch06 - Loops]].
 - **Jump statements** — the `break`, `continue`, and `goto` statements cause an unconditional jump to some other place in the program (`return` belongs here as well).
 
-Before writing `if` statements, we need [[#Logical expressions|logical expressions]] — conditions that `if` statements can test.
+Before writing `if` statements, we need [[#Logical expressions]] — conditions that `if` statements can test.
 
 ---
 
@@ -368,7 +368,12 @@ switch (expression) {
 - floating-point numbers and strings don't qualify
 **Case Labels** -> Each case begins with a label of the form
 `case constant-expression :`
-[[#constant-expression|constant expression]] is like an ordinary expression, but **CANNOT** contain variables or function calls
+### Constant Expression
+[[#Constant Expression]] is like an ordinary expression, but **CANNOT** contain variables or function calls
+- 5 is a constant expression
+- 5 + 10 is a constant expression
+- *n* + 10 is **NOT** a constant expression (unless *n* is a macro that represents a constant)
+**Statements** -> Comes after EACH case label (any number of statements, braces aren't required)
 
 ---
 
