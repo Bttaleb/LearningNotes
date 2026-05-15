@@ -169,6 +169,8 @@ else
 printf("%d\n", i > j ? i : j);
 ```
 
+### Dangling else
+When `if` statements are nested, watch out for the following
 
 ## Boolean Values (C89)
 Declare an int variable and assign it to either 0 or 1
