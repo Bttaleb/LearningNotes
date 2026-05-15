@@ -64,11 +64,11 @@ Left associative, produce either `0` (false) or `1` (true).
 
 Building more complicated logical expressions.
 
-| Symbol | Meaning          |
-| ------ | ---------------- |
-| `!`    | logical negation |
-| `&&`   | logical *and*    |
-| \|\|** | logical *or*     |
+| Symbol   | Meaning          |
+| -------- | ---------------- |
+| `!`      | logical negation |
+| `&&`     | logical *and*    |
+| **\|\|** | logical *or*     |
 
 Produce either `0` or `1` as their result and behave as follows:
 
@@ -321,6 +321,54 @@ _Bool flag;
 ```c
 flag = 5;   // flag is assigned 1
 ```
+
+### The *switch* statement
+For comparing expressions against a series of values to see which one it currently matches. The following shows *if* against *switch* statements
+
+```c
+// cascaded if's
+if (grade == 4)
+	printf("Excellent");
+else if (grade == 3)
+	printf("Good");
+else if (grade == 2)
+	printf("Average");
+else if (grade == 1)
+	printf("Poor")'
+else if (grade == 0)
+	printf("Failing");
+else
+	printf("Illegal Grade");
+// switch: easier to read and faster
+switch (grade) {
+	case 4: printf("Excellent");
+			break;
+	case 3: printf("Good");
+			break;
+	case 2: printf("Average");
+			break;
+	case 1: printf("Poor");
+			break;
+	case 0: printf("Failing");
+			break;
+	default: printf("Illegal Grade");
+			break;
+} // typically has the form
+switch (expression) {
+	case constant-expression : statements
+	...
+	case constant-expression : statements
+	default : statements
+}
+
+```
+
+### Each of a *switch*'s components
+**Controlling Expression** -> *switch* must be followed by an int. expression in parentheses. 
+- floating-point numbers and strings don't qualify
+**Case Labels** -> Each case begins with a label of the form
+`case constant-expression :`
+[[#constant-expression|constant expression]] is like an ordinary expression, but **CANNOT** contain variables or function calls
 
 ---
 

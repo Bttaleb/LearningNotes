@@ -32,7 +32,7 @@ When you encounter a term in another chapter, add the new location below the exi
 - **decrement (`--`)** — see [[Ch04 - Expressions#Increment and decrement]]
 - **`%e` / `%E`** — see [[Ch03 - Formatted Input-Output#%e — exponential float]]
 - **`else` clause** — see [[Ch05 - Selection Statements#The *else* clause]]
-- **equality operators (`==`, `!=`)** — see [[Ch05 - Selection Statements#Equality operators]]
+- **equality operators** ($==, !=$) — see [[Ch05 - Selection Statements#Equality operators]]
 - **expression** — see [[Ch04 - Expressions#TL;DR]]
 - **`%f`** — see [[Ch03 - Formatted Input-Output#%f — fixed decimal float]]
 - **field width** — see [[Ch03 - Formatted Input-Output#Field width and precision]]
