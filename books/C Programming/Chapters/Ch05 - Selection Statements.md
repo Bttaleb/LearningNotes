@@ -170,7 +170,26 @@ printf("%d\n", i > j ? i : j);
 ```
 
 
+## Boolean Values (C89)
+Declare an int variable and assign it to either 0 or 1
+int flag;
+flag = 0;
+flag = 1;
+Problem: Its not obvious that flag is to be assigned only Boolean values and that 0 and 1 represent false and true
 
+```c
+// Instead, define macros such as 
+#define TRUE 1;
+#define FALSE 0;
+```
+
+Now assignments to flag are more natural
+flag = FALSE;
+flag = TRUE;
+To test whether a flag is true, we can write:
+if (flag == TRUE)
+or 
+if (flag) <- better, more concise 
 
 
 
