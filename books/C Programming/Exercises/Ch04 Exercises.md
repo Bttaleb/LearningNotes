@@ -1,10 +1,8 @@
 ---
 type: exercise
-chapter:
-tags:
-  - expressions
-related:
-  - "[[ChNN - Title]]"
+chapter: 4
+tags: [chapter/4, topic/expressions, kind/exercise, status/learning]
+related: ["[[Ch04 - Expressions]]"]
 ---
 
 # Chapter 4 Exercises

@@ -6,5 +6,13 @@
       ],
       "key": "M"
     }
+  ],
+  "graph:open-local": [
+    {
+      "modifiers": [
+        "Shift"
+      ],
+      "key": "ArrowUp"
+    }
   ]
 }
