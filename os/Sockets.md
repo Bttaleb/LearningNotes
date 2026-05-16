@@ -20,7 +20,7 @@ Q's
 - Relation (parent-child) between communication processes?
 - Can be used over network?
 
-[[Ordinary Pipes]] (NO access from outside process that created it)
+[[ordinary-pipes|Ordinary Pipes]] (NO access from outside process that created it)
 - Parent process creates a pipe -> Uses it to communicate with a child process that created it
 
 [[Named Pipes]] (access without parent-child relationship)

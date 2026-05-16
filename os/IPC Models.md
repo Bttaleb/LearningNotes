@@ -23,7 +23,7 @@ A region of memory that both processes can read/write directly.
 - Kernel involved **once at setup** (`shm_open()` system call), then **no kernel involvement** for data exchange
 - Fast — just regular memory reads/writes
 - Dangerous — if both processes access at the same time, [[Synchronization|race conditions]] occur
-- This is why the [[Producer-Consumer Problem]] needs [[Mutex Locks]] and [[Semaphores]]
+- This is why the [[Classic Sync Problems|Producer-Consumer Problem]] needs [[Synchronization Tools#Mutex Locks|mutex locks]] and [[Synchronization Tools#Semaphores|semaphores]]
 
 **Analogy:** Two coworkers sharing a whiteboard. Fast to use, but if both write at the same time, you get a mess.
 
@@ -55,7 +55,7 @@ Processes send/receive discrete messages through the kernel.
 
 ## Synchronization in Message Passing
 
-[[blocking|Blocking]] vs Non-blocking determines how send/receive behave:
+Blocking vs Non-blocking determines how send/receive behave:
 - **Blocking send** — sender waits until message is received
 - **Blocking receive** — receiver waits until message is available
 - If BOTH are blocking → **rendezvous** (both must be present for hand-off)
@@ -80,7 +80,7 @@ Connects to: [[Producer-Consumer Problem]] uses the same bounded buffer concept,
 ## Mechanisms
 
 - [[Sockets]] — for communication across networks (IP + port)
-- [[Ordinary Pipes]] — local, unidirectional, requires parent-child relationship, disappear when processes terminate
+- [[ordinary-pipes|Ordinary Pipes]] — local, unidirectional, requires parent-child relationship, disappear when processes terminate
 - Named Pipes — local, bidirectional, no parent-child needed, persist after processes finish
 
 **When to use pipes vs sockets:** Pipes for local related processes. Sockets when processes are on different machines.

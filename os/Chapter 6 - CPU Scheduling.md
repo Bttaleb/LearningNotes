@@ -24,7 +24,7 @@ Four situations:
 **Non-preemptive:** Only at 1 and 4. Process keeps CPU until done or blocked.
 **Preemptive:** All four. Scheduler can yank CPU away. Creates [[Synchronization]] issues — process might be mid-update on shared data.
 
-Preemptive exists because you **can't trust every process to give up the CPU in time**. One long process would make the whole system unresponsive. That's why preemptive scheduling is why you need [[Mutex Locks]] and [[Semaphores]].
+Preemptive exists because you **can't trust every process to give up the CPU in time**. One long process would make the whole system unresponsive. That's why preemptive scheduling is why you need [[Synchronization Tools#Mutex Locks|mutex locks]] and [[Synchronization Tools#Semaphores|semaphores]].
 
 ---
 

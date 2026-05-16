@@ -19,7 +19,7 @@ description: ""
 	2. Block/Table in memo. -- No limit, but slower
 	3. Stack -- no limit, most flexible, but slower + a lot of overhead
 3. <mark style="background:rgba(5, 117, 197, 0.2)">OS structures</mark> with pros + cons (4)
-	1. <mark style="background:rgba(5, 117, 197, 0.2)">Simple</mark> ([[Monolithic]])
+	1. <mark style="background:rgba(5, 117, 197, 0.2)">Simple</mark> ([[monolithic|Monolithic]])
 		<font color="#00b050">Pros</font>: Fast, efficient
 		<font color="#ff0000">Cons</font>: Difficult to maintain/extend, no isolation, poor security
 	2. <mark style="background:rgba(5, 117, 197, 0.2)">UNIX</mark> (Layered-ish Monolithic)
@@ -46,7 +46,7 @@ description: ""
 		C: Most OS kernel, balance of performance and portability (low-level access)
 		C++: modern OS components, object oriented
 		High-Level: System utilities, python/java/C#, easier development + maintainability
-6. How are [[system calls]] implemented? (8 steps)
+6. How are [[system-calls|system calls]] implemented? (8 steps)
 	1. User invokes API function
 	2. API sets up parameters -> executes trap/software interrupt
 	3. Mode switches FROM User TO Kernel

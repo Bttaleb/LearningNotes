@@ -53,7 +53,7 @@ User-Threads <font color="#00b050">Advantages</font>:
 - User level thread are fast to create and manage
 
 User-Threads <font color="#ff0000">Disadvantages</font>:
-- Most systems calls are [[blocking]]
+- Most systems calls are blocking
 - Multithreaded apps cannot use multiprocessing
 
 Kernel-Thread <font color="#00b050">Advantages</font>:
