@@ -22,9 +22,9 @@ Four situations:
 4. Process terminates
 
 **Non-preemptive:** Only at 1 and 4. Process keeps CPU until done or blocked.
-**Preemptive:** All four. Scheduler can yank CPU away. Creates [[Synchronization]] issues — process might be mid-update on shared data.
+**Preemptive:** All four. Scheduler can yank CPU away. Creates [[synchronization]] issues — process might be mid-update on shared data.
 
-Preemptive exists because you **can't trust every process to give up the CPU in time**. One long process would make the whole system unresponsive. That's why preemptive scheduling is why you need [[Synchronization Tools#Mutex Locks|mutex locks]] and [[Synchronization Tools#Semaphores|semaphores]].
+Preemptive exists because you **can't trust every process to give up the CPU in time**. One long process would make the whole system unresponsive. That's why preemptive scheduling is why you need [[synchronization-tools#Mutex Locks|mutex locks]] and [[synchronization-tools#Semaphores|semaphores]].
 
 ---
 
@@ -71,9 +71,9 @@ Same as MLQ but processes **move between queues** based on behavior. Use full qu
 
 ## Thread Scheduling
 
-**PCS (Process Contention Scope)** — threads compete within the same process. User-level library decides. Kernel doesn't see individual threads. Used with [[Multithreaded Programming|user threads]].
+**PCS (Process Contention Scope)** — threads compete within the same process. User-level library decides. Kernel doesn't see individual threads. Used with [[multithreaded-programming|user threads]].
 
-**SCS (System Contention Scope)** — threads compete across ALL processes. Kernel schedules directly. Used with [[Multithreaded Programming|kernel threads]].
+**SCS (System Contention Scope)** — threads compete across ALL processes. Kernel schedules directly. Used with [[multithreaded-programming|kernel threads]].
 
 ### pthread APIs
 - `SCHED_FIFO` — realtime FCFS within same priority. No quantum. Runs until done/blocked/preempted by higher priority.

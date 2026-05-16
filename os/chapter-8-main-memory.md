@@ -1,37 +1,57 @@
-**Translation Look Aside Buffer (TLB)**
-- Store Address-Space Identifiers (ASIDs)
-	- To uniquely ID each process (pid??) -> provides address-space protection
-	If not, you would need to flush at every context switch (unusable)
-**Associative Memory**
-- Compares input search data
+---
+tags:
+  - memory
+  - paging
+  - tlb
+source: OS Class (Jan 2026)
+description: Page tables, address translation, TLB caching, locality, memory protection
+---
 
-First look to TLB (cache) for what you need (the address of the whole page)
+# Chapter 8 — Main Memory
+
+## Translation Lookaside Buffer (TLB)
+
+A small, fast **associative cache inside the MMU** that stores recent page-number → frame-number translations. Without it, every memory access would require walking the page table — doubling the work for every load/store.
+
+- Stores Address-Space Identifiers (ASIDs)
+	- To uniquely ID each process (pid??) -> provides address-space protection
+	- If not, you would need to flush at every context switch (unusable)
+
+### Associative Memory
+- Compares input search data in parallel against all entries (single clock cycle)
+
+### Lookup flow
+
+First look to TLB (cache) for what you need (the address of the whole page):
 - if HIT, add to *physical* address with displacement into *physical* memory
 - if MISS, look in page table, add to *physical* address with displacement (d) into *physical* memory
 
-**Finding Effective Access Time**
-e = epsilon -> time for TLB search, "20 nanoseconds"
-Hit ratio = a -> percentage of times a page # is found in associative registers, *a ratio related to number of associative registers*
-Miss ratio = 1-a
-Memory access time = m
+### Effective Access Time (EAT)
 
+- e = epsilon -> time for TLB search, "20 nanoseconds"
+- Hit ratio = a -> percentage of times a page # is found in associative registers, *a ratio related to number of associative registers*
+- Miss ratio = 1-a
+- Memory access time = m
 
-EAT = a(e + m) + (1-a)(e + 2m) <- why hit twice? First time hit the cache, if it misses where have to check the page table
+`EAT = a(e + m) + (1-a)(e + 2m)` ← why hit twice? First time hit the cache, if it misses we have to check the page table
 
-**Locality of Reference**
-- 3 reasons as to why we have *LOR*
+## Locality of Reference
+
+3 reasons as to why we have *LOR*:
 1. Your code runs sequentially (usually)
 2. Loops (references array "A" over and over so it helps)
-	- for (i=0; i < 100; i++)
-			A[i] = 0;
+	- `for (i=0; i < 100; i++) A[i] = 0;`
 3. functions/modules
 
-**Memory Protection**
-- Valid-Invalid bit attached to each entry in table 
+## Memory Protection
+
+- Valid-Invalid bit attached to each entry in table
 	- if valid -> page is in process' logical address space (legal page)
 	- if invalid -> page not in process' logical address space (segmentation fault)
 
-**Shared Code**
+## Shared Code
+
+*(notes pending)*
 
 ---
 
@@ -133,12 +153,12 @@ total frames     = physical memory size / page size
 ```
 
 
-**Two level Paging** (forward mapped page table)
+## Two level Paging (forward mapped page table)
+
 Logical address -> divided into
 1. page number of 22 bits
 2. page offset consisting of 10 bits (2^10 bits = 1024 bits or 1k)
+
 Since page table is paged, page number further divided into:
 - 12 bit page number
 - 10 bit page offset
-
-

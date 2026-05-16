@@ -1,1 +1,0 @@
-multiple programs loaded in memory simultaneously. CPU switches between to maximize utilization 

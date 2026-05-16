@@ -57,7 +57,7 @@ description: "Maps abstract CS/OS concepts to real-world applications and coding
 ## Operating Systems
 
 ### Mutex → Protecting Shared Resources
-**Concept:** [[Synchronization Tools]] — mutual exclusion, one thread at a time
+**Concept:** [[synchronization-tools]] — mutual exclusion, one thread at a time
 
 **In practice:**
 - **Database row locks** — when two users try to edit the same record, the database uses a mutex. First transaction locks the row, second waits. Without this, you get corrupted data (same race condition as your `race_condition.c` exercise)
@@ -69,7 +69,7 @@ description: "Maps abstract CS/OS concepts to real-world applications and coding
 ---
 
 ### Semaphore → Rate Limiting & Connection Pools
-**Concept:** [[Synchronization Tools]] — counting semaphore, N threads at a time
+**Concept:** [[synchronization-tools]] — counting semaphore, N threads at a time
 
 **In practice:**
 - **Database connection pools** — a server has 10 database connections. Each request takes one (sem_wait), uses it, returns it (sem_post). Request #11 waits. This is your parking lot exercise scaled up
@@ -81,7 +81,7 @@ description: "Maps abstract CS/OS concepts to real-world applications and coding
 ---
 
 ### Page Tables → Memory Debugging & Virtual Memory
-**Concept:** [[Chapter 8 Main Memory]] — virtual-to-physical address translation
+**Concept:** [[chapter-8-main-memory]] — virtual-to-physical address translation
 
 **In practice:**
 - **Segfault debugging** — a crash at address `0x00000008` means page 0, offset 8. Page 0 is unmapped → null pointer dereference. The address split tells you exactly what went wrong
@@ -93,7 +93,7 @@ description: "Maps abstract CS/OS concepts to real-world applications and coding
 ---
 
 ### Process Scheduling → Task Queues & Load Balancing
-**Concept:** [[Chapter 6 - CPU Scheduling]] — deciding which process runs next
+**Concept:** [[chapter-6-cpu-scheduling]] — deciding which process runs next
 
 **In practice:**
 - **Web server request handling** — Nginx/Apache deciding which request to process next uses scheduling algorithms. Round Robin = each request gets equal time. Priority = premium users served first
@@ -105,7 +105,7 @@ description: "Maps abstract CS/OS concepts to real-world applications and coding
 ---
 
 ### Producer-Consumer → Everywhere in Software
-**Concept:** [[Classic Sync Problems]] — bounded buffer with mutex + semaphores
+**Concept:** [[classic-sync-problems]] — bounded buffer with mutex + semaphores
 
 **In practice:**
 - **Message queues (Kafka, RabbitMQ)** — producers publish events, consumers process them, the queue is the bounded buffer. If the queue fills up, producers block. If it's empty, consumers wait

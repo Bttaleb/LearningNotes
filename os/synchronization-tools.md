@@ -10,7 +10,7 @@ date: 2026-03-24
 
 # Synchronization Tools
 
-The building blocks for solving [[Synchronization|critical section problems]], from low-level hardware up to high-level tools.
+The building blocks for solving [[synchronization|critical section problems]], from low-level hardware up to high-level tools.
 
 ---
 
@@ -67,7 +67,7 @@ If nobody waiting → `lock = false`.
 
 ## Mutex Locks
 
-The simplest high-level [[Synchronization]] tool. Two operations:
+The simplest high-level [[synchronization]] tool. Two operations:
 
 ```
 acquire(lock);    // grab lock, wait if taken
@@ -127,7 +127,7 @@ In the blocking implementation, S can go **negative**. The absolute value of S t
 
 ### Used In Classic Problems
 
-See [[Classic Sync Problems]] — Producer-Consumer, Readers-Writers, Dining Philosophers.
+See [[classic-sync-problems]] — Producer-Consumer, Readers-Writers, Dining Philosophers.
 
 ---
 

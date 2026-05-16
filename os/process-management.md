@@ -36,7 +36,7 @@ Thread B: PC → instruction 17
 
 System runs many processes (user + OS) concurrently across one or more CPUs.
 
-**How:** Multiplexing — rapidly switching CPU among processes/threads ([[Chapter 1 Review|time-sharing]]).
+**How:** Multiplexing — rapidly switching CPU among processes/threads ([[chapter-1-review|time-sharing]]).
 
 ---
 

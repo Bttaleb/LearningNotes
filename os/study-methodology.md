@@ -24,9 +24,9 @@ You already do this instinctively. Your [[execution-models]] note doesn't just l
 | Concept | The Problem It Solves |
 |---------|----------------------|
 | [[process-management\|Process states]] | OS needs to know what each process is doing so it can make scheduling decisions |
-| [[Synchronization\|Critical sections]] | Shared data gets corrupted when multiple processes modify it concurrently |
-| [[Multithreaded Programming\|User vs Kernel threads]] | Kernel threads are expensive; user threads are cheap but invisible to the OS |
-| [[Chapter 6 - CPU Scheduling\|CPU scheduling algorithms]] | Different workloads need different fairness/performance trade-offs |
+| [[synchronization\|Critical sections]] | Shared data gets corrupted when multiple processes modify it concurrently |
+| [[multithreaded-programming\|User vs Kernel threads]] | Kernel threads are expensive; user threads are cheap but invisible to the OS |
+| [[chapter-6-cpu-scheduling\|CPU scheduling algorithms]] | Different workloads need different fairness/performance trade-offs |
 
 **Self-test:** If you can't name the problem, you don't understand the mechanism yet.
 
@@ -51,17 +51,17 @@ EVENT: [something happens]
 
 1. **A user presses a key while a program is waiting for input**
    - Interrupt fires → kernel handles I/O → process moves from waiting → ready
-   - Connect to: [[Communications models]], [[process-management]], your dual-mode knowledge from [[Chapter 1 Review]]
+   - Connect to: [[communications-models]], [[process-management]], your dual-mode knowledge from [[chapter-1-review]]
 
 2. **Two threads try to increment a shared counter simultaneously**
    - Both read counter → both write same value → one increment lost
-   - Connect to: [[Synchronization]] (your producer/consumer code), [[process-management|deadlock]]
+   - Connect to: [[synchronization]] (your producer/consumer code), [[process-management|deadlock]]
 
 3. **A web server receives 1000 requests at once**
    - How does the OS decide which request gets CPU time?
-   - Connect to: [[Chapter 6 - CPU Scheduling]], [[Multithreaded Programming]], [[Sockets]]
+   - Connect to: [[chapter-6-cpu-scheduling]], [[multithreaded-programming]], [[sockets]]
 
-**Why this works for you specifically:** Your notes already have the pieces — [[execution-models]] has the CPU/I/O flow, [[memory]] has the storage hierarchy, [[Synchronization]] has the critical section structure. The vertical trace forces you to connect them instead of studying them in isolation.
+**Why this works for you specifically:** Your notes already have the pieces — [[execution-models]] has the CPU/I/O flow, [[memory]] has the storage hierarchy, [[synchronization]] has the critical section structure. The vertical trace forces you to connect them instead of studying them in isolation.
 
 ---
 
@@ -89,12 +89,12 @@ Process states are the skeleton of everything else. Every scheduling algorithm, 
 
 **Then layer on what you know:**
 
-- **New → Ready:** What decides when a process gets admitted? (Your [[Chapter 6 - CPU Scheduling]] concepts — long-term scheduler)
+- **New → Ready:** What decides when a process gets admitted? (Your [[chapter-6-cpu-scheduling]] concepts — long-term scheduler)
 - **Ready → Running:** This IS CPU scheduling. FCFS, SJF, Priority, Round-Robin — each one is a different answer to "which ready process runs next?"
-- **Running → Waiting:** The process called a blocking I/O operation. Connect to your [[Communications models]] note — blocking send/receive causes exactly this transition
-- **Running → Ready:** Preemption. Your [[Synchronization]] note distinguishes preemptive vs non-preemptive kernels — this is where that matters
+- **Running → Waiting:** The process called a blocking I/O operation. Connect to your [[communications-models]] note — blocking send/receive causes exactly this transition
+- **Running → Ready:** Preemption. Your [[synchronization]] note distinguishes preemptive vs non-preemptive kernels — this is where that matters
 
-**Level up:** Once you can draw the basic diagram from memory, add the thread dimension. A process can be "running" even if its threads are in different states. Your [[Multithreaded Programming]] note on user vs. kernel threads, the kernel only sees kernel thread states, not user thread states.
+**Level up:** Once you can draw the basic diagram from memory, add the thread dimension. A process can be "running" even if its threads are in different states. Your [[multithreaded-programming]] note on user vs. kernel threads, the kernel only sees kernel thread states, not user thread states.
 
 ---
 
@@ -116,7 +116,7 @@ You already use analogies well (the bathroom lock for critical sections, the pen
 |---------|---------|
 | Process states | Job application: Applied (new) → Shortlisted (ready) → Interviewing (running) → Waiting for background check (waiting) → Hired/Rejected (terminated) |
 | User vs kernel threads | Employees vs contractors. The company (kernel) tracks contractors directly but doesn't know about the internal team structure (user threads) of a contracting firm (process) |
-| Buffering types | Delivery: Zero-capacity = hand-to-hand (both must be present). Bounded = mailbox (finite space). Unbounded = warehouse (sender never waits). Already in your [[Communications models]] — now connect it to process blocking behavior |
+| Buffering types | Delivery: Zero-capacity = hand-to-hand (both must be present). Bounded = mailbox (finite space). Unbounded = warehouse (sender never waits). Already in your [[communications-models]] — now connect it to process blocking behavior |
 | Scheduling algorithms | Restaurant seating: FCFS = strict queue. SJF = quick orders first. Priority = VIP list. Round-robin = everyone gets 10 minutes then rotates |
 
 **Rule:** An analogy is only useful if you can also explain where it *breaks down*. The restaurant analogy breaks when you consider that processes can't choose to leave the queue — they get preempted. That's the insight.
@@ -134,15 +134,15 @@ Don't just study what things *are*. Study what happens when they *collide*.
    - Extension: What happens when you need BOTH? That's modern scheduling — and it's why Round-Robin exists
 
 2. **User Threads vs Kernel Visibility**
-   - Your [[Multithreaded Programming]] note lists the advantages/disadvantages
+   - Your [[multithreaded-programming]] note lists the advantages/disadvantages
    - Deeper question: If the kernel blocks a process because one user thread made a blocking syscall, what happens to the OTHER user threads in that process? They all freeze. This is why many-to-many threading models exist
 
 3. **Protection vs Performance**
-   - Your [[Chapter 1 Review]] covers dual-mode and why it's needed
-   - Conflict: Every mode switch (user → kernel → user) costs time. Your [[Chapter 2 Review]] notes that microkernels are slowest precisely because they require MORE mode switches. Simple/monolithic is fastest because everything runs in kernel mode — but one bug crashes the whole system
+   - Your [[chapter-1-review]] covers dual-mode and why it's needed
+   - Conflict: Every mode switch (user → kernel → user) costs time. Your [[chapter-2-review]] notes that microkernels are slowest precisely because they require MORE mode switches. Simple/monolithic is fastest because everything runs in kernel mode — but one bug crashes the whole system
 
 4. **Concurrency vs Correctness**
-   - Your [[Synchronization]] note has Peterson's Solution
+   - Your [[synchronization]] note has Peterson's Solution
    - Conflict: The more locking you add, the safer your data — but the slower your system (less true concurrency). Taken to the extreme, locking everything makes your concurrent system behave like a sequential one. The art is finding the minimum necessary locking
 
 ---
@@ -167,15 +167,15 @@ Knowledge decays fast without retrieval practice. Here's a structured weekly hab
 Based on everything in your vault right now:
 
 **Strong (can explain and connect):**
-- Memory hierarchy and caching — [[memory]], [[Chapter 1 Review]]
-- Dual-mode operation and why it exists — [[Chapter 1 Review]]
-- Synchronization fundamentals — [[Synchronization]]
-- IPC models — [[Communications models]], [[Sockets]]
+- Memory hierarchy and caching — [[memory]], [[chapter-1-review]]
+- Dual-mode operation and why it exists — [[chapter-1-review]]
+- Synchronization fundamentals — [[synchronization]]
+- IPC models — [[communications-models]], [[sockets]]
 
 **Developing (have the facts, need deeper connections):**
 - Process states and transitions — [[process-management]] has the terms but not the full state diagram
-- Thread types and trade-offs — [[Multithreaded Programming]] lists pros/cons but doesn't trace through *why* mechanically
-- CPU scheduling — [[Chapter 6 - CPU Scheduling]] is sparse; needs the vertical traces above
+- Thread types and trade-offs — [[multithreaded-programming]] lists pros/cons but doesn't trace through *why* mechanically
+- CPU scheduling — [[chapter-6-cpu-scheduling]] is sparse; needs the vertical traces above
 
 **Gap (not yet in your notes):**
 - Process creation and termination (fork/exec/wait/exit lifecycle)

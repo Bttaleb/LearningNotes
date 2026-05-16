@@ -50,10 +50,10 @@ do {
 2. <mark style="background:#b1ffff">Progress</mark> - if NO process is in critical section, processes wishing to enter cannot be postponed indefinitely
 3. <mark style="background:#b1ffff">Bounded Waiting</mark> - Must be strict limit on how many times other processes can enter critical sections after a process request(will/could one of the processes wait for an unlimited time?)
 
-See [[Synchronization Tools#Atomic Hardware Instructions]] for how test_and_set and compare_and_swap satisfy these, and the bounded-waiting solution that guarantees all three.
+See [[synchronization-tools#Atomic Hardware Instructions]] for how test_and_set and compare_and_swap satisfy these, and the bounded-waiting solution that guarantees all three.
 
-Higher-level tools built on these: [[Synchronization Tools]]
-Classic problems using them: [[Classic Sync Problems]]
+Higher-level tools built on these: [[synchronization-tools]]
+Classic problems using them: [[classic-sync-problems]]
 
 ANYTIME YOU ACCESS SHARED DATA, YOU MUST PUT IT IN A <mark style="background:rgba(240, 200, 0, 0.2)">CRITICAL SECTION</mark> (with entry and exit)
 	- When you use the bathroom, you go inside (lock), use the bathroom, exit (unlock)

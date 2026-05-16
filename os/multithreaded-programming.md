@@ -9,13 +9,13 @@ date: 2026-02-19
 ---
 
 # Key Distinction
-**Thread vs Process:** A process gets its own address space, PCB, file descriptors. A thread shares code/data/files with other threads in the same process — only gets its own stack, registers, program counter. Cheaper to create, faster to switch, free communication (shared memory) — but shared memory creates [[Synchronization|race conditions]].
+**Thread vs Process:** A process gets its own address space, PCB, file descriptors. A thread shares code/data/files with other threads in the same process — only gets its own stack, registers, program counter. Cheaper to create, faster to switch, free communication (shared memory) — but shared memory creates [[synchronization|race conditions]].
 
 **Why multithreading:** Cheaper creation, faster context switching, no IPC needed (shared address space), responsiveness (one thread blocks, others continue).
 
-**Challenges:** [[Synchronization|Race conditions]], non-deterministic bugs, dividing work evenly, testing difficulty.
+**Challenges:** [[synchronization|Race conditions]], non-deterministic bugs, dividing work evenly, testing difficulty.
 
-Thread scheduling connects to [[Chapter 6 - CPU Scheduling]] — PCS vs SCS determines whether threads compete within a process or across the system.
+Thread scheduling connects to [[chapter-6-cpu-scheduling]] — PCS vs SCS determines whether threads compete within a process or across the system.
 #Parallelism -> implies a system can perform more than one task SIMULTANEOUSLY
 #Concurrency -> supports more than one task making progress
 

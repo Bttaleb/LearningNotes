@@ -9,7 +9,7 @@ date: 2026-03-24
 
 # Classic Synchronization Problems
 
-Three classic problems that apply [[Synchronization Tools#Semaphores|semaphores]] to real coordination scenarios.
+Three classic problems that apply [[synchronization-tools#Semaphores|semaphores]] to real coordination scenarios.
 
 ---
 
@@ -17,7 +17,7 @@ Three classic problems that apply [[Synchronization Tools#Semaphores|semaphores]
 
 A producer writes data to a shared buffer. A consumer reads from it. The problem: how do you coordinate access so nothing gets corrupted or lost?
 
-This pattern bridges [[IPC Models]] (Ch 3) and [[Synchronization]] (Ch 5). It's an IPC problem (two processes exchanging data) whose shared-memory solution requires synchronization tools.
+This pattern bridges [[ipc-models]] (Ch 3) and [[synchronization]] (Ch 5). It's an IPC problem (two processes exchanging data) whose shared-memory solution requires synchronization tools.
 
 ### Solution with Semaphores
 
@@ -47,7 +47,7 @@ If the producer swaps `wait(mutex)` before `wait(empty)`:
 
 ### Connection to Buffering
 
-The bounded buffer here maps to the bounded-capacity case in [[IPC Models|message passing buffering]]:
+The bounded buffer here maps to the bounded-capacity case in [[ipc-models|message passing buffering]]:
 - In message passing → the OS manages the buffer and blocking
 - In shared memory → **you** write the code (using semaphores) to manage it
 
@@ -61,7 +61,7 @@ Shared database. Multiple readers can read simultaneously (no conflict). Writers
 
 Uses: `rw_mutex` (sem, init 1), `mutex` (sem, init 1), `read_count` (int, init 0)
 
-```
+```c
 // Writer                      // Reader
 wait(rw_mutex);                wait(mutex);
   // write                       read_count++;

@@ -8,7 +8,7 @@ description: ""
 date: 2026-02-12
 ---
 
-See [[IPC Models]] for the full comparison of shared memory vs message passing (trade-offs, when to use each).
+See [[ipc-models]] for the full comparison of shared memory vs message passing (trade-offs, when to use each).
 
 ## Interprocess Communication
 
