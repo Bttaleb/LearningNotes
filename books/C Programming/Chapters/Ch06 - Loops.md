@@ -107,16 +107,38 @@ while (i > 0) { // loop termination
 
 ### *for* statement idioms
 - usually best choice for loops that "count up" (increment a variable) or "count down" (decrement a variable)
+```c
+// Counting UP from 0 TO n-1
+for (i = 0; i < n; i++)
+// Counting UP from 1 TO n
+for (i = 1; i <= n; i++) 
+// Counting DOWN from n-1 to 0
+for (i = n - 1; i >= 0; i++)
+// Counting DOWN from n to 1
+for (i = n; i > 0; i--)
+```
+Some beginner errors:
+ - Using `<` or `>` in the controlling expression
+	 - Counting up -> `<` or `<=`
+	 - Counting down -> `>` or `>=`
+- Using == in controlling expression instead of `<`, `<=`, `>`, `>=`
+	- Controlling expression BEGIN `true` -> LATER `false` so loop can terminate
+- "Off-by-one" errors; `i <= n` instead of `i < n`
+## Omitting Expressions in *for* statements
 
+*for* statements are flexible
+- If the first expression is omitted (*expr1*), no initialization is performed before execution
 
 ```c
-Counting **up** from `0` to `n-1`:
-for (i = 0; i < n; i++)
+i = 10; // omit the first expr1 (expr1)
+for (; i > 0; i--)
+	printf("T minus %d and counting. \n", i);
+	
+for (i = 10; i > 0;)
+	printf("T minus %d and counting. \n", i--); // omit third (expr3) post decrement,
 ```
 
-
 ...
-
 
 
 ---
