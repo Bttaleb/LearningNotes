@@ -34,6 +34,13 @@ while (expression) statement
 
 while (i < n)     // controlling expression
 	i = i * 2;    // loop body
+	
+//countdown
+i = 10;
+while (i > 0) {
+	printf("T minus %d seconds and counting\n", i);
+	i--;
+}
 ```
 
 Observations about the *while* statement:
@@ -41,7 +48,23 @@ Observations about the *while* statement:
 - Since controlling expression is tested **before** the loop is executed, body may not be executed at all
 Cross-link related ideas inline: `[[Ch04 - Expressions#Operator precedence]]`.
 
-## Concept name 2
+## *do* Statement
+
+Essentially the *while* statement whose controlling expression is tested **after** each execution of the loop body
+
+```c
+do statement while (expression)
+
+//countdown
+i = 10;
+do {
+	printf("T minus %d seconds and counting", i) // loop body
+	i--;
+} while (i > 0); // controlling expression
+```
+
+Loop body is executed first, then the controlling expression is evaluated
+If value of expression is nonzero -> loop body is executed again, expression evaluated once more
 
 ...
 
