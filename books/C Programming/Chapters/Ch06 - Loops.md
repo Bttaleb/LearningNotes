@@ -23,17 +23,22 @@ One-paragraph mental model of the chapter. Link the key concepts inline so the T
 ---
 
 ## Iteration Statements
-- while
-- do
-- for
+- while -> loops whose controlling expression is tested **before** loop body is executed
+- do -> if the expression is tested **after** the loop body is executed
+- for -> loops that increment or decrement a counting variable
 
-
-Definition in your own words. Mental model. Minimal example.
+### *while* Statement
 
 ```c
-// code
+while (expression) statement
+
+while (i < n)     // controlling expression
+	i = i * 2;    // loop body
 ```
 
+Observations about the *while* statement:
+- The controlling expression is **FALSE** when a while loop **terminates**
+- Since controlling expression is tested **before** the loop is executed, body may not be executed at all
 Cross-link related ideas inline: `[[Ch04 - Expressions#Operator precedence]]`.
 
 ## Concept name 2
