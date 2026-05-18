@@ -50,7 +50,8 @@ Cross-link related ideas inline: `[[Ch04 - Expressions#Operator precedence]]`.
 
 ## *do* Statement
 
-Essentially the *while* statement whose controlling expression is tested **after** each execution of the loop body
+Essentially same as the *while* statement, except controlling expression is tested **after** each execution of the loop body.
+- handy for loops that must execute at least once
 
 ```c
 do statement while (expression)
@@ -63,10 +64,60 @@ do {
 } while (i > 0); // controlling expression
 ```
 
-Loop body is executed first, then the controlling expression is evaluated
-If value of expression is nonzero -> loop body is executed again, expression evaluated once more
+- Loop body is executed first, then the controlling expression is evaluated
+- If value of expression is nonzero -> loop body is executed again, expression evaluated once more
+Do statement turns out to be more attractive, because every integer (even 0) has at least one integer
+
+```c
+//replacing the do loop by a similar while loop
+while (n > 0) {  // if n is initally 0, loop doesn't execute at all
+	n /= 10;
+	digits++;
+}
+Output: The number has 0 digit(s)
+```
+
+## *for* Statement
+Ideal for loops that have a **"counting" variable**
+
+```c
+for (expr1 ; expr2; expr3 ) statement
+for (i = 10; i > 0; i--)
+	printf("T minus %d and counting\n", i);
+```
+Variable *i* -> initialized to 10, then *i* is tested to see if it's greater than 0
+Since it is -> "T minus 10 and counting" is printed
+Then -> *i* is decremented
+
+*for* is closely related to the *while*
+
+```c
+expr1; // initialization step performed before loop begins
+while (expr2) { // controls loop termination (continues executing as long 
+	statement    // as value of expr2 == nonzero)
+	expr3; // operation to be performed at the end of each loop iteration
+}
+
+i = 10; //initialization
+while (i > 0) { // loop termination
+	printf("T minus %d and counting\n", i);
+	i--; // operation to be performed at the end
+}
+```
+
+### *for* statement idioms
+- usually best choice for loops that "count up" (increment a variable) or "count down" (decrement a variable)
+
+
+```c
+Counting **up** from `0` to `n-1`:
+for (i = 0; i < n; i++)
+```
+
 
 ...
+
+
 
 ---
 
