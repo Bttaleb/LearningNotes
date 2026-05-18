@@ -26,6 +26,9 @@ while i < n and A[i] != K do
 if i < n return i
 else return -1
 ```
-Worst case -> efficiency for worst case input of size n (runs the longest of all inputs)
-- analyze to see what kind of inputs yield largest value of basic operation's count C(n)
+Worst case -> efficiency for worst case input of size **n** (runs the longest of all inputs)
+How?
+	Analyze to see what kind of inputs yield largest value of basic operation's count C(**n**) among all possible inputs of size **n** -> compute this worst case value C<sub>worst</sub>(**n**)
 Best Case -> efficiency for best case input of size n (runs the fastest of all inputs)
+How?
+	Determine inputs for which count C(**n**) will be *smallest* among ALL possible inputs of size **n**
