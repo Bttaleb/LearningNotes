@@ -49,4 +49,4 @@ PROOF:
 $100n + 5 ∈ O(n²)$
 "The function $100n + 5$ grows no faster than $n²$"
 We need to find constants c > 0 and n<sub>0</sub> > 0 such that:
-$100n + 5 <= c · n^2$ for all n > n)
+$100n + 5 <= c · n^2$ for all n >= n<sub>0</sub> 

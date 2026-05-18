@@ -12,7 +12,7 @@ When you encounter a term in another chapter, add the new location below the exi
 ## A–C
 
 - **arithmetic operators** — see [[Ch04 - Expressions#Types of operators]]
-- **assignment operator** — see [[Ch04 - Expressions#Assignment operators]]; also [[Ch05 - Selection Statements#If statement]] (`=` vs `==` gotcha)
+- **assignment operator** — see [[Ch04 - Expressions#Assignment operators]]; also [[Ch05 - Selection Statements#If statement]] (= vs == gotcha)
 - **associativity** — see [[Ch04 - Expressions#Operator precedence]]
 - **`BOOL` macro (C89)** — see [[Ch05 - Selection Statements#C89]]
 - **`_Bool` (C99)** — see [[Ch05 - Selection Statements#C99]]
