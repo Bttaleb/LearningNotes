@@ -25,6 +25,17 @@ Big-O -> `Upper-Bound` -> "at most"
 	This algorithm will never do *more* work than this
 	O(n<sup>2</sup>) means: in the worst scenario, growth is capped at n<sup>2</sup>, never more
 	"This job will take at most 2 weeks", could finish in 3 days, but never more than 2 weeks
+	
+```c
+int addUp(int n) {
+	int sum = 0;
+	for (int i = 0; i <= n; i++) {
+		sum += i;
+	} 
+	return sum;
+}
+```
+
 Big-Ω -> `Lower-Bound` -> "at least"
 	This algorithm will never do *less* work than this
 	Ω(n) means: no matter what, this thing does at least linear work, you can't make it faster than the growth rate
@@ -47,6 +58,12 @@ where;
 	`g(n)` -> whatever comparison function you're testing against (n, n<sup>2</sup>, n·log<sub>n</sub>)
 PROOF:
 $100n + 5 ∈ O(n²)$
-"The function $100n + 5$ grows no faster than $n²$"
+	"The function $100n + 5$ grows no faster than $n²$"
 We need to find constants c > 0 and n<sub>0</sub> > 0 such that:
-$100n + 5 <= c · n^2$ for all n >= n<sub>0</sub> 
+$100n + 5 ≤ c · n^2$ for all n ≥ n<sub>0</sub> 
+For $n ≥ 1$ we know that,
+$n ≤ n^2$ and $1 ≤ n^2$ 
+So we can replace each term in 100n + 5 with something bigger (in terms of $n^2$)
+$100n + 5 ≤ 100n^2 + 5n^2$ (since $n ≤ n^2$ and $1 ≤ n^2$ so $5 ≤ 5n^2$)
+$= 105n^2$
+So with c = 105 and n<sub>0</sub> = 1, we know the inequality holds
