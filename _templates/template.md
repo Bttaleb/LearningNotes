@@ -1,6 +1,6 @@
 ---
 tags:
-source: ""
+type: chapter
 description: ""
 date: January 20, 2026
 ---
