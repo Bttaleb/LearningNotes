@@ -27,11 +27,19 @@ Big-O -> `Upper-Bound` -> "at most"
 	"This job will take at most 2 weeks", could finish in 3 days, but never more than 2 weeks
 	
 ```c
+// O(n) linear time
+// n = 1,000,000
+// ~1,000,000 steps to complete
 int addUp(int n) {
 	int sum = 0;
 	for (int i = 0; i <= n; i++) {
 		sum += i;
 	} 
+	return sum;
+}
+// O(1) constant time
+int addUp(int n) {
+	int sum = n · (n + 1) / 2;
 	return sum;
 }
 ```
