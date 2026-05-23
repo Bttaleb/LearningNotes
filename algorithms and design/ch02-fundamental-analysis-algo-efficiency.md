@@ -12,7 +12,8 @@ One framework:
 3. Which scenario? -> Worst, Best, Average-Case
 4. How do we classify growth **precisely**? -> Big-O, Big-Ω, Big-Θ
 
-### Measuring an inputs size
+## Measuring an inputs size
+#list-problems
 Obvious observation: **ALL algorithms run longer on larger inputs**
 - Takes longer to sort larger arrays, multiply larger matrices
 Therefore, investigate algorithms efficiency as a function of some *parameter n*, indicating algorithm's input size
@@ -20,9 +21,26 @@ Therefore, investigate algorithms efficiency as a function of some *parameter n*
 - sorting
 - searching
 - finding list's smallest element
+*Finding*: it doesn't matter which reasonable parameter you pick - analysis comes out same way regardless (for **list problems**)
 ### Gotcha - Choice of parameter indicating an input size DOES matter
+
+#matrix-multiplication-problems
 The input size parameter you choose can change how an algorithm's efficiency appears, **even when two parameters (n) are mathematically equivalent**
-*Example*: 
+*Example*: matrix multiplication
+- *n* - the order of the matrix (one side's length)
+	A is n·n, B is an n·n matrix == O(N<sup>3</sup>)
+- *N* - the total number of elements across both matrices
+	N = 2n^2 -> n = √(N/2) == O(N<sup>1.5</sup>)
+*Finding*: unlike list problems where the parameter choice is harmless, some problems (**matrix multiplication**) have multiple natural size measures that produce meaningfully different efficiency spaces; **choice requires deliberate attention**
+
+The choice (size metric), can be influenced by operations of the algorithm in question
+*Example*: how should we measure an input's size for a spell-checking algorithm?
+1. If algorithm examines `individual character as its input` -> **measure size by the number of characters**
+2. If algorithm works by `processing words` ->  **count their numbers** in the input
+*Example 2*: measuring input size for algorithms checking primality of a positive integer *n*
+- Here, input is just 1 number
+- it is this numbers magnitude, that determines the input size
+*Finding*: measure size by the number *b* of bits in the *n*'s v
 
 ## Basic Operations
 Count the most time consuming operation in it's innermost loop

@@ -57,11 +57,11 @@ Job C:               [run]──────────────[run]
 
 ### Batch vs Time-Sharing
 
-| Aspect | Batch | Time-Sharing |
-|--------|-------|--------------|
-| Interaction | None — all inputs upfront | Interactive — user waits for response |
-| Response time | Doesn't matter | < 1 second (ideally < 100ms) |
-| Example | Midnight backup | Terminal session, text editor |
+| Aspect        | Batch                     | Time-Sharing                          |
+| ------------- | ------------------------- | ------------------------------------- |
+| Interaction   | None — all inputs upfront | Interactive — user waits for response |
+| Response time | Doesn't matter            | < 1 second (ideally < 100ms)          |
+| Example       | Midnight backup           | Terminal session, text editor         |
 
 ### What Time-Sharing Adds
 
