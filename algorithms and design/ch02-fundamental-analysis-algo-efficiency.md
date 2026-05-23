@@ -1,3 +1,6 @@
+	"When you can measure what you are speaking about and express int in numbers than you know something about it; but when you cannot express it in numbers your knowledge is a meagre and unsatisfactory kind: it may be the beginning of knowledge but you have scarcely, in your thoughts, advanced to the stage of science, whatever the matter may be"
+	- Lord Kelvin (1842-1907)
+
 
 Time efficiency (time complexity) -> how fast an algorithm runs
 Space efficiency (space complexity) -> amount of memory units required in addition to space needed for its input and output
@@ -8,6 +11,18 @@ One framework:
 2. How does work grow with `n`? -> Orders of growth (log<sub>n</sub>, n, n<sup>2</sup>, 2<sup>n</sup>...)
 3. Which scenario? -> Worst, Best, Average-Case
 4. How do we classify growth **precisely**? -> Big-O, Big-Ω, Big-Θ
+
+### Measuring an inputs size
+Obvious observation: **ALL algorithms run longer on larger inputs**
+- Takes longer to sort larger arrays, multiply larger matrices
+Therefore, investigate algorithms efficiency as a function of some *parameter n*, indicating algorithm's input size
+*Most Cases:* selecting such parameter is straightforward -> size of list for problems;
+- sorting
+- searching
+- finding list's smallest element
+### Gotcha - Choice of parameter indicating an input size DOES matter
+The input size parameter you choose can change how an algorithm's efficiency appears, **even when two parameters (n) are mathematically equivalent**
+*Example*: 
 
 ## Basic Operations
 Count the most time consuming operation in it's innermost loop
