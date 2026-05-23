@@ -40,9 +40,10 @@ The choice (size metric), can be influenced by operations of the algorithm in qu
 *Example 2*: measuring input size for algorithms checking primality of a positive integer *n*
 - Here, input is just 1 number
 - it is this numbers magnitude, that determines the input size
-*Finding*: measure size by the number *b* of bits in the *n*'s v
+*Finding*: measure size by the number *b* of bits in the *n*'s binary representation
+	b = [log<sub>2</sub>n] + 1
 
-## Basic Operations
+## Units for Measuring Running Time (Basic Operations)
 Count the most time consuming operation in it's innermost loop
 	Sorting -> key comparison (are these elements in order?)
 	Matrix Multiplication -> multiplication (slowest arithmetic operation)
