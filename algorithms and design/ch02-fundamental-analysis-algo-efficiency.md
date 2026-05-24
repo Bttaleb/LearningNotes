@@ -50,15 +50,39 @@ Count the most time consuming operation in it's innermost loop
 **Important Application**: 
 - let c<sub>op</sub> be the execution time of an algo's basic operation
 - let C(n) be the number of times this operation needs to be executed for this algorithm
-then, T(n) = c<sub>op</sub>C(n), where T(n) is the running time of a rogram imp
-
+then, T(n) = c<sub>op</sub>C(n), where T(n) is the running time of a program implementing this algorithm
 *Key Insight*: If asking "how much **slower** does this algorithm get if **input doubles**", you compute the ratio:
 T(2n) / T(n) = ((c_op · C(2n)) / ((c_op · C(n))
 *c_op* divides out completely. Only *C(n)*'s shape matters;
+
+### TABLE 2.1 — Values of growth functions
+
+Why *C(n)*'s shape matters so much: this is the same `n` evaluated under different orders of growth. By `n = 10`<sup>6</sup>, *log n* is still ~20 while *n*<sup>3</sup> is already 10<sup>18</sup>; *2*<sup>n</sup> and *n!* are off the charts after `n = 100`.
+
+"It grows so slowly (logarithmic function), in fact, we should expect a program implementing an algorithm with a logarithmic basic-operation count to run practically **instantaneously** on inputs of ALL realistic sizes."
+
+| n              | log<sub>2</sub> n | n              | n log<sub>2</sub> n | n<sup>2</sup>   | n<sup>3</sup>   | 2<sup>n</sup>       | n!                   |
+| -------------- | ----------------- | -------------- | ------------------- | --------------- | --------------- | ------------------- | -------------------- |
+| 10             | 3.3               | 10<sup>1</sup> | 3.3·10<sup>1</sup>  | 10<sup>2</sup>  | 10<sup>3</sup>  | 10<sup>3</sup>      | 3.6·10<sup>6</sup>   |
+| 10<sup>2</sup> | 6.6               | 10<sup>2</sup> | 6.6·10<sup>2</sup>  | 10<sup>4</sup>  | 10<sup>6</sup>  | 1.3·10<sup>30</sup> | 9.3·10<sup>157</sup> |
+| 10<sup>3</sup> | 10                | 10<sup>3</sup> | 1.0·10<sup>4</sup>  | 10<sup>6</sup>  | 10<sup>9</sup>  | —                   | —                    |
+| 10<sup>4</sup> | 13                | 10<sup>4</sup> | 1.3·10<sup>5</sup>  | 10<sup>8</sup>  | 10<sup>12</sup> | —                   | —                    |
+| 10<sup>5</sup> | 17                | 10<sup>5</sup> | 1.7·10<sup>6</sup>  | 10<sup>10</sup> | 10<sup>15</sup> | —                   | —                    |
+| 10<sup>6</sup> | 20                | 10<sup>6</sup> | 2.0·10<sup>7</sup>  | 10<sup>12</sup> | 10<sup>18</sup> | —                   | —                    |
+
+*Empty cells (—) in Levitin's original*: the values are so astronomically large they aren't worth printing. For perspective: 2<sup>1000</sup> has ~301 digits; 1000! has ~2568 digits. No physical computer will ever finish such a computation in the lifetime of the universe.
+
+**Takeaways:**
+- *log n* barely grows — doubling `n` adds just **one** comparison.
+- *n* and *n log n* scale gracefully — these are the sweet-spot complexities.
+- *n*<sup>2</sup> is the boundary of "still tolerable for moderate inputs" (~10<sup>4</sup>).
+- *n*<sup>3</sup> already strains at `n = 10`<sup>3</sup>.
+- *2*<sup>n</sup> and *n!* are **intractable**(hard to solve) beyond tiny inputs — the algorithmic-power barrier covered later in [[#Algorithm design techniques]] and combinatorial problems.
+
 ## Asymptotic Notations
 Two runners on a track; who's faster in the long run?
-Big-O -> `Upper-Bound` -> "at most"
-	This algorithm will never do *more* work than this
+## Big-O -> `Upper-Bound` -> "at most"
+This algorithm will never do *more* work than this
 	O(n<sup>2</sup>) means: in the worst scenario, growth is capped at n<sup>2</sup>, never more
 	"This job will take at most 2 weeks", could finish in 3 days, but never more than 2 weeks
 	
@@ -80,12 +104,12 @@ int addUp(int n) {
 }
 ```
 
-Big-Ω -> `Lower-Bound` -> "at least"
-	This algorithm will never do *less* work than this
+## Big-Ω -> `Lower-Bound` -> "at least"
+This algorithm will never do *less* work than this
 	Ω(n) means: no matter what, this thing does at least linear work, you can't make it faster than the growth rate
 	"This job will take at least 3 days", could take longer, but never less than 3 days
-Big-Θ -> `Tight-Bound`; *A* and **B** are in the same league -- same order of growth
-	Growth is locked in, not slower or faster
+## Big-Θ -> `Tight-Bound`; *A* and **B** are in the same league (same order of growth)
+Growth is locked in, not slower or faster
 	"This job will take 3-5 days, guaranteed"
 
 | Notation | t(n) growth                                        | g(n) growth                                |
