@@ -5,6 +5,7 @@
 Time efficiency (time complexity) -> how fast an algorithm runs
 Space efficiency (space complexity) -> amount of memory units required in addition to space needed for its input and output
 
+## 2.1
 ### How does an algorithm's work grow as it's input grows?
 One framework:
 1. What do we measure? -> Input size `n`, and a *basic operation*
@@ -79,6 +80,7 @@ Why *C(n)*'s shape matters so much: this is the same `n` evaluated under differe
 - *n*<sup>3</sup> already strains at `n = 10`<sup>3</sup>.
 - *2*<sup>n</sup> and *n!* are **intractable**(hard to solve) beyond tiny inputs — the algorithmic-power barrier covered later in [[#Algorithm design techniques]] and combinatorial problems.
 
+## 2.2
 ## Asymptotic Notations
 Two runners on a track; who's faster in the long run?
 ## Big-O -> `Upper-Bound` -> "at most"
