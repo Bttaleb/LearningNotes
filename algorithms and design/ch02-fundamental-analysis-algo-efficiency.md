@@ -47,8 +47,10 @@ The choice (size metric), can be influenced by operations of the algorithm in qu
 Count the most time consuming operation in it's innermost loop
 	Sorting -> key comparison (are these elements in order?)
 	Matrix Multiplication -> multiplication (slowest arithmetic operation)
-If the basic operation runs `C(n)` times, and each takes time `c_op`, then:
-`T(n) = c_op · C(n)`
+**Important Application**: 
+- let c<sub>op</sub> be the execution time of an algo's basic operation
+- let C(n) be the number of times this operation needs to be executed for this algorithm
+then, T(n) = c<sub>op</sub>C(n), where T(n) is the running time of a rogram imp
 
 *Key Insight*: If asking "how much **slower** does this algorithm get if **input doubles**", you compute the ratio:
 T(2n) / T(n) = ((c_op · C(2n)) / ((c_op · C(n))
