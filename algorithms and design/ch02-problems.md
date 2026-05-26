@@ -2,7 +2,7 @@
 Indicate:
 (*i*) a natural [[ch02-fundamental-analysis-algo-efficiency#*Size Metric* -> a specific parameter that scales the work of the algorithm|size metric]] for its inputs
 (*ii*) its basic operations
-(*iii*) if basic operation count varies for inputs of the same size:
+(*iii*) if basic operation count varies for inputs of the same size (does algorithm's control flow depend on the input values, or only on n?):
 a. Computing the sum of n numbers
 	(*i*) n, the number of numbers in the collection
 	(*ii*) addition
@@ -20,9 +20,9 @@ d. Euclid’s algorithm
 	(*ii*) modulo division
 	(*iii*) Yes, the number of mod operations depends on the specific values of m and n, not just their magnitudes. For inputs of comparable size, the count can range from 1 iteration up to many. Control flow depends on when remainders reach 0 (value-dependent)
 e. sieve of Eratosthenes
-	(*i*)
-	(*ii*)
-	(*iii*)
+	(*i*) n, a single number (upper bound)
+	(*ii*) assignment (cross out numbers)
+	(*iii*) No, it does not vary. For the same n, the algorithm runs the same way each time
 f. pen-and-pencil algorithm for multiplying two n-digit decimal integers
 	(*i*)
 	(*ii*)
