@@ -34,18 +34,18 @@ The input size parameter you choose can change how an algorithm's efficiency app
 	N = 2n^2 -> n = √(N/2) == O(N<sup>1.5</sup>)
 *Finding*: unlike list problems where the parameter choice is harmless, some problems (**matrix multiplication**) have multiple natural size measures that produce meaningfully different efficiency spaces; **choice requires deliberate attention**
 
-### *Size Metric* -> a specific parameter that scales the work of the algorithm
+## *Size Metric* -> a specific parameter that scales the work of the algorithm
 
 	1. what the parameter is (a letter)
 	2. what it counts (the number if what, exactly)
 
 The choice (size metric), can be influenced by operations of the algorithm in question
 
-Shape of a size-metric
+### Shape of a size-metric
 Answer **IS NOT** "the input" or "the array" - too vague. Metric must be a specific countable quantity
 - Matrix Multiplication -> **n**, where n is the dimension of each matrix (the matrices are n x n)
 - Checking whether a positive integer **m** is prime -> **the magnitude of m** (expressed as the number of bits or decimal digits of m, [log<sub>2</sub>m] + 1)
-The Pattern
+### The Pattern
 What feature of the input controls how much work I have to do, and how do I measure that feature?
 - If collection, metric is usually count of elements in it
 - If single number, metric is usually magnitude (or number of digits/bits)
