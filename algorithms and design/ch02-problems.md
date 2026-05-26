@@ -2,7 +2,17 @@
 Indicate:
 (*i*) a natural [[ch02-fundamental-analysis-algo-efficiency#*Size Metric* -> a specific parameter that scales the work of the algorithm|size metric]] for its inputs
 (*ii*) its basic operations
-(*iii*) if basic operation count varies for inputs of the same size (does algorithm's control flow depend on the input values, or only on n?):
+(*iii*) basic operation count varies for inputs of the same size? (does algorithm's control flow depend on the input values, or only on n?):
+
+| Part | Algorithm            | Basic Operation           | (*iii*)<br>Varies?                             |
+| ---- | -------------------- | ------------------------- | ---------------------------------------------- |
+| a    | sum of n numbers     | addition                  | No                                             |
+| b    | n!                   | multiplication            | No                                             |
+| c    | find largest         | comparison                | No                                             |
+| d    | Euclid's gcd         | modulo                    | Yes, # of mod ops. depends on value of n and m |
+| e    | sieve                | assignment (crossing out) | No                                             |
+| f    | pen-and-pencil mult. | single                    |                                                |
+
 a. Computing the sum of n numbers
 	(*i*) n, the number of numbers in the collection
 	(*ii*) addition
@@ -24,9 +34,9 @@ e. sieve of Eratosthenes
 	(*ii*) assignment (cross out numbers)
 	(*iii*) No, it does not vary. For the same n, the algorithm runs the same way each time
 f. pen-and-pencil algorithm for multiplying two n-digit decimal integers
-	(*i*)
-	(*ii*)
-	(*iii*)
+	(*i*) n, the number of digits in each integer
+	(*ii*) single digit multiplication (each digit multiplied with each digit of the other)
+	(*iii*) no, the algorithm always performs exactly n<sup>2</sup> single digit multiplications regardless of digit values
 
 ---
 
