@@ -4,15 +4,6 @@ Indicate:
 (*ii*) its basic operations
 (*iii*) basic operation count varies for inputs of the same size? (does algorithm's control flow depend on the input values, or only on n?):
 
-| Part | Algorithm            | Basic Operation           | (*iii*)<br>Varies?                             |
-| ---- | -------------------- | ------------------------- | ---------------------------------------------- |
-| a    | sum of n numbers     | addition                  | No                                             |
-| b    | n!                   | multiplication            | No                                             |
-| c    | find largest         | comparison                | No                                             |
-| d    | Euclid's gcd         | modulo                    | Yes, # of mod ops. depends on value of n and m |
-| e    | sieve                | assignment (crossing out) | No                                             |
-| f    | pen-and-pencil mult. | single                    |                                                |
-
 a. Computing the sum of n numbers
 	(*i*) n, the number of numbers in the collection
 	(*ii*) addition
@@ -24,7 +15,7 @@ b. Computing n!
 c. Finding the largest element in a list of n numbers
 	(*i*) n, the number of elements in the list
 	(*ii*) comparison (each element is compared against the current largest-so-far)
-	(*iii*) No, the algorithm must compares every element to the running maximum to be able to confirm the maximum. So it performs exactly n-1 comparisons for any inputs of size n. Control flow is determined by n alone. 
+	(*iii*) No, the algorithm must compare every element to the running maximum to confirm the maximum. So it performs exactly n-1 comparisons for any inputs of size n. Control flow is determined by n alone. 
 d. Euclid’s algorithm
 	(*i*) n, the smaller of the two input integers
 	(*ii*) modulo division
@@ -32,17 +23,29 @@ d. Euclid’s algorithm
 e. sieve of Eratosthenes
 	(*i*) n, a single number (upper bound)
 	(*ii*) assignment (cross out numbers)
-	(*iii*) No, it does not vary. For the same n, the algorithm runs the same way each time
+	(*iii*) No. Control flow (outer loop runs to √n; inner crossing-out loops run to n in steps of i) is determined entirely by **n**. The input *is* the size metric, so there are no other input values that could affect execution — same n produces an identical execution every time.
 f. pen-and-pencil algorithm for multiplying two n-digit decimal integers
 	(*i*) n, the number of digits in each integer
 	(*ii*) single digit multiplication (each digit multiplied with each digit of the other)
-	(*iii*) no, the algorithm always performs exactly n<sup>2</sup> single digit multiplications regardless of digit values
+	(*iii*) No. The algorithm always performs exactly n<sup>2</sup> single-digit multiplications regardless of digit values. The structure (n partial-product rows, each with n digit-mults) is determined entirely by **n**. Carries and the final row-sum are *auxiliary work* and don't change the basic-operation count.
+
+| Part | Algorithm            | Basic Operation           | (*iii*)<br>Varies?                             |
+| ---- | -------------------- | ------------------------- | ---------------------------------------------- |
+| a    | sum of n numbers     | addition                  | No                                             |
+| b    | n!                   | multiplication            | No                                             |
+| c    | find largest         | comparison                | No                                             |
+| d    | Euclid's gcd         | modulo                    | Yes, # of mod ops. depends on value of n and m |
+| e    | sieve                | assignment (crossing out) | No                                             |
+| f    | pen-and-pencil mult. | single digit mult.        | No                                             |
+
+
+	
 
 ---
 
 ## Lessons Learned — Mistakes & Insights
 
-Transferable lessons from wrong/imprecise answers in problems (a)–(d). Each one is a *pattern* of mistake worth catching in future problems.
+Transferable lessons from wrong/imprecise answers across problems (a)–(f). Each one is a *pattern* of mistake worth catching in future problems.
 
 ### 1. Don't confuse "input" with "input content"
 - **Wrong move (in (a)):** Read "sum of n numbers" as one really long number whose length is n.
@@ -89,6 +92,30 @@ Transferable lessons from wrong/imprecise answers in problems (a)–(d). Each on
 ### 8. Always trace a concrete example to verify (iii)
 - **What I should have done in (d):** Actually run gcd(60, 1), gcd(60, 24), and gcd(60, 13) before answering. Got 1, 2, and 6 iterations respectively for inputs of "the same size" — that's the proof that the count varies.
 - **Transferable rule:** When (iii) is non-obvious, **pick two or three same-size inputs and trace by hand**. If they all take the same number of operations → (iii) is no. If they diverge → (iii) is yes. Empirical check beats hand-wavy reasoning every time.
+
+### 9. Don't confuse input with what the algorithm *constructs* internally
+- **Wrong move (in (e)):** Wrote "(i) the input is n numbers starting from 2."
+- **Why it's wrong:** That list (2, 3, ..., n) isn't supplied by the user — the algorithm *generates* it internally from the single input n. The user hands the algorithm one number; the algorithm builds the list as it runs.
+- **Right answer:** Input is one integer **n** (the upper bound). The list of integers from 2 to n is the algorithm's *internal state*, not its input.
+- **Transferable rule:** Distinguish three things in every problem: **input** (what the user supplies), **internal state** (what the algorithm builds during execution), and **output** (what it returns). Size metric describes the *input* only. This is the same family as Lesson 3, applied to internal state instead of output.
+
+### 10. Basic operation isn't always arithmetic
+- **Wrong move (in (e)):** Wrote "(ii) counting?" — the question mark itself was telling.
+- **Why it's wrong:** The sieve isn't counting anything. Picture the algorithm on paper: your pencil is crossing out numbers. That's the engine. In code, it's a memory write (`sieve[i] = false`) — an **assignment**, not an arithmetic op.
+- **Right answer:** **Assignment** (marking a number as composite / setting a sentinel value).
+- **Transferable rule:** The basic operation can be any kind of repeated work — addition, multiplication, comparison, **assignment**, swap, increment. Match the operation to what the algorithm is *physically doing*, not to arithmetic ops you've seen before. When in doubt, picture the pen-and-paper version and watch your hand.
+
+### 11. Basic operation lives in the innermost loop / dominant work
+- **Wrong move (in (f)):** Wrote "(ii) addition" — the pen-and-pencil mult algorithm does both multiplications and additions, and addition got picked.
+- **Why it's wrong:** The **single-digit multiplications** sit in the innermost loop (n × n = n² of them, one for every digit-pair). The additions (carries within a row, summing the rows at the end) are downstream / auxiliary work.
+- **Right answer:** **Single-digit multiplication** — the dominant operation in the innermost loop.
+- **Transferable rule:** When an algorithm performs multiple kinds of operations, pick the basic operation that lives in the **innermost loop** and **dominates the work**. Don't pick a slower-running auxiliary op just because it happens to appear in the algorithm.
+
+### 12. Auxiliary work ≠ variation in basic-operation count
+- **Wrong move (in (f)(iii)):** Justified "yes, varies" with "if the result of one of the multiplications is greater than 9 then we need to do carry over and addition work."
+- **Why it's wrong:** Carries are **auxiliary work** that may or may not happen depending on values — but they don't change the count of **single-digit multiplications** (the basic operation). You still do exactly n² digit-mults whether 4×3=12 (carry) or 4×2=8 (no carry).
+- **Right answer:** **No, count doesn't vary.** Always n² single-digit multiplications. Carries and final row-summing are auxiliary work, irrelevant to the basic-operation count.
+- **Transferable rule:** Once you pick the basic operation in (ii), **answer (iii) only about that operation**. Auxiliary work (carries, bookkeeping, finalization) can vary with values without changing the basic-operation count. This is the same family as Lesson 7 — "side effects of the algorithm" don't automatically mean (iii) is yes.
 
 ---
 
