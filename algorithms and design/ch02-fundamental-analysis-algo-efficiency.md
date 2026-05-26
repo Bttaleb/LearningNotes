@@ -15,9 +15,9 @@ One framework:
 
 ## Measuring an inputs size
 #list-problems
-Obvious observation: **ALL algorithms run longer on larger inputs**
+**Obvious observation**: ALL algorithms run longer on larger inputs
 - Takes longer to sort larger arrays, multiply larger matrices
-Therefore, investigate algorithms efficiency as a function of some *parameter n*, indicating algorithm's input size
+Therefore, investigate algorithms efficiency as a <mark style="background:rgba(5, 117, 197, 0.2)">function</mark> of some <mark style="background:rgba(240, 200, 0, 0.2)">parameter</mark> **n**, indicating algorithm's *input size*
 *Most Cases:* selecting such parameter is straightforward -> size of list for problems;
 - sorting
 - searching
