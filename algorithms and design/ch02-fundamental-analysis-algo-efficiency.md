@@ -154,3 +154,24 @@ So we can replace each term in 100n + 5 with something bigger (in terms of $n^2$
 $100n + 5 ≤ 100n^2 + 5n^2$ (since $n ≤ n^2$ and $1 ≤ n^2$ so $5 ≤ 5n^2$)
 $= 105n^2$
 So with c = 105 and n<sub>0</sub> = 1, we know the inequality holds
+
+when solving for recurrence, if you see division and want to use backwards substitution, you only need to solve for numbers that are of power 2 (2<sup>k</sup>)
+Algorithm BinRec(n)
+//Input: A positive decimal integer n
+//Output: The number of binary digits in n's binary representation
+if n = 1 return 1
+else return BinRec([n/2]) + 1
+
+BinRec(n) = BinRec([n/2]) + 1
+BinRec(1) = 1
+
+Becomes
+n = 2<sup>k</sup>
+A(2<sup>k</sup>) = A(2<sup>k-1</sup>) + 1
+A(2<sup>0</sup>) = 0
+1. sub A(2<sup>k-1</sup>) by A(2<sup>k-2</sup>) + 1
+2. sub A(2<sup>k-2</sup>) + 1 by A(2<sup>k-3</sup>) + 1
+A(2<sup>k</sup>) = A(2<sup>k-1</sup>) + 1
+A(2<sup>k-2</sup>) + 1 + 1 = A(2<sup>k-2</sup>) + 2
+A(2<sup>k-3</sup>) + 1 + 2 = A(2<sup>k-3</sup>) + 3
+A(2<sup>k-i</sup>) + i
