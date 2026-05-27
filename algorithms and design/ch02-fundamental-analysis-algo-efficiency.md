@@ -170,7 +170,7 @@ n = 2<sup>k</sup>
 A(2<sup>k</sup>) = A(2<sup>k-1</sup>) + 1
 A(2<sup>0</sup>) = 0
 1. sub A(2<sup>k-1</sup>) by A(2<sup>k-2</sup>) + 1
-2. sub A(2<sup>k-2</sup>) + 1 by A(2<sup>k-3</sup>) + 1
+2. sub A(2<sup>k-2</sup>) + 1 by A(2<sup>k-3</sup>) + 2
 A(2<sup>k</sup>) = A(2<sup>k-1</sup>) + 1
 A(2<sup>k-2</sup>) + 1 + 1 = A(2<sup>k-2</sup>) + 2
 A(2<sup>k-3</sup>) + 1 + 2 = A(2<sup>k-3</sup>) + 3
