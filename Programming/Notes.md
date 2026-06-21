@@ -19,3 +19,5 @@ Separation of Concerns
 | Idle detection + timeout | src/providers/inactivityProviders.tsx        | every authenticated screen                                        |
 | Warning UI               | src/components/SessionTimeoutModal.tsx       | Pure presentation                                                 |
 
+## Piece 1 - Config -> sessionTimeout.ts
+We use 2 files, app.config (already injects into env) + sessiontTime.ts
