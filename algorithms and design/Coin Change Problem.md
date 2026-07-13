@@ -11,23 +11,23 @@
 | 5    | 5      | $50   |
 capacity W = 6
 
-How do we find recurrence?
-Step 1 - Almost every DP focuses on final choice or final element: What do i do about the last coin in the row?
+## How do we find recurrence given the problem set?
+We can start with the definition of $F(n)$, a named answer to a smaller version of the whole problem
+$F(n)$ = the maximum you can collect from the first n coins
+We're defining a function whose value we don't know yet, BUT whose *meaning* is pinned down exactly
+What $F$ **IS NOT** describing: a procedure
+What $F$ IS describing: a quantity, "the best possible score using only n coins"
 
-Step 2 - Enumerate choices for that decision
-List every distinct option, for the last coin -> Take it or skip it
+## How do we find the formula?
+### Move 1: Assume the answer to smaller cases exist already
+Pretend we know $F(1)$ through $F(n-1)$, they're handed to us, correct and free
+Our job: Given these, how do we compute $F(n)$
+- We reduced an impossible "solve everything" into a tiny "solve one more step"
+### Move 2: Look at the last element and ask "what are my options for it?"
+If we reason about the whole arrangement of $n$ coins, that's exponential and hopeless (what happens to one final element?)
 
-Step 3 - For each choice, "what smaller subproblem am I left with"
-- If I TAKE last coin (coin n), I collect C<sub>n</sub>
-	- Adjacency rule forbids the (n-1) coin, so we must look at the (n-2) coin -> This leaves us with F(n-2). Total: C<sub>n</sub> + F(n-2)
-- If I SKIP it, I collect nothing: I can use the n-1 coin: F(n-1)
+### Move 3: In each universe, what's the leftover, and how do I score it?
+Universe "coin $n$ is IN" - Then we collect coin C<sub>n</sub>, what's left to decide is coins 1...n-2 (because n-1 is forbidden)
 
-Step 4 - Combine choices with max or min
-Coin row wants the maximum
- - F(n) = max( C<sub>n</sub> + F(n-2) ,  F(n-1) )
-
-Step 5 - Find base case: smallest input where there's no decision to make
-F(0) = 0 => (no coins, nothing to collect)
-F(1) = C<sub>1</sub> => (one coin, no adjacency conflict)
-
-Looking at the F(n-2) coin is the consequence of the rule "no two adjacent coins". When we take coin n, coin n-1 becomes off limits. Jumping to F(n-2) guarantees we skip over the forbidden neighbor
+## What does $F(n-2)$ mean?
+Looking at the F(n-2) coin is the consequence of the rule "no two adjacent coins". When we take coin n, coin n-1 becomes off limits. Jumping to F(n-2) guarantees we skip over the forbidden neighbor, hence C<sub>n</sub> or **Coin n** + F(n-2) or **the next coin that isn't adjacent**
