@@ -37,7 +37,7 @@ Binary Heap and Adjacency List -> O(VlogV + ElogV)
 ![[Excalidraw-Prim's-Algorithm]]
 
 ## Kruskal's Algorithm
-Looks at minimum spanning tree of weighted connected graph G = V, E as an [[acyclic subgraph]] with |V| - 1 edges for which the sum of the edge weights is the smallest
+Looks at minimum spanning tree of weighted connected graph G = (V, E) as an [[Cyclic vs Acyclic Graph|acyclic subgraph]] with |V| - 1 edges for which the sum of the edge weights is the smallest
 Step 1: Remove all looks and Parallel Edges
 Step 2: Arrange all edges in their increasing order of weight 
 Step 3: Start adding edges to the graph beginning from the one which has the least weight without violating the spanning tree properties
