@@ -24,13 +24,31 @@
 
 ### Complexity Reference Table
 
-|                        |               |                  |                  |           |
-| ---------------------- | ------------- | ---------------- | ---------------- | --------- |
-| **Algorithm**          | **Best Case** | **Average Case** | **Worst Case**   | **Space** |
-| Insertion Sort         | Θ(n)          | Θ(n<sup>2</sup>) | Θ(n<sup>2</sup>) | Θ(1)      |
-| Binary Search          | Θ(1)          | Θ(logn)          | Θ(logn)          | Θ(1)      |
-| Topological sort (DFS) | Θ(V + E)      | Θ(V + E)         | Θ(V + E)         | Θ(V)      |
-| Mergesort              | Θ(nlogn)      | Θ(nlogn)         | Θ(nlogn)         | Θ(n)      |
-| Quicksort              | Θ(nlogn)      | Θ(nlogn)         | Θ(n<sup>2</sup>) | Θ(logn)   |
-| Binary Tree Traversal  | 1             |                  |                  |           |
-|                        |               |                  |                  |           |
+|                                                              |                                 |                                 |                                 |                  |
+| ------------------------------------------------------------ | ------------------------------- | ------------------------------- | ------------------------------- | ---------------- |
+| **Algorithm**                                                | **Best Case**                   | **Average Case**                | **Worst Case**                  | **Space**        |
+| Insertion Sort                                               | Θ(n)                            | Θ(n<sup>2</sup>)                | Θ(n<sup>2</sup>)                | Θ(1)             |
+| Binary Search                                                | Θ(1)                            | Θ(logn)                         | Θ(logn)                         | Θ(1)             |
+| Topological sort (DFS)                                       | Θ(V + E)                        | Θ(V + E)                        | Θ(V + E)                        | Θ(V)             |
+| Mergesort                                                    | Θ(nlogn)                        | Θ(nlogn)                        | Θ(nlogn)                        | Θ(n)             |
+| Quicksort                                                    | Θ(nlogn)                        | Θ(nlogn)                        | Θ(n<sup>2</sup>)                | Θ(logn)          |
+| Binary Tree Traversal                                        | Θ(n)                            | Θ(n)                            | Θ(n)                            | Θ(n)             |
+| Heapsort                                                     | Θ(nlogn)                        | Θ(nlogn)                        | Θ(nlogn)                        | Θ(1)             |
+| Heapify (bottom-up)                                          | Θ(n)                            | Θ(n)                            | Θ(n)                            | Θ(1)             |
+| AVL Tree                                                     | Θ(logn)                         | Θ(logn)                         | Θ(logn)                         | Θ(n)             |
+| Horner's Rule                                                | Θ(n)                            | Θ(n)                            | Θ(n)                            | Θ(1)             |
+| Gaussian Elimination                                         | Θ(n<sup>2</sup>)                | Θ(n<sup>2</sup>)                | Θ(n<sup>2</sup>)                | Θ(1)             |
+| Comparison / distribution counting sort                      | Θ(n<sup>2</sup>) / Θ(n + range) | Θ(n<sup>2</sup>) / Θ(n + range) | Θ(n<sup>2</sup>) / Θ(n + range) | Θ(n)             |
+| Horspool / Boyer Moore                                       | Θ(n/m)                          | Θ(n)                            | Θ(nm)                           | Θ(alphabet)      |
+| Hashing                                                      | Θ(1)                            | Θ(1)                            | Θ(n)                            | Θ(n)             |
+| Warshall's Transitive Closure                                | Θ(n<sup>3</sup>)                | Θ(n<sup>3</sup>)                | Θ(n<sup>3</sup>)                | Θ(n<sup>2</sup>) |
+| Floyd's shortest path                                        | Θ(n<sup>3</sup>)                | Θ(n<sup>3</sup>)                | Θ(n<sup>3</sup>)                | Θ(n<sup>2</sup>) |
+| 0/1 Knapsack (DP table)                                      | Θ(nW)                           | Θ(nW)                           | Θ(nW)                           | Θ(nW)            |
+| Prim's MST<br>(Minimum Spanning Tree)<br>min-heap + adj list | Θ(E logV)                       | Θ(E logV)                       | Θ(E logE)                       | Θ(V)             |
+| Kruskal's MST                                                | Θ(E logE)                       | Θ(E logE)                       | Θ(E logE)                       | Θ(V)             |
+| Dijkstra's<br>min-heap                                       | Θ(E logV)                       | Θ(E logV)                       | Θ(E logV)                       | Θ(V)             |
+| Huffman Coding                                               | Θ(nlogn)                        | Θ(nlogn)                        | Θ(nlogn)                        | Θ(n)             |
+***Θ(nW)*** is a "psuedo-polynomial"
+	W is a value, NOT input size
+
+## Unit 5 - Decrease and Conquer
