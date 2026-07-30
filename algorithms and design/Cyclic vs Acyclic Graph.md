@@ -15,6 +15,7 @@ What is a cycle?
 ## Why it matters for MSTs
 A spanning tree must be acyclic: if a subgraph has a cycle, you can remove the heaviest edge in that cycle and still keep everything connected — so a minimum-weight connected subgraph never contains a cycle. That's why [[Greedy Technique#Kruskal's Algorithm|Kruskal's algorithm]] rejects any edge that would form a cycle.
 
+![[Excalidraw-DAG&Tree]]
 - Connected + acyclic = **tree**
 - Acyclic but possibly disconnected = **forest**
 - Directed graph with no cycles = **DAG** (directed acyclic graph)
