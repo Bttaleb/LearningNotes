@@ -86,3 +86,9 @@ Scan `j` **leftward**, stopping @ first element **less than or equal to** `p`
 If `i < j`, swap A[i] and A[j], continue
 When `i` is **greater than or equal to** `j`, stop and swap pivot into place: swap A[l] and A[j]
 Now `j` is the split point
+![[Excalidraw-Hoare]]
+
+## Heap Construction -> Bottom-up Heapify
+**Main Idea** -> **Max-heap** is a complete binary tree (stored as array) where;
+- every parent is **greater than or equal to** its children
+- turns array into heap in Θ(n) time (transform and conquer)
