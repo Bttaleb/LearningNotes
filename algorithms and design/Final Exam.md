@@ -74,7 +74,7 @@
 **Analogy** -> Sorting a room of people by height around one "reference" person
 - Send shorter people left, taller people right
 - After shuffle, reference person is standing where they'll finish;
-	- the two groups are still jumped, to be sorted later
+	- the two groups are still jumbled, to be sorted later
 **Hoare's Partition** -> 
 `r` and `l` = index bounds of the subarray: `A[l..r]`, where:
 	`l` is the leftmost index; $l = 0$
@@ -92,3 +92,12 @@ Now `j` is the split point
 **Main Idea** -> **Max-heap** is a complete binary tree (stored as array) where;
 - every parent is **greater than or equal to** its children
 - turns array into heap in Θ(n) time (transform and conquer)
+**Analogy** -> Corporate reorganization from bottom up
+- start a lowest managers who have reports (last non-lead node)
+- for each, if subordinate outranks the boss, promote strongest subordinate
+- sifting weaking manager down until they sit above ONLY weaker people
+- working upward
+**Algorithm** -> for `i` from **last parent** (index [n/2] - 1) **down to 0**
+- sift A[i] down; repeatedly compare with its larger child
+- if child is bigger, swap and continue from child's position
+- stop when node is **greater than or equal to** both children or becomes a leaf
