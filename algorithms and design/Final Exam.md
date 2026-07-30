@@ -55,7 +55,7 @@
 ## 1. Topological Sorting -> Source-Removal Algorithm
 **Main Idea** -> Given `directed acyclic graph (DAG)`
 - Linear ordering of vertices such that every edge points "forward"
-	-  If there's an edge 'u' -> 'v', then u comes before v in the lsit
+	-  If there's an edge 'u' -> 'v', then u comes before v in the list
 **Analogy** -> Getting dressed
 - Socks before shoes, shirt before jacket
 - Some items have no orders between them (sock vs. shirt)
@@ -64,3 +64,25 @@
 2. Add it to output list and remove it from graph (delete it and all outgoing edges)
 3. Removing it drops its neighbors
 4. Repeat until graph is empty
+![[Excalidraw-topological_ordering]]
+
+## 2. Array Partition -> Hoare's Algo
+**Main Idea** -> Partitioning is the `engine` inside quicksort (Divide & Conquer)
+- Pick a pivot, rearrange everything so that:
+	- Everything **less than or equal to** pivot sits to its left
+	- Everything **greater than or equal to** pivot sits to its right
+**Analogy** -> Sorting a room of people by height around one "reference" person
+- Send shorter people left, taller people right
+- After shuffle, reference person is standing where they'll finish;
+	- the two groups are still jumped, to be sorted later
+**Hoare's Partition** -> 
+`r` and `l` = index bounds of the subarray: `A[l..r]`, where:
+	`l` is the leftmost index; $l = 0$
+	`r` is the rightmost index; $r=n-1$ 
+Pivot `p` = `A[l]`, (first element) 
+`i = l` , `j = r + 1` 
+Scan `i` **rightward**, stopping @ first element **greater than or equal to** `p`
+Scan `j` **leftward**, stopping @ first element **less than or equal to** `p`
+If `i < j`, swap A[i] and A[j], continue
+When `i` is **greater than or equal to** `j`, stop and swap pivot into place: swap A[l] and A[j]
+Now `j` is the split point
