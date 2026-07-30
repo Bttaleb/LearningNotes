@@ -9,7 +9,7 @@ related: ["[[Final Exam]]", "[[Greedy Technique]]", "[[Coin Change Problem]]", "
 
 # CSC3110 Final Exam — Comprehensive Study Guide
 
-> **How to use this note.** The exam is built from nine recurring question types (straight from the [[Final Exam|review deck]]). Each section below follows the same rhythm: **the idea → an analogy → the algorithm → a fully worked example → the traps that lose points.** Read a section, then cover the worked example and redo it yourself on paper. If you can reproduce every worked example here from a blank page, you're ready. All numbers below are machine-verified.
+> **How to use this note.** Part A covers the **nine recurring question types** straight from the [[Final Exam|review deck]] — these are your highest-value targets. Part B covers **four high-probability extras** (Dijkstra, Huffman, 0/1 knapsack DP, Floyd & Warshall) that the unit slides emphasize and finals commonly test. Every section follows the same rhythm: **the idea → an analogy → the algorithm → a fully worked example → the traps that lose points.** Read a section, then cover the worked example and redo it yourself on paper. If you can reproduce every worked example here from a blank page, you're ready. **All numbers below are machine-verified, and worked examples are aligned to your professor's slides.**
 
 ---
 
@@ -23,8 +23,8 @@ Every algorithm on this exam is one answer to a single question: *"How do I rela
 | Divide & Conquer | Split into **several** subproblems, solve, combine | Quicksort / Hoare's partition, mergesort |
 | Transform & Conquer | **Transform** into a better representation, then solve | Heap construction (heapify), presorting |
 | Space–Time Trade-off | **Precompute & store** to make later work cheap | Comparison counting sort |
-| Dynamic Programming | **Overlapping** subproblems solved once into a table | Coin-row, coin-change |
-| Greedy | Sequence of locally-best, **irrevocable** choices | Prim's, Kruskal's MST |
+| Dynamic Programming | **Overlapping** subproblems solved once into a table | Coin-row, coin-change, 0/1 knapsack, Floyd, Warshall |
+| Greedy | Sequence of locally-best, **irrevocable** choices | Prim's, Kruskal's MST, Dijkstra, Huffman |
 | Backtracking / Branch-&-Bound | Build a **state-space tree**, prune with bounds | Assignment problem |
 
 **The two traps the exam loves.** (1) *DP vs Divide-and-Conquer* — both split a problem, but D&C subproblems are **independent**, whereas DP exists precisely **because** subproblems **overlap** (naive recursion would be exponential). (2) *Greedy vs DP* — greedy commits to one choice and never looks back (fast, but only correct when the problem has the right structure); DP considers **all** choices via a table and is always correct where it applies.
@@ -43,8 +43,12 @@ Every algorithm on this exam is one answer to a single question: *"How do I rela
 | Kruskal's MST | Θ(E log E) | Θ(E log E) | Θ(E log E) | Θ(V) |
 | Coin-row / coin-change DP | Θ(n) / Θ(n·amount) | — | — | Θ(n) |
 | Assignment (branch-and-bound) | exponential worst case; prunes in practice | — | — | Θ(state tree) |
+| Dijkstra's shortest paths (heap + adj list) | Θ(E log V) | Θ(E log V) | Θ(E log V) | Θ(V) |
+| Huffman coding | Θ(n log n) | Θ(n log n) | Θ(n log n) | Θ(n) |
+| 0/1 Knapsack DP (table) | Θ(nW) | Θ(nW) | Θ(nW) | Θ(nW) |
+| Warshall (transitive closure) / Floyd (all-pairs) | Θ(n³) | Θ(n³) | Θ(n³) | Θ(n²) |
 
-> One fact that shows up as a trick question: heapsort is Θ(n log n), but **building** the heap bottom-up is only **Θ(n)** — the cheap part.
+> One fact that shows up as a trick question: heapsort is Θ(n log n), but **building** the heap bottom-up is only **Θ(n)** — the cheap part. Another: Θ(nW) for knapsack is **pseudo-polynomial** — W is a capacity *value*, not the input size.
 
 ---
 
@@ -247,6 +251,8 @@ Reading each cell: F(3)=max(F(2)=3, 5+F(1)=8)=8; F(5)=max(F(4)=8, 1+F(3)=9)=9; F
 
 **Traps.** (1) The base cases F(0)=0 and F(1)=c₁ anchor everything — get them wrong and the whole row shifts. (2) To **recover** which coins were chosen, compare F(i) with F(i−1): equal ⇒ coin i skipped; greater ⇒ coin i taken, then jump back **two**. (3) This is DP, not greedy — grabbing the largest coins greedily can violate adjacency and lose.
 
+> **Professor's slide example** (Fig 8.1): coin row `5, 1, 2, 10, 6, 2` → table F = 0, 5, 5, 7, 15, 15, 17, optimal **{c₁, c₄, c₆} = 5 + 10 + 2 = 17**. Same method, same backtrace rule.
+
 ---
 
 ## 8. Money Change — Minimum Coins (DP)
@@ -303,13 +309,145 @@ Every other complete assignment costs ≥ 13; branch-and-bound reaches 13 while 
 
 ---
 
+# Part B — High-Probability Extras
+
+These four aren't in the review deck's worked problems, but they get heavy slide time and are staples of algorithms finals. Each is a natural neighbor of a Part A topic (Dijkstra & Huffman are greedy like MST; knapsack & Floyd are DP like coin-row).
+
+---
+
+## 10. Dijkstra's Algorithm — Single-Source Shortest Paths
+
+**The idea.** Given a weighted graph and a **source** vertex, find the shortest-path distance from the source to **every** other vertex. Like Prim's, it's **greedy**: repeatedly finalize the closest not-yet-finalized vertex. The difference from Prim's is the priority: Prim's ranks a fringe vertex by its **single cheapest edge** to the tree; Dijkstra's ranks it by **total distance from the source** along the best known path.
+
+**Analogy.** Ripples from a stone dropped in a pond. The wavefront reaches the nearest points first; each time it touches a new point you record "shortest time to get here," and that value never changes again — because any later path would have to travel farther. You always expand from the closest unreached point next.
+
+**Algorithm.**
+1. Set dist(source) = 0, all others = ∞. Keep a "previous vertex" pointer for path reconstruction.
+2. Pick the **unvisited vertex with smallest dist** (a min-priority-queue). Mark it **visited** — its distance is now final.
+3. **Relax** its edges: for each neighbor v, if dist(u) + weight(u,v) < dist(v), update dist(v) and set prev(v) = u.
+4. Repeat until all vertices are visited.
+
+**Worked example — source A** (your professor's Example 2). Edges: A–B(7), B–C(2), B–D(9), C–E(10), D–F(1).
+
+| Vertex | Shortest dist from A | Previous |
+|---|---|---|
+| A | 0 | — |
+| B | 7 | A |
+| C | 9 | B |
+| D | 16 | B |
+| E | 19 | C |
+| F | 17 | D |
+
+Visiting order: A(0) → B(7) → C(9) → F(17) → D(16)… i.e. always the smallest unvisited dist. Read a path backward through "Previous": F ← D ← B ← A, so the shortest A→F path is A–B–D–F with length 7 + 9 + 1 = 17.
+
+**Traps.** (1) **Negative edge weights break Dijkstra's** — the "finalized forever" assumption fails; use Bellman-Ford instead. (2) It's shortest *paths*, not an MST — Dijkstra's tree can differ from the MST (it minimizes distance-from-source, not total edge weight). (3) Works on **directed and undirected** graphs. (4) Efficiency: Θ(V²) with a weight matrix + array, **Θ(E log V)** with adjacency lists + min-heap.
+
+---
+
+## 11. Huffman Coding
+
+**The idea.** Build an **optimal prefix-free** binary code: assign short bit-strings to frequent characters and longer ones to rare characters, minimizing the total encoded length. It's **greedy** — repeatedly merge the two least-frequent nodes. **Prefix-free** means no code is a prefix of another, so the decoder is never ambiguous (e.g. codes 0, 01 are illegal because 0 prefixes 01).
+
+**Analogy.** Building a company from the bottom by repeatedly merging the two smallest teams. The two least-frequent characters get buried deepest in the hierarchy (longest codes); the most frequent character stays near the top (shortest code). Depth in the final tree = code length, so rare things sink and common things float.
+
+**Algorithm.**
+1. Make a **leaf node** for each character with its frequency; put them all in a **min-heap** (priority queue keyed by frequency).
+2. **Extract the two minimum-frequency nodes.** Create a new internal node whose frequency is their **sum**; the two extracted nodes become its left (0) and right (1) children. Insert it back into the heap.
+3. Repeat until **one node** remains — the root.
+4. Assign codes by walking the tree: left edge = 0, right edge = 1. Each leaf's path spells its code.
+
+**Worked example — your slide's frequencies** a:5, b:9, c:12, d:13, e:16, f:45.
+
+Merges (each combines the two smallest): (a5+b9)=**14** → (c12+d13)=**25** → (14+e16)=**30** → (25+30)=**55** → (f45+55)=**100** (root).
+
+Resulting codes:
+
+| Char | Freq | Code | Bits |
+|---|---|---|---|
+| f | 45 | `0` | 1 |
+| c | 12 | `100` | 3 |
+| d | 13 | `101` | 3 |
+| e | 16 | `111` | 3 |
+| a | 5 | `1100` | 4 |
+| b | 9 | `1101` | 4 |
+
+Total encoded size = 45·1 + 12·3 + 13·3 + 16·3 + 5·4 + 9·4 = **224 bits** (vs 6 chars × fixed 3-bit code × 100 = 300 bits — a real saving). The frequent `f` got the 1-bit code; rare `a`, `b` got 4-bit codes.
+
+**Traps.** (1) Always merge the **two smallest** each round — re-heap after every insert. (2) Ties can be broken arbitrarily; different valid trees can give different codes but the **same total bit count**. (3) The code is **prefix-free by construction** because characters sit only at **leaves** — no character is on the path to another. (4) To **decode**, walk the tree from the root following each bit until you hit a leaf, emit that character, and restart at the root.
+
+---
+
+## 12. 0/1 Knapsack — Dynamic Programming
+
+**The idea.** Given items each with a weight and a value, and a knapsack capacity W, choose a subset of **maximum total value** without exceeding W. "0/1" means each item is either fully taken or left — no fractions (that's the *continuous* knapsack, which greedy solves). This is DP over a 2-D table indexed by *(item, capacity)*.
+
+**Analogy.** Packing a weight-limited suitcase, deciding one item at a time. For each item you ask: "Am I better off **leaving** it (keep the best packing of earlier items for this capacity) or **taking** it (its value plus the best packing of earlier items in the *leftover* space)?" You fill a grid of every (items-considered, capacity) combination so each decision reuses answers already computed.
+
+**The recurrence.** Let F[i][c] = best value using the first i items with capacity c.
+- **Exclude item i:** F[i−1][c].
+- **Include item i** (only if wᵢ ≤ c): valueᵢ + F[i−1][c − wᵢ].
+- **F[i][c] = max( F[i−1][c], valueᵢ + F[i−1][c − wᵢ] )**; row 0 and column 0 are all zeros.
+
+**Worked example — your slide's instance.** Values [1, 6, 10, 16], weights [1, 2, 3, 5], capacity W = 7.
+
+| item \ cap | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+|---|---|---|---|---|---|---|---|---|
+| **0** (none) | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| **1** (w1,v1) | 0 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+| **2** (w2,v6) | 0 | 1 | 6 | 7 | 7 | 7 | 7 | 7 |
+| **3** (w3,v10) | 0 | 1 | 6 | 10 | 11 | 16 | 17 | 17 |
+| **4** (w5,v16) | 0 | 1 | 6 | 10 | 11 | 16 | 17 | **22** |
+
+**Optimal value = F[4][7] = 22.** Recover items by backtracing: F[4][7]=22 ≠ F[3][7]=17, so **item 4 is in** → drop to capacity 7−5=2, value F[3][2]=6. F[3][2]=F[2][2], so item 3 is out; F[2][2]=6 ≠ F[1][2]=1, so **item 2 is in** → capacity 2−2=0. **Chosen items: {2, 4}**, weight 2+5=7, value 6+16=22.
+
+**Traps.** (1) The include-branch uses **F[i−1][c − wᵢ]** — the previous row and the *reduced* capacity; using the current row would allow reusing an item (that's the *unbounded* knapsack). (2) Backtrace rule: if F[i][c] = F[i−1][c], item i was **not** used; otherwise it was, and you subtract its weight. (3) Θ(nW) is **pseudo-polynomial** — fast only when W is modest.
+
+---
+
+## 13. Warshall's & Floyd's Algorithms — All-Pairs via a k-Intermediate DP
+
+**The idea.** Both answer "what's reachable / shortest between **every** pair of vertices?" by the same DP trick: allow paths to use intermediate vertices numbered 1…k, and grow k from 0 to n. **Warshall's** computes the **transitive closure** (can you get from i to j at all? — boolean). **Floyd's** computes **all-pairs shortest distances** (how far? — weighted). Both are Θ(n³).
+
+**Analogy.** Opening up highway hubs one at a time. Start with only direct roads (k = 0). Then "allow trips to route through city 1" and update every pair that gets better; then allow city 2 as a connector, and so on. After you've allowed every city as a possible waypoint, each pair reflects the best route using any combination of hubs.
+
+**The recurrence** (identical structure, different operation):
+- **Warshall:** R⁽ᵏ⁾[i][j] = R⁽ᵏ⁻¹⁾[i][j] **OR** ( R⁽ᵏ⁻¹⁾[i][k] **AND** R⁽ᵏ⁻¹⁾[k][j] ) — "already reachable, **or** reachable via k."
+- **Floyd:** D⁽ᵏ⁾[i][j] = **min**( D⁽ᵏ⁻¹⁾[i][j], D⁽ᵏ⁻¹⁾[i][k] + D⁽ᵏ⁻¹⁾[k][j] ) — "current best, **or** go i→k then k→j."
+
+The key mental image for both: cell [i][j] is updated from **its own row-k entry plus its own column-k entry** (row i, column k) + (row k, column j).
+
+**Worked example — Floyd on a 4-vertex digraph.** Initial weight matrix D⁽⁰⁾ (∞ = no direct edge, diagonal 0):
+
+| | a | b | c | d |
+|---|---|---|---|---|
+| **a** | 0 | ∞ | 3 | ∞ |
+| **b** | 2 | 0 | ∞ | ∞ |
+| **c** | ∞ | 7 | 0 | 1 |
+| **d** | 6 | ∞ | ∞ | 0 |
+
+After running k = a, b, c, d, the final all-pairs shortest distances D⁽⁴⁾:
+
+| | a | b | c | d |
+|---|---|---|---|---|
+| **a** | 0 | 10 | 3 | 4 |
+| **b** | 2 | 0 | 5 | 6 |
+| **c** | 7 | 7 | 0 | 1 |
+| **d** | 6 | 16 | 9 | 0 |
+
+E.g. a→d = 4 because a→c(3)→d(1); a→b = 10 via a→c→d→a? no — via a→c(3)→b(7) = 10. Every entry is the best route allowing any intermediates.
+
+**Traps.** (1) The **loop order is k outermost**, then i, then j — swapping k inside is the classic bug (it breaks the "intermediates ≤ k" invariant). (2) Warshall uses **OR/AND on booleans**; Floyd uses **min/+ on weights** — same skeleton, don't mix them. (3) Floyd tolerates **negative edges** but **not** negative-weight cycles. (4) Both are Θ(n³) time, Θ(n²) space, and process an in-place n×n matrix.
+
+---
+
 ## Final-Week Drill Plan
 
 Work in this order — hardest-to-recall last so it's freshest:
 
-1. **Redo every worked example above from a blank page.** If a number doesn't match, reread that section's "Traps."
+1. **Nail Part A first** — it maps one-to-one onto the review deck, so it's the likeliest source of exam points. Redo every worked example from a blank page; if a number doesn't match, reread that section's "Traps."
 2. **Do the deck's exercise problems** (Hoare on `[55,12,78,64,3,39,22,81]`; heap on `[1,3,5,4,6,13,10,9,8,15,17]`; coin-row `{7,3,5,12,2,8}`; the second assignment matrix) — solutions/patterns are all derivable from the sections here.
-3. **Memorize the [complexity table](#complexity-reference-know-these-cold)** and the [technique map](#0-the-big-picture--which-technique-and-why) — these are free points and frame every question.
-4. **Rehearse the four "vs" distinctions:** DP vs D&C, Greedy vs DP, Prim vs Kruskal, comparison vs distribution counting sort.
+3. **Then Part B** — draw the Huffman tree for the a–f frequencies, run Dijkstra from A, fill the knapsack grid, and do one Floyd pass. These reuse Part A's greedy/DP muscles.
+4. **Memorize the [complexity table](#complexity-reference-know-these-cold)** and the [technique map](#0-the-big-picture--which-technique-and-why) — these are free points and frame every question.
+5. **Rehearse the "vs" distinctions:** DP vs D&C · Greedy vs DP · Prim vs Kruskal · **Dijkstra vs Prim** (distance-from-source vs cheapest-fringe-edge) · **Warshall vs Floyd** (reachability vs distance) · comparison vs distribution counting sort · 0/1 vs continuous knapsack (DP vs greedy).
 
 > Linked notes to revisit: [[Final Exam]] · [[Greedy Technique]] · [[Coin Change Problem]] · [[Cyclic vs Acyclic Graph]] · [[DFS_PR~1]]
