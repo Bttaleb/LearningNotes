@@ -114,3 +114,6 @@ Now `j` is the split point
 2. Go through them in order, add edge if it **does not** create a cycle
 3. Stop when you have |V| - 1 edges
 *If adding an edge closes a cycle, heaviest edge in that cycle is never needed*
+![[Excalidraw-MST(Kruskal)]]
+
+## 5. MST -> Prims
