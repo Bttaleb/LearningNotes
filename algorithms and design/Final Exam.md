@@ -88,7 +88,7 @@ When `i` is **greater than or equal to** `j`, stop and swap pivot into place: sw
 Now `j` is the split point
 ![[Excalidraw-Hoare]]
 
-## Heap Construction -> Bottom-up Heapify
+## 3. Heap Construction -> Bottom-up Heapify
 **Main Idea** -> **Max-heap** is a complete binary tree (stored as array) where;
 - every parent is **greater than or equal to** its children
 - turns array into heap in Θ(n) time (transform and conquer)
@@ -100,4 +100,17 @@ Now `j` is the split point
 **Algorithm** -> for `i` from **last parent** (index [n/2] - 1) **down to 0**
 - sift A[i] down; repeatedly compare with its larger child
 - if child is bigger, swap and continue from child's position
-- stop when node is **greater than or equal to** both children or becomes a lea bf
+- stop when node is **greater than or equal to** both children or becomes a leaf
+![[Excalidraw-Heapify]]
+
+## 4. MST -> Kruskal's
+**Main Idea**: an MST of *weighted connected graph* is **acyclic**
+- Exactly |V| - 1 edges
+**Analogy** -> Laying the cheapest possible road network to connect every town
+- Lay cheapest first
+- Skip roads whose two towns are **already connected** by roads you've built
+**Algorithm**
+1. Sort all edges by increasing weight
+2. Go through them in order, add edge if it **does not** create a cycle
+3. Stop when you have |V| - 1 edges
+*If adding an edge closes a cycle, heaviest edge in that cycle is never needed*
