@@ -100,4 +100,4 @@ Now `j` is the split point
 **Algorithm** -> for `i` from **last parent** (index [n/2] - 1) **down to 0**
 - sift A[i] down; repeatedly compare with its larger child
 - if child is bigger, swap and continue from child's position
-- stop when node is **greater than or equal to** both children or becomes a leaf
+- stop when node is **greater than or equal to** both children or becomes a lea bf
