@@ -276,6 +276,8 @@ E.g. F(5)=min(F(4)+1, F(3)+1, F(0)+1)=1 (one nickel); F(10)=min(F(9)+1, F(8)+1, 
 
 **Traps.** (1) Initialize F(0)=0 and all others to **∞** so unreachable amounts stay unreachable. (2) This DP is guaranteed optimal for **any** denomination set — unlike the **greedy** change-making in your [[Greedy Technique#Change Making Problem|greedy note]], which only works for "nice" coin systems and can fail otherwise (e.g. coins {1,3,4}, amount 6: greedy gives 4+1+1=3 coins, DP gives 3+3=2). (3) Complexity Θ(n · amount) — pseudo-polynomial, because it scales with the **value** of the amount, not its input size.
 
+> **Why greedy fails on {1, 3, 4} (exam favorite).** Greedy grabs the biggest coin first, so on any amount ≡ 2 (mod 4) it strands a remainder of **2** and pays it as `1 + 1`. But that `4 + 1 + 1` (three coins for 6) could always be `3 + 3` (two coins) — so greedy is off by exactly **one coin** on **6, 10, 14, 18, …**, and correct everywhere else. Lesson: greedy needs the *greedy-choice property*; {1, 3, 4} doesn't have it, DP doesn't need it.
+
 ---
 
 ## 9. Assignment Problem — Branch-and-Bound
