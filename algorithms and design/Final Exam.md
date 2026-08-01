@@ -162,5 +162,9 @@ Now `j` is the split point
 **Analogy** -> Filling a jug to an exact line using cups of fixed sizes, minimizing pours
 - To reach the 10-mark, ask for each cup size `c`, "what's the fewest pours to reach 10-c?" 
 - Then add one pour for cup c
-**The Recurrence** -> F(m) = fewest coins to make amount `m`
+**The Recurrence** -> F(m) = fewest coins to make amount `m`; "what was the last coin I added to make amount m?"
+- Suppose last coin is c<sub>j</sub>.
+- Before placing, we already made m - c<sub>j</sub> 
 - F(m) = min over each coin c<sub>j</sub> <= m of (F(m-c<sub>j</sub> + 1)), with F(0) = 0
+	`+1` = the one coin you're placing right now
+	F(m-c<sub>j</sub>) = "solve the same problem on what;s left"
