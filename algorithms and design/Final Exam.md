@@ -167,4 +167,5 @@ Now `j` is the split point
 - Before placing, we already made m - c<sub>j</sub> 
 - F(m) = min over each coin c<sub>j</sub> <= m of (F(m-c<sub>j</sub> + 1)), with F(0) = 0
 	`+1` = the one coin you're placing right now
-	F(m-c<sub>j</sub>) = "solve the same problem on what;s left"
+	F(m-c<sub>j</sub>) = "solve the same problem on what's left" -> amount left after removing that coin
+	
