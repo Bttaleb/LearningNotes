@@ -20,6 +20,7 @@
 - D&C **subproblems** are independent
 - DP exists **because** subproblems overlap (makes recursion exponential)
 `Greedy vs DP`
+- Greedy optimizes the next step, DP optimizes the whole path
 - Greedy commits to one choice <- faster but only correct when the choice or optimal substructure holds
 - DP considers all choices and picks best (via table)
 
@@ -153,3 +154,13 @@ Now `j` is the split point
 - **Take coin `i`** -> get c<sub>i</sub> plus best from coins 1..i-2 (coin i-1 is forbidden)
 	- c<sub>i</sub> + F(i-2)
 - **Skip coin `i`** -> keep F(i-1), F(i) = max((F(i-1), c<sub>i</sub> + F(i-2)), with F(0) = 0, F(1) = c<sub>1</sub>
+![[Excalidraw-CoinRow]]
+
+## 8. Money Change (Minimum Coins DP)
+**Main Idea** -> Given coin denominations and target amount;
+- use fewest coins to make exactly that amount (bottom-up DP), **indexed by amount** rather than position
+**Analogy** -> Filling a jug to an exact line using cups of fixed sizes, minimizing pours
+- To reach the 10-mark, ask for each cup size `c`, "what's the fewest pours to reach 10-c?" 
+- Then add one pour for cup c
+**The Recurrence** -> F(m) = fewest coins to make amount `m`
+- F(m) = min over each coin c<sub>j</sub> <= m of (F(m-c<sub>j</sub> + 1)), with F(0) = 0
