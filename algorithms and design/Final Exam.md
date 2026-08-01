@@ -126,3 +126,21 @@ Now `j` is the split point
 2. Look at all edges crossing from V<sub>T</sub> to outside vertices. Pick the minimum-weight such edges.
 3. Add that edge and its new vertex to the tree
 4. Repeat until all vertices are in the tree (|V| - 1 edges added)
+![[Excalidraw-Prims]]
+
+### Prim vs Kruskal
+**Prim**'s keeps *one growing connected tree* & picks cheapest edge
+**Kruskal**'s picks *globally cheapest edge* and may build several fragments that merge later
+
+## Comparison Counting Sort
+**Main Idea** -> Space-Time tradeoff
+- Instead of moving elements around by comparison, count for each element how many other smaller than it
+**Analogy** -> Assigning race finishers to podium positions by tallying wins
+- For each runner, ask "how many runners did you beat?"
+- If you beat 3 others, you finish in position 3 (idx 0), every runners beat-count is their finishing slot
+**Algorithm** -> For each pair (i, j) with i < j;
+	if A[i] < A[j], increment Count[j],
+	else, increment Count[i]
+- After all pairs, Count[i] = number of elements smaller than A[i]
+- Place each A[i] into output position Count[i]
+![[Excalidraw-Comparison_counting]]
