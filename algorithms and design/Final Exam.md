@@ -132,7 +132,7 @@ Now `j` is the split point
 **Prim**'s keeps *one growing connected tree* & picks cheapest edge
 **Kruskal**'s picks *globally cheapest edge* and may build several fragments that merge later
 
-## Comparison Counting Sort
+## 6. Comparison Counting Sort
 **Main Idea** -> Space-Time tradeoff
 - Instead of moving elements around by comparison, count for each element how many other smaller than it
 **Analogy** -> Assigning race finishers to podium positions by tallying wins
@@ -144,3 +144,12 @@ Now `j` is the split point
 - After all pairs, Count[i] = number of elements smaller than A[i]
 - Place each A[i] into output position Count[i]
 ![[Excalidraw-Comparison_counting]]
+
+## 7. Coin-Row Problem (Dynamic Programming)
+**Main Idea** -> A row of n coins with values c<sub>1</sub>...c<sub>n</sub>. Pick coins for **MAX TOTAL VALUE**, but not two adjacent coins
+- Define a named quantity for a sub-instance, find recurrence, fill table bottom-up
+**Analogy** -> Walking down a buffet where you may take dishes, but never two dishes sitting next to each other. At each dish, **take it** (previous dish is restricted), or **skip it** (keep whatever you'd accumulate up to the previous dish)
+**The Recurrence** -> F(i) = max amount obtainable from first `i` coins
+- **Take coin `i`** -> get c<sub>i</sub> plus best from coins 1..i-2 (coin i-1 is forbidden)
+	- c<sub>i</sub> + F(i-2)
+- **Skip coin `i`** -> keep F(i-1), F(i) = max((F(i-1), c<sub>i</sub> + F(i-2)), with F(0) = 0, F(1) = c<sub>1</sub>
