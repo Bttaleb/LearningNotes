@@ -117,3 +117,12 @@ Now `j` is the split point
 ![[Excalidraw-MST(Kruskal)]]
 
 ## 5. MST -> Prims
+**Main Idea** -> Greedy by vertex: grow one tree outward from smart vertex
+- each step adding the cheapest edge that connects a new vertex
+**Analogy** -> A spreading vine from one seed, at any moment the vine reaches out along its single cheapest available tendril to gran one new, not-yet reached point.
+- Always one connected plant, never separate pieces (key difference from Kruskal's which can grow several forest fragments)
+**Algorithm** -> 
+1. Start from any vertex; put it in the tree V<sub>T</sub>
+2. Look at all edges crossing from V<sub>T</sub> to outside vertices. Pick the minimum-weight such edges.
+3. Add that edge and its new vertex to the tree
+4. Repeat until all vertices are in the tree (|V| - 1 edges added)
