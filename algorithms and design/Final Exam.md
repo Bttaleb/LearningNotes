@@ -202,4 +202,15 @@ Now `j` is the split point
 	- For each neighbor v, if dist(u) + weight(u,v) < dist(v), update dist(v) and set prev(u) = u
 4. Repeat until all vertices are visited
 ![[Excalidraw-Dijkstra]]
-
+## 11. Huffman Coding
+**Main Idea** -> Build optimal prefix tree:
+- assign short bit-strings to frequent characters and longer ones to rare characters (greedy)
+**Analogy** -> Building a company from the bottom up, repeatedly merging two smallest teams
+- The two least-frequent characters get buried deepest in the hierarchy
+- Most frequent characters stays near the top
+**Algorithm** -> 
+1. Make **lead node** for each character with its frequency (all in a min. heap)
+2. **Extract the 2 minimum frequency nodes**; create new internal whose frequency = sum
+	- the 2 extracted nodes become its left (0) and right (1) children: insert back into heap
+3. Repeat until **one node remains** (the root)
+4. Assign codes by walking the tree: left edge = 0, right edge = 1
