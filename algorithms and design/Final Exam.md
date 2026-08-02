@@ -170,3 +170,18 @@ Now `j` is the split point
 	`+1` = the one coin you're placing right now
 	F(m-c<sub>j</sub>) = "solve the same problem on what's left"
 	![[Excalidraw-MoneyChange]]
+## 9. Assignment Problem -> Branch and Bound
+**Main Idea** -> Assign `n` people to `n` jobs to minimize total cost
+- Given cost matrix `C` where `C[i][j]` is the cost of person `i` doing job `j`
+- Brute force is `n!` permutations
+**Analogy** -> Planning a wedding seating chart by trying arrangements, with a running "best so far" and a smart shortcut:
+- Before fully seating a table, compute cheapest it could possibly get from here
+**Algorithm** ->
+1. Lower bound (root & each node):
+	- Partial assignment: add costs already committed + for each **unassigned person** the smallest remaining entry in their row
+2. Branch:
+	- Pick next person; create a child node for each job still available
+3. Bound & Prune:
+	- Compute each child's lower bound; explore most promising (smallest bound) first (best-fit). 
+	- Prune nodes whose bound >= current best complete sol.
+4. When a **leaf** (full assignment) beats the incumbent, update the best
