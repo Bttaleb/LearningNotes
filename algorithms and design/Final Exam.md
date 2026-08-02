@@ -160,8 +160,9 @@ Now `j` is the split point
 **Main Idea** -> Given coin denominations and target amount;
 - use fewest coins to make exactly that amount (bottom-up DP), **indexed by amount** rather than position
 **Analogy** -> Filling a jug to an exact line using cups of fixed sizes, minimizing pours
-- To reach the 10-mark, ask for each cup size `c`, "what's the fewest pours to reach 10-c?" 
-- Then add one pour for cup c
+- To reach the 10, ask for each cup size `c`, "what's the fewest pours to reach `10-c`?" 
+- `10-c` is an **amount**, -> where the jug was sitting at *before* your final pour
+- The number of pours to reach that level is `F(10-c)`
 **The Recurrence** -> F(m) = fewest coins to make amount `m`; "what was the last coin I added to make amount m?"
 - Suppose last coin is c<sub>j</sub>.
 - Before placing, we already made m - c<sub>j</sub> 
