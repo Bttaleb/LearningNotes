@@ -176,9 +176,17 @@ Now `j` is the split point
 - Brute force is `n!` permutations
 **Analogy** -> Planning a wedding seating chart by trying arrangements, with a running "best so far" and a smart shortcut:
 - Before fully seating a table, compute cheapest it could possibly get from here
+
+|          | Job 1 | Job 2 | Job 3 | Job 4 |
+| -------- | ----- | ----- | ----- | ----- |
+| Person a | 9     | `2`   | 7     | 8     |
+| Person b | 6     | 4     | `3`   | 7     |
+| Person c | 5     | 8     | `1`   | 8     |
+| Person d | 7     | 6     | 9     | `4`   |
+
 **Algorithm** ->
 1. Lower bound (root & each node):
-	- Partial assignment: add costs already committed + for each **unassigned person** the smallest remaining entry in their row
+	- Sum each person's cheapest job; Ex. 2 + 3 + 1 + 4 = 10
 2. Branch:
 	- Pick next person; create a child node for each job still available
 3. Bound & Prune:
