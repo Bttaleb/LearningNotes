@@ -199,4 +199,7 @@ Now `j` is the split point
 2. Pick the unvisited vertex with smallest distance (min. priority queue)
 	- Mark **visited**, distance is now final
 3. Relax its edges:
-	- For each neighbor v, if dist(u) + weight(u,v) < dist(v), update dist
+	- For each neighbor v, if dist(u) + weight(u,v) < dist(v), update dist(v) and set prev(u) = u
+4. Repeat until all vertices are visited
+![[Excalidraw-Dijkstra]]
+
