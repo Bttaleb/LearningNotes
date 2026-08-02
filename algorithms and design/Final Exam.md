@@ -176,14 +176,6 @@ Now `j` is the split point
 - Brute force is `n!` permutations
 **Analogy** -> Planning a wedding seating chart by trying arrangements, with a running "best so far" and a smart shortcut:
 - Before fully seating a table, compute cheapest it could possibly get from here
-
-|          | Job 1 | Job 2 | Job 3 | Job 4 |
-| -------- | ----- | ----- | ----- | ----- |
-| Person a | 9     | `2`   | 7     | 8     |
-| Person b | 6     | 4     | `3`   | 7     |
-| Person c | 5     | 8     | `1`   | 8     |
-| Person d | 7     | 6     | 9     | `4`   |
-
 **Algorithm** ->
 1. Lower bound (root & each node):
 	- Sum each person's cheapest job; Ex. 2 + 3 + 1 + 4 = 10
@@ -193,3 +185,18 @@ Now `j` is the split point
 	- Compute each child's lower bound; explore most promising (smallest bound) first (best-fit). 
 	- Prune nodes whose bound >= current best complete sol.
 4. When a **leaf** (full assignment) beats the incumbent, update the best
+![[Excalidraw-Branch&Bound]]
+
+## 10. Dijkstra's -> Single source Shortest Path
+**Main Idea** -> Given weighted graph and source vertex:
+- Find shortest path distance from the source to every other vertex (greedy)
+- Ranked by total distance from the source
+**Analogy** -> Ripples from a stone dropped into a pond. The wavefront reaches the nearest point first
+- Each time it touches a new point, record "shortest time to get here"
+**Algorithm** ->
+1. Set dist(source) = 0, all others = ∞
+	- Keep a "previous vertex" pointer for path reconstruction
+2. Pick the unvisited vertex with smallest distance (min. priority queue)
+	- Mark **visited**, distance is now final
+3. Relax its edges:
+	- For each neighbor v, if dist(u) + weight(u,v) < dist(v), update dist
