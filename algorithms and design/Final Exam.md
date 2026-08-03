@@ -227,3 +227,4 @@ Now `j` is the split point
 - Exclude item `i`: `F[i-1][c]`
 - Include item `i` (only if w<sub>i</sub> < c): value<sub>i</sub> + F[i-1]'[c-w<sub>i</sub>]
 - `F[i-1][c]` = max( `F[i-1][c]`, value<sub>i</sub> + F[i]'[c-w<sub>i</sub>])
+![[Excalidraw-Knapsack]]
