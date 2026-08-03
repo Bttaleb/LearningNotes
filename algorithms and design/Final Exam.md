@@ -214,3 +214,16 @@ Now `j` is the split point
 	- the 2 extracted nodes become its left (0) and right (1) children: insert back into heap
 3. Repeat until **one node remains** (the root)
 4. Assign codes by walking the tree: left edge = 0, right edge = 1
+![[Excalidraw-Huffman]]
+
+## 12. 0/1 Knapsack DP
+**Main Idea** ->  Given items with weight, value, & knapsack capacity `W`
+- choose subset of **max total value** without exceeding `W`
+**Analogy** -> Packing a weight-limit on a suitcase, deciding one at a time
+- For each item ask: 
+	- "better off **leaving** it" (keep best packing of earlier items)
+	- "better off taking it" (its value + best packing of earlier items)
+**Recurrence** -> Let `F[i][j]` = best value using first `i` items with capacity `c`
+- Exclude item `i`: `F[i-1][c]`
+- Include item `i` (only if w<sub>i</sub> < c): value<sub>i</sub> + F[i-1]'[c-w<sub>i</sub>]
+- `F[i-1][c]` = max( `F[i-1][c]`, value<sub>i</sub> + F[i]'[c-w<sub>i</sub>])
