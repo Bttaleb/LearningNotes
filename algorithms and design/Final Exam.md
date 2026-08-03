@@ -223,7 +223,7 @@ Now `j` is the split point
 - For each item ask: 
 	- "better off **leaving** it" (keep best packing of earlier items)
 	- "better off taking it" (its value + best packing of earlier items)
-**Recurrence** -> Let `F[i][j]` = best value using first `i` items with capacity `c`
+**Recurrence** -> Let `F[i][c]` = best value using first `i` items with capacity `c`
 - Exclude item `i`: `F[i-1][c]`
 - Include item `i` (only if w<sub>i</sub> < c): value<sub>i</sub> + F[i-1]'[c-w<sub>i</sub>]
 - `F[i-1][c]` = max( `F[i-1][c]`, value<sub>i</sub> + F[i]'[c-w<sub>i</sub>])
