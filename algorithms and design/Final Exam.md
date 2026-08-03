@@ -187,7 +187,7 @@ Now `j` is the split point
 4. When a **leaf** (full assignment) beats the incumbent, update the best
 ![[Excalidraw-Branch&Bound]]
 
-## 10. Dijkstra's -> Single source Shortest Path
+## 10. Dijkstra's -> Shortest Path from one node to all nodes
 **Main Idea** -> Given weighted graph and source vertex:
 - Find shortest path distance from the source to every other vertex (greedy)
 - Ranked by total distance from the source
@@ -228,3 +228,9 @@ Now `j` is the split point
 - Include item `i` (only if w<sub>i</sub> < c): value<sub>i</sub> + F[i-1]'[c-w<sub>i</sub>]
 - `F[i-1][c]` = max( `F[i-1][c]`, value<sub>i</sub> + F[i]'[c-w<sub>i</sub>])
 ![[Excalidraw-Knapsack]]
+
+## 13. Floyd-Warshall
+**Main Idea** -> Shortest path between all pairs of vertices, negative edges allowed
+- allow paths to use intermediate vertices numbered 1...k
+- Floyd computes **all pairs shortest distances**
+- Warshall computes **transitive closure**
