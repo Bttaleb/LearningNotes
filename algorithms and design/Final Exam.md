@@ -170,6 +170,7 @@ Now `j` is the split point
 	`+1` = the one coin you're placing right now
 	F(m-c<sub>j</sub>) = "solve the same problem on what's left"
 	![[Excalidraw-MoneyChange]]
+	
 ## 9. Assignment Problem -> Branch and Bound
 **Main Idea** -> Assign `n` people to `n` jobs to minimize total cost
 - Given cost matrix `C` where `C[i][j]` is the cost of person `i` doing job `j`
