@@ -138,11 +138,47 @@ for (i = 10; i > 0;)
 	printf("T minus %d and counting. \n", i--); // omit third (expr3) post decrement,
 ```
 
-...
+## Exiting a Loop
+`break`: transfers control just *past* the end of a loop
+- can only escape one level of nesting
+Ex. 
+```c
+while (...) {
+	switch (...) {
+		...
+		break; //transfers control OUT of switch, but not out of while
+		...
+	}
+}
+```
 
+`continue`: transfers control to a point just *before* the end of the loop body
+Ex. Reads a series of numbers and computes their sum
+```c
+n = 0;
+sum = 0;
+while (n < 10) {
+	scanf("%d", &i);
+	if (i == 0)
+		continue
+	sum += i;
+	n++;
+	/* continue jumps to here */
+}
+```
 
----
+`goto`: capable of jumping to *any* statement in a function, provided the statement has a **label**
+```c
+/* labeled statement */
+identifier : statement
+/* goto statement */
+goto identifier ;
 
+for (d = 2; d < n; d++) {
+	if (n % d == 0)
+		goto done;
+}
+```
 ## Worked examples
 
 ```c
