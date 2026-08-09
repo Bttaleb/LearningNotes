@@ -176,8 +176,26 @@ goto identifier ;
 
 for (d = 2; d < n; d++) {
 	if (n % d == 0)
-		goto done;
+		goto done; 
+	done:
+	if (d < n)
+		printf("%d is divisible by %d\n" n, d);
+	else
+		printf("%d is a prime\n", n);
 }
+```
+
+- `break` doesn't have the desired effect (exiting from a `switch` but not from the loop)
+	- `goto` solves this problem (useful for exiting nested)
+```c
+while (...) {
+	switch (...) {
+		...
+		goto loop_done;
+		...
+	}
+}
+loop_done: ...
 ```
 ## Worked examples
 
