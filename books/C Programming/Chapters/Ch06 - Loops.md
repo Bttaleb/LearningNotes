@@ -185,8 +185,8 @@ for (d = 2; d < n; d++) {
 }
 ```
 
-- `break` doesn't have the desired effect (exiting from a `switch` but not from the loop)
-	- `goto` solves this problem (useful for exiting nested)
+`break` doesn't have the desired effect (exiting from a `switch` but not from the loop)
+- `goto` solves this problem (useful for exiting nested)
 ```c
 while (...) {
 	switch (...) {

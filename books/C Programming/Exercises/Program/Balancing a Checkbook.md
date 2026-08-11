@@ -12,7 +12,7 @@ for (;;) {
 	execute command;
 }
 ```
-the `executing command` requires a switch statement that reads like:
+the `execute command` requires a switch statement that reads like:
 ```c
 switch (command) {
 	case command_1: perform operation_1; break;
