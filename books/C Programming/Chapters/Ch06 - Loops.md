@@ -9,23 +9,10 @@ tags:
   - chapter/6
 related: []
 ---
-
-# Chapter NN — Title
-
-> Each `##` heading is a deep-link target. From any other note write `[[ChNN - Title#Section]]` to jump here. Add new terms to [[Glossary]] as you encounter them.
-
-## TL;DR
-
-One-paragraph mental model of the chapter. Link the key concepts inline so the TL;DR doubles as a table of contents:
-
-> *Example pattern:* "C does X using [[#Concept A]] and [[#Concept B]], controlled by [[#Concept C]]. Watch out for the [[#gotcha name|named gotcha]]."
-
----
-
 ## Iteration Statements
-- while -> loops whose controlling expression is tested **before** loop body is executed
-- do -> if the expression is tested **after** the loop body is executed
-- for -> loops that increment or decrement a counting variable
+- `while` -> loops whose controlling expression is tested **before** loop body is executed
+- `do` -> if the expression is tested **after** the loop body is executed
+- `for` -> loops that increment or decrement a counting variable
 
 ### *while* Statement
 
@@ -197,24 +184,16 @@ while (...) {
 }
 loop_done: ...
 ```
-## Worked examples
 
+## *Null* statements
+- Good for writing loops whose bodies are empty (ex. prime-finding loop)
 ```c
-// worked example from the book, with your annotation
+for (d = 2; d < n; d++)
+	if (n % d == 0)
+		break;
+// moving n % d == 0 condition into the loop's controlling expression makes the body of the loop empty
+for (d = 2)
 ```
-
-Read each line out loud — what is it doing, and why?
-
-## Gotchas
-
-- Subtle thing that bit you (or could)
-- Mistake the book flagged
-
-## Quick reference
-
-| Thing | Meaning |
-|---|---|
-|   |   |
 
 ---
 
@@ -222,14 +201,3 @@ Read each line out loud — what is it doing, and why?
 
 [[ChNN Exercises]]
 
-## Connects to
-
-- **Builds on:** [[Ch(NN-1) - PrevTitle]] — what idea this chapter extends
-- **Forward:** [[Ch(NN+x) - LaterTitle]] — where this concept resurfaces
-
-## Glossary feed
-
-After finishing, add these terms to [[Glossary]] with `**term** — see [[ChNN - Title#Section]]`:
-
-- term 1
-- term 2
