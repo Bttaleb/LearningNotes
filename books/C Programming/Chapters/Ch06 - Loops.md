@@ -192,7 +192,8 @@ for (d = 2; d < n; d++)
 	if (n % d == 0)
 		break;
 // moving n % d == 0 condition into the loop's controlling expression makes the body of the loop empty
-for (d = 2)
+for (d = 2; d < n && n % d != 0; d++)
+/* empty loop body */
 ```
 
 ---
