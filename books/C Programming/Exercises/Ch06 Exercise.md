@@ -59,9 +59,10 @@ for (i = 5, j = i - 1; i > 0, j > 0; --i, j = i - 1)
 	printf("%d ", i);
 ```
 - **Predict:** 
-	9384 938.4 93.84 9.384 0.9384
+	4 3 2 1
 - **Why:**
-	each time the loop runs, the value of `i` is divided by 10 until the value of `i` is less than 0
+	`i` is initialized to 5
+	loop runs until 
 - **Actual:**
 	9384 938 93 9 
 - **Match?** ✅ / ❌ —> ❌
