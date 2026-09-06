@@ -36,3 +36,31 @@ If I buy with no good reason other than the impulse to say "the market is cheap"
 If I buy, and the market continues higher, I will eventually lose because I have taught my mind that it is okay to catch a falling knife
 "I have created a pattern in my mind that associated buying falling asset prices with pleasure, because I had success with it at some point"
 **There are no bargains in the financial markets** 
+
+### Fighting Humanness
+You need to teach your brain to be hopeful (about profits) when it is wrongly fearful (about losing the profits). You need to teach your brain to be fearful (about losses) when it is mistakenly hopeful (about the position running positive). 
+
+When a trader is confronted with a loss, they hope it will turn around
+- the operative word here is *hope*
+When a trader is confronted with a profitable position, they are afraid the profit will disappear
+- the operative word here is *fear*
+We tend to chase hope a lot further down the road of misery than we are prepared to follow the road of opportunity
+
+Key trait of successful traders: Adding to winning trades -> Serves as an antidote to the temptation of wanting to take profit
+
+"When you are in  a winning position, instead of thinking where to get out, why don't you think about where to get in more?"
+
+If 90% of traders with a profit:
+- contemplate where to take half profits
+- contemplate where to take their next half of the profit
+then to make money trading, you need to do what majority finds difficult to do
+
+Why is it easier to add to a loser but harder to add to a winner?
+**What is your mind dwelling on**
+When adding to a loser:
+- we dwell on the potential for bigger profits
+- we decide **NOT** to dwell on the market telling us we are wrong
+- we decide **NOT** to dwell on the the fact we have just doubled our risk
+When adding to a winner:
+- we dwell on the fact that market may take our profits away
+- we decide **NOT** to dwe
