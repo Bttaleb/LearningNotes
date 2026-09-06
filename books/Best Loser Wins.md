@@ -56,11 +56,30 @@ If 90% of traders with a profit:
 then to make money trading, you need to do what majority finds difficult to do
 
 Why is it easier to add to a loser but harder to add to a winner?
-**What is your mind dwelling on**
+To answer; **What is your mind dwelling on**?
 When adding to a loser:
 - we dwell on the potential for bigger profits
 - we decide **NOT** to dwell on the market telling us we are wrong
 - we decide **NOT** to dwell on the the fact we have just doubled our risk
 When adding to a winner:
 - we dwell on the fact that market may take our profits away
-- we decide **NOT** to dwe
+- we decide **NOT** to dwell on the fact that the market is corroborating with us
+
+### Building new Pathways
+Why add to winning trades?
+- to fight *normal* human behavior
+- to stop from taking *half profits*
+By adding to winning trades, by thinking **"How can I make more when I am right?"**
+rather than thinking
+**"Where should I take profit?"**
+
+The outcome of one trade is random, the outcome of 100 is predictable
+For this reason, our behavior needs to be the same for every trade we execute. By applying the same behavior to every trade, we are virtually guaranteed to be profitable
+
+**What is the correct behavior?**
+- We are focused on establishing the behavior that will ensure we will be profitable over time
+- Observe what everyone else is doing and do the opposite
+1. *They don't add to winners*: add a little or double up, start slow
+2. *They don't use a stop-loss*: it would crystallize the pain of a loss, if the position is open, there is hope
+3. *They add to losing trades*: people love a bargain, **there are no bargains in financial markets**
+4. *They take half profits*: 
