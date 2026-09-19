@@ -54,7 +54,12 @@ Permutation - where is it? (which of the 8 corner/12 edge slots is this piece si
 Orientation - which way is it twisted/flipped?
 
 In this manner, a cube state is now four small arrays
-1. corner po
+1. corner position
+2. corner orientation
+3. edge position
+4. edge orientation
+
+These 4 arrays are the coordinates *Kociemba's* algorithm runs on
 
 
 
