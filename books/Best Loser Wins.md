@@ -12,7 +12,7 @@
 - If big drastic changes are introduced into your life, you are likely going to come face to face with that pain
 - How to build staying power during change? introduce change **slowly**
 
-### Visualisation
+### Visualization
 if a nightmare taps you on the shoulder, do not turn around immediately expecting to be scared. Pause and expect more, exaggerate
 
 ### Ego, and Wonderful Failure

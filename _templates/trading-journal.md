@@ -71,12 +71,12 @@ result: ""
 
 ### C2 Gate — Is the manipulation confirmed?
 
-| # | IF | THEN | ✓ |
-|---|-----|------|---|
-| 2.1 | C2 sweeps beyond C1 high or C1 low (wick through the level) | Liquidity has been taken → proceed | ☐ |
-| 2.2 | C2 reverses and closes back inside or near the opposite side of C1 range | Manipulation is confirmed, not a breakout → proceed | ☐ |
-| 2.3 | The sweep aligns with taking out resting liquidity (stops above/below) | Smart money narrative present → proceed | ☐ |
-| 2.4 | Bearish: C2 swept C1 high → enter above C1 open / Bullish: C2 swept C1 low → enter below C1 open | Entry side is defined → prepare for C3 | ☐ |
+| #   | IF                                                                                               | THEN                                                | ✓   |
+| --- | ------------------------------------------------------------------------------------------------ | --------------------------------------------------- | --- |
+| 2.1 | C2 sweeps beyond C1 high or C1 low (wick through the level)                                      | Liquidity has been taken → proceed                  | ☐   |
+| 2.2 | C2 reverses and closes back inside or near the opposite side of C1 range                         | Manipulation is confirmed, not a breakout → proceed | ☐   |
+| 2.3 | The sweep aligns with taking out resting liquidity (stops above/below)                           | Smart money narrative present → proceed             | ☐   |
+| 2.4 | Bearish: C2 swept C1 high → enter above C1 open / Bullish: C2 swept C1 low → enter below C1 open | Entry side is defined → prepare for C3              | ☐   |
 
 > **If 2.1 fails →** No sweep happened. CRT is not active.
 > **If 2.2 fails →** This might be a legitimate breakout, not manipulation. Do not fade.

@@ -528,3 +528,37 @@ I'll suggest the best structure for that type of knowledge.
 ---
 
 *Your second brain grows with every interaction. The more you teach it, the more it can teach you back.*
+
+---
+
+## Capture & Process Workflow
+
+For raw ideas, projects, and things you learn that aren't organized yet, use the
+**inbox**. Dump first, organize later — zero friction to capture, and I do the
+structuring.
+
+### The flow
+
+| Step | You do | I do |
+|------|--------|------|
+| **Capture** | `notes: capture [idea]`, or copy `_templates/capture.md` into `_inbox/` and dump | Create the file, seed what I can, leave prompts |
+| **Sit** | Add to it whenever, however messy | Nothing — captures wait at `status: raw` |
+| **Process** | `notes: process inbox` (or name one file) | Split into focused notes, add frontmatter + approved tags + `[[wiki-links]]`, file into domains, mark the capture `processed` |
+
+### Commands
+
+| Command | What it does |
+|---------|--------------|
+| `notes: capture [idea]` | Starts a new raw capture in `_inbox/` |
+| `notes: process inbox` | Turns every `status: raw` capture into organized notes |
+| `notes: process [file]` | Processes one capture |
+
+### How captures become notes
+- **One dump can become many notes** — a project capture often spawns an
+  algorithm note, a theory note, and a project-design note.
+- I flag **candidate tags** in each capture's *Processing notes* section and get
+  your OK before introducing any tag not already in your vocabulary.
+- Captures are a **staging area** — nothing there is final, and processing is
+  always proposed before it moves things.
+
+See `_inbox/README.md` for details.
