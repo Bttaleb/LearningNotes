@@ -138,11 +138,23 @@ for (i = 10; i > 0;)
 	printf("T minus %d and counting. \n", i--); // omit third (expr3) post decrement,
 ```
 
-## Exiting a Loop
-`break`: transfers control just *past* the end of a loop
+## Exiting from a Loop
+### `break` 
+transfers control out of the current loop
 - can only escape one level of nesting
 Ex. 
 ```c
+/* Checking if a number n (input) is prime (number > 1, only divisble by 1 and itself)
+3, 5, 7, 11, 13, 17
+ */
+for (d = 2; d < n; d++) { 
+	if (n % d == 0)
+		break;
+	if (d < n)
+		printf("%d is divisible by %d", n, d);
+	else
+		printf("%d is prime", n);
+}
 while (...) {
 	switch (...) {
 		...
@@ -152,7 +164,8 @@ while (...) {
 }
 ```
 
-`continue`: transfers control to a point just *before* the end of the loop body
+### `continue`
+transfers control to a point just *before* the end of the loop body
 Ex. Reads a series of numbers and computes their sum
 ```c
 n = 0;
