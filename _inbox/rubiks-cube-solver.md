@@ -95,8 +95,20 @@ Walking the chain:
 - even + even + even + ... **is always even**
 - so every reachable state has an even total permutation parity
 ### Law of the Cube
-1. Total permutation of corners and edges together is always even
+1. Total permutation of corners and edges together is always even = 2
+2. Corner Orientation = 3
+3. Edge Orientation = 2
+2 x 3 x 2 = 12
 
+| Law                | Conserved Quantity       | Last Piece Forced  | Divides By |
+| ------------------ | ------------------------ | ------------------ | ---------- |
+| Permutation Parity | total swaps even         | last swap's parity | 2          |
+| Corner Orientation | sum of twists ≡ 0(mod 3) | 8th corner's twist | 3          |
+| Edge Orientation   | sum of flips ≡ 0(mod 2)  | 12th edge's flip   | 2          |
+Every row is a validation gate where:
+sum of twists mod 3, reject if its a nonzero
+sum of flips mod 2, reject if its a nonzero
+permutation parity, reject if its an odd
 
 
 
