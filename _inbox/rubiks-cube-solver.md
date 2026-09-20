@@ -40,6 +40,7 @@ Building in stages
 - Stage 4
 	- Interactive/animation layer
 
+
 ### What's the right unit to use for the data model?
 What's the smallest thing that moves? (atomicity)
 WRONG: The stickers (54)
@@ -59,8 +60,14 @@ In this manner, a cube state is now four small arrays (coordinates for Kociemba'
 3. edge position
 4. edge orientation
 
+How do we validate user's input?
+- Decompose the entered corner and edge permutation into swaps, count them, add
+- Odd total -> reject: "this isn't a real cube"
 ### Permutation Parity
 "Permutation" -> A rule that sends each position to another position
+"Parity" -> a relation between a pair of integers:
+- if both are odd or both are even, they have the same parity
+- if one is even and the other is odd they have different parity
 Ex. 4 chairs
 - person in chair 1 -> chair 2
 - person in chair 2 -> chair 3
@@ -79,9 +86,16 @@ The pattern generalizes to:
 - 4 cycle = 3 swaps
 - k cycle = k-1 swaps
 
+Q1. A U turn's *corner* cycle is 3 swaps (odd). It's *edge* cycle is 4 (3 swaps, also odd). Even or odd overall?
+A1. One quarter turn changes total parity by odd + odd (3+3) = 6, even
 
-
-
+Walking the chain:
+- start solved, total parity = even (zero swaps)
+- each quarter turn adds an even amount (Q1)
+- even + even + even + ... **is always even**
+- so every reachable state has an even total permutation parity
+### Law of the Cube
+1. Total permutation of corners and edges together is always even
 
 
 
