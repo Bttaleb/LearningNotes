@@ -115,7 +115,17 @@ permutation parity, reject if its an odd
 
 ## What I already know
 <!-- Fill in your current understanding so I can pitch the notes at the right level. -->
--
+### Facelet Model
+54 Stickers
+Purpose: input (user enters their scramble) and render
+Changes if input is redesigned (add camera scan, restyle the render)
+- Never touched by the solver
+NOT a search key
+
+### Validation Gate
+Checks:
+1. Structural -> `cornerPermutation` is a permutation of 0..<8, `edgePermutation` is a permutation of 0..<12
+2. Corner twist law -> `cornerOrientation`
 
 ## Open questions / what I need to figure out
 - Which cube **representation**? (facelet colors vs. cubie permutation+orientation)
