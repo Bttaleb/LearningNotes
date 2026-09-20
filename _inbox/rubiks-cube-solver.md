@@ -53,13 +53,37 @@ This makes it so we have 20 moving pieces instead of 54 stickers
 Permutation - where is it? (which of the 8 corner/12 edge slots is this piece sitting in)
 Orientation - which way is it twisted/flipped?
 
-In this manner, a cube state is now four small arrays
+In this manner, a cube state is now four small arrays (coordinates for Kociemba's algorithm)
 1. corner position
 2. corner orientation
 3. edge position
 4. edge orientation
 
-These 4 arrays are the coordinates *Kociemba's* algorithm runs on
+### Permutation Parity
+"Permutation" -> A rule that sends each position to another position
+Ex. 4 chairs
+- person in chair 1 -> chair 2
+- person in chair 2 -> chair 3
+- person in chair 3 -> chair 4
+- person in chair 4 -> chair 1
+
+This gives us 4 cycles
+A 3 cycle looks like
+(1 2 3) = "1->2, 2->3, 3->1" = (3, 1, 2)
+- swap 1 and 2
+- swap 2 and 3
+**2 transpositions**
+The pattern generalizes to:
+- 2 cycle = 1 swap
+- 3 cycle = 2 swaps
+- 4 cycle = 3 swaps
+- k cycle = k-1 swaps
+
+
+
+
+
+
 
 
 
