@@ -3,7 +3,7 @@
 ### 1. Generating Wave Fronts (The Source)
 - NOT a continuous wave
 	- Emission Trigger: Every T<sub>s</sub> seconds (T<sub>s</sub> = 1/f<sub>s</sub>), simulation records the current (x<sub>s</sub>, y<sub>s</sub>) position of the source and resets the timer
-	- Wave Expansion: For each generated wave, its radius *R* at any time *t* since its creation is R(t) = v * t, where v = speed of sound
+	- Wave Expansion: For each generated wave, its radius *R* at any elapsed time *t* since its creation is calculated by R(t) = v * t, where v = speed of sound
 
 ### 2. Moving the Entities
 - In every frame (updates at time step Δt), position of source and observer are updated based on their velocities
@@ -12,4 +12,5 @@
 ### 3. Detecting Perceived Frequency (Observer)
 - To simulate the observer "hearing", we calculate when a wave front's expanding radius intersects with the observer's moving position
 - Wave fronts are emitted from the center (x<sub>c</sub>, y<sub>c</sub>) reaches the observer (x<sub>o</sub>, y<sub>o</sub>) when distance between them **equals** the wave's radius
-	- 
+	- d = √(x<sub>o</sub> - x<sub>c</sub>)^2 + (y<sub>o</sub> - y<sub>c</sub>)^2
+- Detection Event: Code will check every frame if d (distance) <= R(t). Whenever the condition transitions from false to true, the simulation registers a "hit" (peak of wave reached the observer)
