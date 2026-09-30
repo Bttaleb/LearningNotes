@@ -14,3 +14,4 @@
 - Wave fronts are emitted from the center (x<sub>c</sub>, y<sub>c</sub>) reaches the observer (x<sub>o</sub>, y<sub>o</sub>) when distance between them **equals** the wave's radius
 	- d = √(x<sub>o</sub> - x<sub>c</sub>)^2 + (y<sub>o</sub> - y<sub>c</sub>)^2
 - Detection Event: Code will check every frame if d (distance) <= R(t). Whenever the condition transitions from false to true, the simulation registers a "hit" (peak of wave reached the observer)
+- Observed Frequency (f<sub>o</sub>): Our simulation tracks the time interval between conbsecutive hits (ΔT<sub>obs</sub>) -> Perceived frequency is then calculated dynamically in the code as f<
