@@ -44,7 +44,7 @@ Messages are imposed **on top** of the steam
 	- collect each count back tagged with it's job ID,
 	- sum them into a total, and record per job latency and overall throughput as the **baseline** that later transports must beat 
 
-### Function Design Recipe
+### Function Design Recipe (read_exact function)
 1. Purpose -> what is this function trying to accomplish
 	- Fill `buf` with exactly `n` bytes from `fd`, even though `read()` might hand them over in pieces
 2. Inputs -> what does it receive
@@ -107,3 +107,19 @@ read_exact(fd, buf, n):
 
 In C, `p + k` (buf + got) doesn't add `k` elements, so it moves forward by `k * sizeof(*p)` bytes 
 
+## write_all function
+1. Purpose
+	- Send exactly `n` bytes from `buf` to `fd`, even though `write()` might accept them in pieces
+2. Inputs:
+	- fd, where we write to
+	- buf, where we read from
+	- n, data being transferred
+3. Output:
+
+| Outcome                    | Returns                                              |
+| -------------------------- | ---------------------------------------------------- |
+| Sent all `n` bytes         | n                                                    |
+| The reader is gone (EPIPE) | -1, errno = EPIPE (precondition: SIGPIPE is ignored) |
+| A real error               | -1                                                   |
+| Interrupted                | Not visible to caller, retries internally            |
+4. Pseudocode
