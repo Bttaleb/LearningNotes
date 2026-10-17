@@ -17,7 +17,7 @@ Messages are imposed **on top** of the steam
 
 ## Polya Step 1: Understand the problem
 1. Topology -> You have 1 coordinator and N workers. Jobs flow **down** to workers and results flow **back up**. How many pipes needed total? Why can't a single pipe carry traffic in both directions?
-	- 1
+	- 1 coordinator, N workers -> **2N pipes** ()
 2. Input and outputs -> What is the workload? (Count words for this example). What does **one** job contain, what does one **result** message contain?
 	- One job contains counting the words in the given array. One result contains how many words were counted
 3. Edge cases -> Name 3 things that can go wrong on this channel
