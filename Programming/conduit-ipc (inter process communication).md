@@ -63,14 +63,18 @@ Messages are imposed **on top** of the steam
 
 1. Examples -> Trace concrete inputs -> expected outputs by hand
 
-| Call # | `got` before | write into pos.     | Ask for how many | read() returns | `got` after |
-| ------ | ------------ | ------------------- | ---------------- | -------------- | ----------- |
-| 1      | 0            | buf + 0             | 10               | 4              | 4           |
-| 2      | 4            | buf + 4             | 6                | 3              | 3           |
-| 3      | 3            | buf + 7             | 3                | 3              | 3           |
-| 4      | 3            | loop ends (finishe) |                  |                |             |
+| Call # | `got` before | write into pos.      | Ask for how many | read() returns | `got` after |
+| ------ | ------------ | -------------------- | ---------------- | -------------- | ----------- |
+| 1      | 0            | buf + 0              | 10               | 4              | 4           |
+| 2      | 4            | buf + 4              | 6                | 3              | 7           |
+| 3      | 7            | buf + 7              | 3                | 3              | 10          |
+| 4      | 10           | loop ends (finished) |                  |                |             |
 
 1. Pattern -> Look at examples, what repeats? what changes?
+	- **Write into** is always `buf + got`
+	- **Ask for** is always `n - got`
+	- **Got after** is always `got before + read() return`
+	- Loop ends when `got` reached 10, which is the value for how many asked for, so the loop keeps going while `got < n`
 2. Template -> Turn pattern into code skeleton
 3. Fill In -> Complete the skeleton
 4. Test -> Run examples
