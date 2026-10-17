@@ -39,4 +39,8 @@ Messages are imposed **on top** of the steam
 | Zombies           | Exited workers keep a process table entry until reaped                    | waitpid() every worker                                      |
 
 4. Restate -> What must phase 1 do without using "pipe" or "fork"
-	- Split a large text file into chunks, hand each chunk to one of N independent worker processes that count words in parallel, collect each count back tagged with it's job DI, sum them into a total, and record per job latency and overall throughput as the **baseline** that later transports must beat 
+	- Split a large text file into chunks,
+	- hand each chunk to one of N independent worker processes that count words in parallel, 
+	- collect each count back tagged with it's job ID,
+	- sum them into a total, and record per job latency and overall throughput as the **baseline** that later transports must beat 
+
