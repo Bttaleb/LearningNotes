@@ -76,8 +76,35 @@ Messages are imposed **on top** of the steam
 	- **Got after** is always `got before + read() return`
 	- Loop ends when `got` reached 10, which is the value for how many asked for, so the loop keeps going while `got < n`
 2. Template -> Turn pattern into code skeleton
-3. Fill In -> Complete the skeleton
-4. Test -> Run examples
+
+```c
+read_exact(fd, buf, n):
+	got = 0
+	while (got < n):
+		r = read(fd, (char *)buf + got, n - got)
+		if r < 0:
+			if errno == EINTR: continue
+			return -1
+		if r == 0:
+			if got == 0: return 0
+			return -1
+		got = got + r
+	return n
+
+```
+
+1. Fill In -> Complete the skeleton
+
+| Case                        | Path                             | Returns |
+| --------------------------- | -------------------------------- | ------- |
+| All bytes arrived in pieces | Loop -> got += r; until got == n | n       |
+| Signal Interrupt            | r < 0, EINTR -> continue         | retries |
+| Real error                  | r < 0, not EINTR                 | -1      |
+| Clean EOF                   | r == 0, got == 0                 | 0       |
+| Truncated                   | r == 0, got > 0                  | -1      |
+
+
+2. Test -> Run examples
 
 In C, `p + k` (buf + got) doesn't add `k` elements, so it moves forward by `k * sizeof(*p)` bytes 
 
