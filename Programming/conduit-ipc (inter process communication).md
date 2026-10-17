@@ -44,3 +44,34 @@ Messages are imposed **on top** of the steam
 	- collect each count back tagged with it's job ID,
 	- sum them into a total, and record per job latency and overall throughput as the **baseline** that later transports must beat 
 
+### Function Design Recipe
+1. Purpose -> what is this function trying to accomplish
+	- Fill `buf` with exactly `n` bytes from `fd`, even though `read()` might hand them over in pieces
+2. Inputs -> what does it receive
+	- `fd`: where our bytes come from
+	- `buf`: where we put them
+	- `n`: how many bytes the caller needs
+3. Output -> What does it return, for each possible outcome
+	
+
+| Outcome                                   | `read_exact` return |
+| ----------------------------------------- | ------------------- |
+| Got all `n` bytes                         | n                   |
+| Other side closed before any byte arrived | 0                   |
+| Other side closed partway                 | -1                  |
+| A real error                              | -1                  |
+
+1. Examples -> Trace concrete inputs -> expected outputs by hand
+
+| Call # | `got` before | write into pos.     | Ask for how many | read() returns | `got` after |
+| ------ | ------------ | ------------------- | ---------------- | -------------- | ----------- |
+| 1      | 0            | buf + 0             | 10               | 4              | 4           |
+| 2      | 4            | buf + 4             | 6                | 3              | 3           |
+| 3      | 3            | buf + 7             | 3                | 3              | 3           |
+| 4      | 3            | loop ends (finishe) |                  |                |             |
+
+1. Pattern -> Look at examples, what repeats? what changes?
+2. Template -> Turn pattern into code skeleton
+3. Fill In -> Complete the skeleton
+4. Test -> Run examples
+
