@@ -3,10 +3,10 @@
     "aliases": "aliases",
     "cssclasses": "multitext",
     "tags": "tags",
-    "date": "date",
     "pair": "multitext",
     "htf_timeframe": "multitext",
     "candle_expectation": "multitext",
-    "candle": "multitext"
+    "candle": "multitext",
+    "date": "date"
   }
 }

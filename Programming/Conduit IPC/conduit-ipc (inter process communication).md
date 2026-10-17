@@ -60,8 +60,7 @@ Messages are imposed **on top** of the steam
 | Other side closed before any byte arrived | 0                   |
 | Other side closed partway                 | -1                  |
 | A real error                              | -1                  |
-
-1. Examples -> Trace concrete inputs -> expected outputs by hand
+4.  Examples -> Trace concrete inputs -> expected outputs by hand
 
 | Call # | `got` before | write into pos.      | Ask for how many | read() returns | `got` after |
 | ------ | ------------ | -------------------- | ---------------- | -------------- | ----------- |
@@ -70,12 +69,12 @@ Messages are imposed **on top** of the steam
 | 3      | 7            | buf + 7              | 3                | 3              | 10          |
 | 4      | 10           | loop ends (finished) |                  |                |             |
 
-1. Pattern -> Look at examples, what repeats? what changes?
+5.  Pattern -> Look at examples, what repeats? what changes?
 	- **Write into** is always `buf + got`
 	- **Ask for** is always `n - got`
 	- **Got after** is always `got before + read() return`
 	- Loop ends when `got` reached 10, which is the value for how many asked for, so the loop keeps going while `got < n`
-2. Template -> Turn pattern into code skeleton
+6. Template -> Turn pattern into code skeleton
 
 ```c
 read_exact(fd, buf, n):
@@ -93,7 +92,7 @@ read_exact(fd, buf, n):
 
 ```
 
-1. Fill In -> Complete the skeleton
+7. Fill In -> Complete the skeleton
 
 | Case                        | Path                             | Returns |
 | --------------------------- | -------------------------------- | ------- |
@@ -104,7 +103,7 @@ read_exact(fd, buf, n):
 | Truncated                   | r == 0, got > 0                  | -1      |
 
 
-2. Test -> Run examples
+8. Test -> Run examples
 
 In C, `p + k` (buf + got) doesn't add `k` elements, so it moves forward by `k * sizeof(*p)` bytes 
 
