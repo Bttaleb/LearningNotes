@@ -17,12 +17,26 @@ Messages are imposed **on top** of the steam
 
 ## Polya Step 1: Understand the problem
 1. Topology -> You have 1 coordinator and N workers. Jobs flow **down** to workers and results flow **back up**. How many pipes needed total? Why can't a single pipe carry traffic in both directions?
-	- 1 coordinator, N workers -> **2N pipes** ()
+	- 1 coordinator, N workers -> **2N pipes** (one job pipe + one result pipe)
 2. Input and outputs -> What is the workload? (Count words for this example). What does **one** job contain, what does one **result** message contain?
-	- One job contains counting the words in the given array. One result contains how many words were counted
-3. Edge cases -> Name 3 things that can go wrong on this channel
-	1. read() returns null
-	2. read() and write() can happen at the same time
-	3. write() can happen before read()
+	- A message = data only
+	- Frame: `[len: u32][type: u8][payload: len bytes]`
+	- JOB: (type=1): `[job_id: u32][text_len: u32][text: text_len bytes]`
+	- RESULT (type=2): `[job_id: u32][word_count: u64][compute_ns: u64]`
+3. Edge cases -> What can go wrong on this channel
+
+| Case              | What happens                                                              | Handling                                                    |
+| ----------------- | ------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| Short read        | read() returns fewer bytes than asked                                     | Loop until the full N bytes recieved                        |
+| EOF (End of File) | read() returns 0 when all write ends are closed                           | Treat as "peer is done"                                     |
+| Forgotten close() | fd table is copied on fork -> write end has 2 references; EOF never fires | Each side closes the end it doesn't use, right after fork() |
+| Signal Interrupt  | read() returns -1                                                         | Retry                                                       |
+| Reader gone       | write() to a pipe with no reader -> SIGPIP (kills process by default)     | Ignore SIGPIPE, handle EPIPE                                |
+| Full buffer       | 64KB pipe buffer fills -> write() blocks                                  | Deadlock                                                    |
+| Deadlock          | coordinator blocked writing to A's full job pipe                          | Circular wait                                               |
+| Worker crash      | job lost mid flight                                                       | Detect via EOF                                              |
+| Chunk Boundary    | A word split across two chunks gets counted twice                         | Split chunks on whitespace, not fixed byte offset           |
+| Zombies           | Exited workers keep a process table entry until reaped                    | waitpid() every worker                                      |
+
 4. Restate -> What must phase 1 do without using "pipe" or "fork"
-	- Create a two way stream that allows us to read and write 
+	- Split a large text file into chunks, hand each chunk to one of N independent worker processes that count words in parallel, collect each count back tagged with it's job DI, sum them into a total, and record per job latency and overall throughput as the **baseline** that later transports must beat 
