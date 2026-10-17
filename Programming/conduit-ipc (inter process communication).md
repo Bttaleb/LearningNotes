@@ -79,3 +79,5 @@ Messages are imposed **on top** of the steam
 3. Fill In -> Complete the skeleton
 4. Test -> Run examples
 
+In C, `p + k` (buf + got) doesn't add `k` elements, so it moves forward by `k * sizeof(*p)` bytes 
+
