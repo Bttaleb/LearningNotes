@@ -123,3 +123,9 @@ In C, `p + k` (buf + got) doesn't add `k` elements, so it moves forward by `k * 
 | A real error               | -1                                                   |
 | Interrupted                | Not visible to caller, retries internally            |
 4. Pseudocode
+
+
+**Job Pipe**: coordinator *writes* -> worker *reads*
+**Result Pipe**: worker writes -> coordinator *reads*
+Each process (job/result) holds one end of each pipe
+- If you find yourself thinking "the coordinator reads from the job (process) pipe", its a sign it forgot to close an end
