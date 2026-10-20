@@ -234,8 +234,11 @@ if (pid > 0) {
 	
 ```c
 char buf[10];
-ssize_t ret = read_exact(-1, buf, 10);
-
+ssize_t ret = read_exact(-1, buf, 10); // -1 guarantees we never get a valid ticket number
+// kernel: look up slot -1 in this process's fd table (no such slot)
 if (ret < 0 && errno == EBADF) {
+	printf("PASS: real error");
+} else {
+	printf("FAIL: real error (expected ret=-1, got ret=%zd"), ret);
 }
 ```
