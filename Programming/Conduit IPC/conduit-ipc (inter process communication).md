@@ -185,7 +185,6 @@ if (pid == 0) {
 	close(fds[1]); // close the write end
 	_exit(0); // exit the process
 }
-
 // PARENT process
 if (pid > 0) {
 	close(fds[1]); // close writer
@@ -206,7 +205,6 @@ if (pid > 0) {
 
 ## test_truncated_eof
 	return -1 on truncated eof (missing bytes)
-
 ```c
 // CHILD process
 if (pid == 0) {
@@ -215,10 +213,29 @@ if (pid == 0) {
 	close(fds[1]); // close writer
 	_exit(0);
 }
-
 // PARENT process
 if (pid > 0) {
-	close(fdsa)
+	close(fds[1]);
+	char buf[10];
+	ssize_t ret = read_exact(fds[0], buf, 10); // we're asking for 10 bytes          (rememeber the child only sent 5 bytes)
+	if (ret == -1) {
+		printf("PASS: truncated EOF check");
+	} else {
+		printf("FAIL: truncated EOF (expected ret=-1, got ret=%zd)", ret);
+	}
+	
+	close(fds[0]);
+	waitpid(pid, NULL, 0);
 }
+```
 
+## test_bad_fd
+	returns -1 on real error
+	
+```c
+char buf[10];
+ssize_t ret = read_exact(-1, buf, 10);
+
+if (ret < 0 && errno == EBADF) {
+}
 ```
