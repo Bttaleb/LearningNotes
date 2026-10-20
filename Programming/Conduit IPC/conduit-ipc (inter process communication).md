@@ -140,9 +140,11 @@ Each process (job/result) holds one end of each pipe
 | test_bad_fd        | read_exact(-1, buf, 10), no pipe or fork                          | ret = -1 AND errno = EBADF        | Real read() errors pass through with the correct errno                            |
 |                    |                                                                   |                                   |                                                                                   |
 ### **test_chunked_read**
+
 	returns n on success
-CHILD  process (scripted writer)
+	
 ```c
+// CHILD  process (scripted writer)
 if (pid == 0) {
 	close(fds[0]);
 	write(fds[1], "ABCD", 4);
@@ -154,20 +156,69 @@ if (pid == 0) {
 	close(fds[1]);
 	_exit(0);
 }
-```
-PARENT process (scripted reader)
-
-```c
+// PARENT process (scripted reader)
 if (pid > 0) {
 	close(fds[`]); // close wrie end
 	char buf[10]; // allocate a 10 byte buffer
 	ssize_t ret = read_exact(fds[0], buf, 10); // caller for a return value
 	
+	// if our returned value is 10 and it's equal to "ABCDEFGHIJ" in our buffer,         then we can move on
 	if (ret == 10 && memcmp(buf, "ABCDEFGHIJ", 10) == 0) {
 		printf("PASS: chunked read");
 	} else {
-		printf("FAIL: chunked read)
+		printf("FAIL: chunked read (ret=%zd, buf='%.*s')\n", ret, 10, buf)'
 	}
+	
+	close(fds[0]); // close our read pipe
+	waitpid(pid, NULL, 0); // terminate the process (avoid zombie)
 }
 ```
 
+## test_clean_eof
+
+	return 0 on clean EOF
+	
+```c
+// CHILD process
+if (pid == 0) {
+	close(fds[0]); // close the read end
+	close(fds[1]); // close the write end
+	_exit(0); // exit the process
+}
+
+// PARENT process
+if (pid > 0) {
+	close(fds[1]); // close writer
+	char buf[10]; // create 10 byte buffer
+	ssize_t ret = read_exact(fds[0], buf, 10); // read our bytes from the buffer
+	
+	if (ret == 0) { // if no bytes read, clean pass
+		printf("PASS: clean eof");
+	} else { // fail anything else, return its value
+		printf("FAIL: clean eof (expected ret=0, got ret=%zd)", ret);
+		close(fds[0]); // close reader
+	}
+	close(fds[0]); // outside close reader
+	waitpid(pid, NULL, 0); // terminate process
+}
+```
+
+
+## test_truncated_eof
+	return -1 on truncated eof (missing bytes)
+
+```c
+// CHILD process
+if (pid == 0) {
+	close(fds[0]); // close reader
+	write(fds[1], "ABCDE", 5); // write 5 bytes
+	close(fds[1]); // close writer
+	_exit(0);
+}
+
+// PARENT process
+if (pid > 0) {
+	close(fdsa)
+}
+
+```
