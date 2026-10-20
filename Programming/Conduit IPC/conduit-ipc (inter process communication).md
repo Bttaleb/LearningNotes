@@ -140,9 +140,8 @@ Each process (job/result) holds one end of each pipe
 | test_bad_fd        | read_exact(-1, buf, 10), no pipe or fork                          | ret = -1 AND errno = EBADF        | Real read() errors pass through with the correct errno                            |
 |                    |                                                                   |                                   |                                                                                   |
 ### **test_chunked_read**
-- returns n on success
+	returns n on success
 CHILD  process (scripted writer)
-
 ```c
 if (pid == 0) {
 	close(fds[0]);
@@ -155,15 +154,20 @@ if (pid == 0) {
 	close(fds[1]);
 	_exit(0);
 }
-
 ```
 PARENT process (scripted reader)
 
 ```c
 if (pid > 0) {
-	close(fds[0]);
+	close(fds[`]); // close wrie end
+	char buf[10]; // allocate a 10 byte buffer
+	ssize_t ret = read_exact(fds[0], buf, 10); // caller for a return value
 	
+	if (ret == 10 && memcmp(buf, "ABCDEFGHIJ", 10) == 0) {
+		printf("PASS: chunked read");
+	} else {
+		printf("FAIL: chunked read)
+	}
 }
-
 ```
 
