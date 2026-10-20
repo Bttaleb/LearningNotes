@@ -105,7 +105,7 @@ read_exact(fd, buf, n):
 
 8. Test -> Run examples
 
-In C, `p + k` (buf + got) doesn't add `k` elements, so it moves forward by `k * sizeof(*p)` bytes 
+In C, `p + k` (buf + got) doesn't add `k` elements, so it moves forward by `k * sizeof(*p)`bytes 
 
 ## write_all function
 1. Purpose
@@ -129,3 +129,41 @@ In C, `p + k` (buf + got) doesn't add `k` elements, so it moves forward by `k * 
 **Result Pipe**: worker writes -> coordinator *reads*
 Each process (job/result) holds one end of each pipe
 - If you find yourself thinking "the coordinator reads from the job (process) pipe", its a sign it forgot to close an end
+
+## Test functions
+
+| Test               | Scenario                                                          | Expects                           | Proves                                                                            |
+| ------------------ | ----------------------------------------------------------------- | --------------------------------- | --------------------------------------------------------------------------------- |
+| test_chunked_read  | Child writes "ABCD", "EFG", "HIJ" with sleeps; parent asks for 10 | ret == 10 AND buf == "ABCDEFGHIJ" | The loop survives short reads, and 'buf + got' puts each chunk in the right place |
+| test_clean_eof     | Child writes nothing, closes                                      | ret == 0                          | EOF between messages = normal goodbyte (worker sees "no more jobs")               |
+| test_truncated_eof | Child writes "ABCDE" (5), closes; parent asks for 10              | ret == -1                         | EOF mid message = error; got > 0 flips the same event from 0 to -1                |
+| test_bad_fd        | read_exact(-1, buf, 10), no pipe or fork                          | ret = -1 AND errno = EBADF        | Real read() errors pass through with the correct errno                            |
+|                    |                                                                   |                                   |                                                                                   |
+### **test_chunked_read**
+- returns n on success
+CHILD  process (scripted writer)
+
+```c
+if (pid == 0) {
+	close(fds[0]);
+	write(fds[1], "ABCD", 4);
+	usleep(1000);
+	write(fds[1], "EFG", 3);
+	usleep(1000);
+	write(fds[1], "HIJ", 3);
+	usleep(1000);
+	close(fds[1]);
+	_exit(0);
+}
+
+```
+PARENT process (scripted reader)
+
+```c
+if (pid > 0) {
+	close(fds[0]);
+	
+}
+
+```
+
