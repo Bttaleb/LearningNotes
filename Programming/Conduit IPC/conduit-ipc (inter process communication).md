@@ -242,3 +242,10 @@ if (ret < 0 && errno == EBADF) {
 	printf("FAIL: real error (expected ret=-1, got ret=%zd"), ret);
 }
 ```
+
+## Helper Functions
+
+|                           | chunked read         | clean EOF | truncated EOF |
+| ------------------------- | -------------------- | --------- | ------------- |
+| What the child writes     | "ABCD", "EFG", "HIJ" | 0         | -1            |
+| Bytes the parent asks for | 10                   | 10        |               |
