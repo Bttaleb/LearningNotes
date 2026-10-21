@@ -266,7 +266,6 @@ const char *chunks[]
 3. **Bytes asked for vs. expected** `ret`: same type, or different?
 	Different types since we need to be able to hand positive and negative numbers
 	
-
 | Parameter       | Type      | Why                                                                                                |
 | --------------- | --------- | -------------------------------------------------------------------------------------------------- |
 | Bytes asked for | size_t    | It's a size, never negative. Passed straight to `read_exact`'s `n`, so it should match that type   |
