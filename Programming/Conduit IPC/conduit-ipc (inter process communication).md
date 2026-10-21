@@ -248,4 +248,7 @@ if (ret < 0 && errno == EBADF) {
 |                           | chunked read         | clean EOF | truncated EOF |
 | ------------------------- | -------------------- | --------- | ------------- |
 | What the child writes     | "ABCD", "EFG", "HIJ" | 0         | -1            |
-| Bytes the parent asks for | 10                   | 10        |               |
+| Bytes the parent asks for | 10                   | 10        | 10            |
+| Expected `ret`            | 10                   | 0         | -1            |
+| Check `buf`?              | yes                  | yes       | yes           |
+| Test name                 | chunked read         | clean eof | truncated eof |
