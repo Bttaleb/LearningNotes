@@ -89,7 +89,6 @@ read_exact(fd, buf, n):
 			return -1
 		got = got + r
 	return n
-
 ```
 
 7. Fill In -> Complete the skeleton
@@ -244,11 +243,40 @@ if (ret < 0 && errno == EBADF) {
 ```
 
 ## Helper Functions
+How can we find the *helper function's* parameters?
+- Put them side by side (diff)
+- Label the lines that are the same/different
+- The same lines go into the helper body
+- Name the ROLE of each different line
 
-|                           | chunked read         | clean EOF | truncated EOF |
-| ------------------------- | -------------------- | --------- | ------------- |
-| What the child writes     | "ABCD", "EFG", "HIJ" | 0         | -1            |
-| Bytes the parent asks for | 10                   | 10        | 10            |
-| Expected `ret`            | 10                   | 0         | -1            |
-| Check `buf`?              | yes                  | yes       | yes           |
-| Test name                 | chunked read         | clean eof | truncated eof |
+1. **Chunks**: what's the C type of "an array of strings", and what extra parameters does the helper need?
+	
+```c
+const char *chunks[]
+```
+
+2. **Expected** `buf`: how does `NULL` let one parameter mean either "check against this string" or "don't check"?
+	Since `NULL` is a signal *from the caller to the helper*, the helper has no expectation for `buf` in it's test
+
+| Caller Passes | Helper Does                    |
+| ------------- | ------------------------------ |
+| "ABCDEFGHIJ"  | memcmp(buf, expected_buf, ...) |
+| NULL          | Skips the check                |
+
+3. **Bytes asked for vs. expected** `ret`: same type, or different?
+	Different types since we need to be able to hand positive and negative numbers
+	
+
+| Parameter       | Type      | Why                                                                                                |
+| --------------- | --------- | -------------------------------------------------------------------------------------------------- |
+| Bytes asked for | size_t    | It's a size, never negative. Passed straight to `read_exact`'s `n`, so it should match that type   |
+| Expected `ret`  | `ssize_t` | Has to hold `-1`. It's compared with `read_exact`'s **return value**, so it should match that type |
+
+
+|                           | chunked read         | clean EOF | truncated EOF       |
+| ------------------------- | -------------------- | --------- | ------------------- |
+| What the child writes     | "ABCD", "EFG", "HIJ" | nothing   | "ABCDE" (one chunk) |
+| Bytes the parent asks for | 10                   | 10        | 10                  |
+| Expected `ret`            | 10                   | 0         | -1                  |
+| Check `buf`?              | yes, "ABCDEFGHIJ"    | no        | no                  |
+| Test name                 | chunked read         | clean eof | truncated eof       |
