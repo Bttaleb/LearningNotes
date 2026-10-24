@@ -300,5 +300,4 @@ WEXITSTATUS(status) // the number it passed to _(exit)
 ```
 2. Is it okay for the child to use `read_exact` to read them, even though we should "test one thing at a time"? What's different now compared to when test 1 was written
 	 `read_exact` is verified, earlier it was untested. Now that is has its own passing test covering every outcome, including mutation checks that showed those tests can detect bugs, we can trust its infrastructure
-Parent (writer, function under test)
-close()
+`write_all` partial path: unreachable with blocking pipes (measured: w=10 in one call). The `+ sent` mutation is equivalent. Testable in Phase 2 with non-blocking fds
