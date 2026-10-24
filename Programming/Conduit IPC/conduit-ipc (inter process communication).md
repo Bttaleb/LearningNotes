@@ -279,3 +279,12 @@ const char *chunks[]
 | Expected `ret`            | 10                   | 0         | -1                  |
 | Check `buf`?              | yes, "ABCDEFGHIJ"    | no        | no                  |
 | Test name                 | chunked read         | clean eof | truncated eof       |
+
+## write_all tests
+
+| Outcome                  | How to trigger it          | Expected `ret` | Expected `errno` | Testable? |
+| ------------------------ | -------------------------- | -------------- | ---------------- | --------- |
+| All bytes written        | When written > n           | 10             |                  | Yes       |
+| Reader is gone           | When reader pipe is closed | -1             | -1               | yes       |
+| Bad fd                   | Bad write                  | -1 or errno    | -1               | yes       |
+| write() returns 0 -> EIO |                            |                |                  |           |
