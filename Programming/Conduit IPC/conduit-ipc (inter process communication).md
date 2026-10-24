@@ -282,9 +282,23 @@ const char *chunks[]
 
 ## write_all tests
 
-| Outcome                  | How to trigger it          | Expected `ret` | Expected `errno` | Testable? |
-| ------------------------ | -------------------------- | -------------- | ---------------- | --------- |
-| All bytes written        | When written > n           | 10             |                  | Yes       |
-| Reader is gone           | When reader pipe is closed | -1             | -1               | yes       |
-| Bad fd                   | Bad write                  | -1 or errno    | -1               | yes       |
-| write() returns 0 -> EIO |                            |                |                  |           |
+| Outcome                  | How to trigger it                                                                  | Expected `ret` | Expected `errno` | Testable? |
+| ------------------------ | ---------------------------------------------------------------------------------- | -------------- | ---------------- | --------- |
+| All bytes written        | write_all(fd, "ABCDEFHIJ", 10)                                                     | 10 (n)         |                  | Yes       |
+| Reader is gone           | child closes its read end and exits before parent writes, and `SIGPIPE` is ignored | -1             | EPIPE            | yes       |
+| Bad fd                   | fd = -1                                                                            | -1             | EBADF            | yes       |
+| write() returns 0 -> EIO | unreachable with real pipes                                                        | -1             | EIO              | No        |
+| EINTR retry              | signal mid-write                                                                   |                |                  | no        |
+1. The child reads and checks the bytes. How does it report the result to the parent? What does waitpid(pid, NULL, 0) throw away?
+	 `NULL` throws away the child's exit status. `waitpid` reaps the child, whatever is passes as the second argument. To receive it, pass an `int` to fill instead of `NULL`
+	 
+```c
+int status;
+waitpid(pid, &status, 0);
+WIFEXITED(status) // true if the child exited normall (not killed by a signal)
+WEXITSTATUS(status) // the number it passed to _(exit)
+```
+2. Is it okay for the child to use `read_exact` to read them, even though we should "test one thing at a time"? What's different now compared to when test 1 was written
+	 `read_exact` is verified, earlier it was untested. Now that is has its own passing test covering every outcome, including mutation checks that showed those tests can detect bugs, we can trust its infrastructure
+Parent (writer, function under test)
+close()
