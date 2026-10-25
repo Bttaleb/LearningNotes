@@ -313,3 +313,14 @@ ssize_t write_all(int fd, const void *buf, size_t n) {
         fprintf(stderr, "write_all: asked %zu, w=%zd\n", n - sent, w);
 
 ```
+
+## protocol.h
+How does recv_msg report each outcome?
+
+| Situation               | `recv_msg` returns  | Also                                     |
+| ----------------------- | ------------------- | ---------------------------------------- |
+| Got the whole message   | payload length (>0) | `*type` filled in                        |
+| Clean EOF before header | 0                   | the worker's shutdown signal             |
+| EOF partway             | -1                  | from `read_exact`                        |
+| `len` too large (or 0)  | -1                  | `errno = EMSGSIZE`, channel now unusable |
+| Real read error         | -1                  | `errno` from `read()`                    |
