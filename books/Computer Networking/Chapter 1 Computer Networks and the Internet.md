@@ -10,3 +10,6 @@ End systems, packet switches, and other pieces of the Internet run a [[protocol]
 
 Applications include mobile/smartphone apps, Internet messaging, mapping road-traffic are said to be **distributed applications** (involve multiple end systems that exchange data with each other)
 Internet applications run on end systems **NOT** in the packet switches in the network core
+
+How does one program running on one end system instruct the Internet to deliver data to another program running on another end system?
+	End systems attached to the Internet provide a **[[socket interface]]**

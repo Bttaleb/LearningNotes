@@ -5,8 +5,12 @@ aliases:
 source: Conduit IPC project, Computer Networking
 description: An agreement between two parties about what the bytes mean
 ---
+
 an agreement between two parties about what the bytes mean
 - a contract both sides follow so the **receiver** can rebuild exactly what the sender meant
+
+![[Pasted image 20261027113846.png]]
+
 eg.
 The kernel moves raw bytes through the *pipe* and nothing else. It has no idea what a "job" or a "result" is so the **coordinator** writes this
 
