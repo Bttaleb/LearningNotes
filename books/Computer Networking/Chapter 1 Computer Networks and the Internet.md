@@ -27,3 +27,13 @@ Hosts are sometimes further divided into:
 ### Access Networks
 Network that physically connects an end system to the first router (or edge router) on a path form the end system to any other distant end system 
 
+### How Homes Connect to the Internet
+Two most prevalent types of broadband residential access are
+	digital subscriber line (DSL)
+	cable
+DSL Internet access is obtained from the same local telephone company (telco) that provides its wired local phone access. Thus when DSL is used, a customer's telco is also its ISP
+
+The home's DSL modem takes digital data and translates it to high frequency tones for transmission over telephone wires to the CO; the analog signals from many such houses are translated back into digital format at the DSLAM
+
+Each customer's DSL modem uses the existing telephone line exchange data with a digital subscriber line access multiplexer located in the telco's central office (CO). The DSL modem then takes digital data and translates it to high-frequency tones for transmission over telephone wires to the CO.
+
