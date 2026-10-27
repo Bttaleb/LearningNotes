@@ -13,3 +13,5 @@ Internet applications run on end systems **NOT** in the packet switches in the n
 
 How does one program running on one end system instruct the Internet to deliver data to another program running on another end system?
 	End systems attached to the Internet provide a **[[socket interface]]**
+### Network Protocols
+entities exchanging messages and taking actions are hardware or software compontents ''
