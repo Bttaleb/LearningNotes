@@ -29,11 +29,24 @@ Network that physically connects an end system to the first router (or edge rout
 
 ### How Homes Connect to the Internet
 Two most prevalent types of broadband residential access are
-	digital subscriber line (DSL)
-	cable
-DSL Internet access is obtained from the same local telephone company (telco) that provides its wired local phone access. Thus when DSL is used, a customer's telco is also its ISP
+	**digital subscriber line (DSL)**
+	**cable**
+DSL Internet access is obtained from the same local telephone company (telco) that provides its wired local phone access. Thus when DSL is used, a customer's telco is also its ISP.
 
 The home's DSL modem takes digital data and translates it to high frequency tones for transmission over telephone wires to the CO; the analog signals from many such houses are translated back into digital format at the DSLAM
 
 Each customer's DSL modem uses the existing telephone line exchange data with a digital subscriber line access multiplexer located in the telco's central office (CO). The DSL modem then takes digital data and translates it to high-frequency tones for transmission over telephone wires to the CO.
+	Residential telephone line carries both data & traditional telephone signals, encoded at different frequencies
+	- High-speed downstream channel, 50 kHz to 1 MHz band
+	- Medium-speed upstream channel, 4 kHz to 50 kHz band
+	- Ordinary two-way telephone channel, 0 to 4kHz band
+This approach makes it appear as three separate links
+Customer side:
+	- splitter separates data and telephone signals arriving and forwards the signal to the DSL modem
+Telco side:
+	- In the CO, DSLAM separates data and phone signals and sends the data to the Internet
+DSL standards define multiple transmission rates;
+- downstream transmission rates of 24 Mbs and 52 Mbs
+- upstream rates of 3.5 Mbps and 16 Mbps
+	- newest standard provides up and down of 1 Gbps
 
