@@ -5,7 +5,7 @@ aliases:
 source: Conduit IPC project, Computer Networking
 description: An agreement between two parties about what the bytes mean
 ---
-
+	defines the format and the order of messages exchanged between two or more communicating entities, as well as the actions taken on the transmission and/or receipt of a message or other event
 an agreement between two parties about what the bytes mean
 - a contract both sides follow so the **receiver** can rebuild exactly what the sender meant
 

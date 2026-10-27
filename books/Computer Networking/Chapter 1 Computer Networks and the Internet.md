@@ -14,4 +14,16 @@ Internet applications run on end systems **NOT** in the packet switches in the n
 How does one program running on one end system instruct the Internet to deliver data to another program running on another end system?
 	End systems attached to the Internet provide a **[[socket interface]]**
 ### Network Protocols
-entities exchanging messages and taking actions are hardware or software compontents ''
+Entities that exchange messages and take actions are hardware or software components of some device
+All activity in the Internet that involves two or more communicating remote entities is governed by a **protocol**
+eg. making a request to a Web server (typing the URL of a Web page into your Web server)
+
+### Network Edge
+End systems sit at the **edge of the network**
+*Hosts* and *end systems* are used interchangeably
+Hosts are sometimes further divided into: 
+1. **clients**: desktops, laptops, smartphones
+2. **servers**: powerful machines that store and distribute Web pages, stream video, relay emails
+### Access Networks
+Network that physically connects an end system to the first router (or edge router) on a path form the end system to any other distant end system 
+
