@@ -1,3 +1,10 @@
+---
+type: definition
+aliases:
+  - protocols
+source: Conduit IPC project, Computer Networking
+description: An agreement between two parties about what the bytes mean
+---
 an agreement between two parties about what the bytes mean
 - a contract both sides follow so the **receiver** can rebuild exactly what the sender meant
 eg.
@@ -25,3 +32,9 @@ One message on the wire looks like:
 len (4 bytes) | type (1) | payload (len bytes)
 
 ```
+
+## Types of Protocols
+1. Transmission Control Protocol (TCP)
+	
+2. Internet Protocol (IP)
+	specifies the format of the packets that are sent and recieved among routers and end systems

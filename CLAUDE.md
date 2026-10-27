@@ -21,6 +21,7 @@ swift/                 ← Swift/iOS development
 os/                    ← Operating Systems
 arch/                  ← Architecture/Design
 theory/                ← Theoretical CS (automata, computability)
+Glossary/              ← Definitions: one short page per term, opened by clicking [[term]]
 db/, net/, algo/, web/, tools/  ← Future domains (not yet populated)
 .obsidian/             ← Obsidian config (do not edit manually)
 ```
@@ -57,3 +58,7 @@ Only use tags the user has explicitly introduced. If you discover a connecting c
 - **Wiki-links are key** — always add `[[wiki-links]]` to related notes; this is what makes Obsidian's graph view useful
 - **One domain per note** — each note lives in exactly one domain folder
 - **`note.end` requires approval** — propose consolidation/refactoring changes before executing them
+
+## Definitions (Glossary/)
+
+When a note uses `[[some term]]` for a word that needs a definition, the page lives in `Glossary/` (cross-domain — not bound to the one-domain rule). Use `_templates/definition.md` (frontmatter `type: definition`, a one-line `description`, `aliases` for plurals/variants). `Glossary/00 Glossary Index.md` lists them all via Dataview. The per-subject `glossary.md` files (e.g. `os/glossary.md`) are section indexes, not definitions — keep both.
