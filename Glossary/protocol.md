@@ -10,7 +10,7 @@ an agreement between two parties about what the bytes mean
 - a contract both sides follow so the **receiver** can rebuild exactly what the sender meant
 
 ![[Pasted image 20261027113846.png]]
-
+	Note: in our human protocol, *there are specific messages we send, and specific actions we take in response to the received reply message or other events*
 eg.
 The kernel moves raw bytes through the *pipe* and nothing else. It has no idea what a "job" or a "result" is so the **coordinator** writes this
 
