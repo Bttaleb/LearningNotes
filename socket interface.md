@@ -1,7 +1,6 @@
 - Specifies how a program running on one end system asks the Internet infrastructure to deliver data to a specific destination program running on another end system
 
 - A set of rules that the sending program must follow so that the Internet can deliver the data to the destination program
-
 ### Analogy
 Suppose Alice wants to send a letter to Bob using the postal service.
 	Alice can't just write the letter (the data) and drop the letter out of her window

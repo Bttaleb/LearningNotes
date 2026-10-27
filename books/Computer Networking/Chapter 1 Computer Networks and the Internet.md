@@ -24,11 +24,12 @@ Hosts are sometimes further divided into:
 2. **servers**: powerful machines that store and distribute Web pages, stream video, relay emails
 ### **Access Networks**
  are networks that physically connects an end system to the first router (or edge router) on a path from the end system to any other distant end system 
-### **How a Home Connects to the Internet**
+## **How a Home Connects to the Internet**
 is by using the two most prevalent types of broadband residential access;
 	1. **digital subscriber line (DSL)**
 	2. **cable**
-**DSL** Internet access is obtained from the same *local telephone company (telco)* that provides its wired local phone access. Thus when **DSL** is used, a customer's *telco* is also its ISP.
+### **DSL** Internet access
+is obtained from the same *local telephone company (telco)* that provides its wired local phone access. Thus when **DSL** is used, a customer's *telco* is also its ISP.
 	The home's DSL modem takes digital data and translates it to high frequency tones for transmission over telephone wires to the CO; the analog signals from many such houses are translated back into digital format at the DSLAM
 Each customer's DSL modem uses the existing telephone line exchange data with a digital subscriber line access multiplexer located in the *telco's* central office (CO). The DSL modem then takes digital data and translates it to high-frequency tones for transmission over telephone wires to the CO.
 Residential telephone line carries both data & traditional telephone signals, encoded at different frequencies
@@ -47,5 +48,20 @@ Customer side:
 the newest standard provides up and down of 1 Gbps
 ### **Cable Internet access**
 makes use of the cable television company's existing cable television infrastructure.
-	requires special modems called *cable modems* (an external device), connects to home PC through Ethernet
-
+	requires special modems called *cable modems* (an external device), which connects to a home PC (through Ethernet)
+- a shared broadcast medium
+	every packet sent by the head end travels downstream on every link to every home., every packet sent by a home travels on the upstream channel to the head end.
+If several users are simultaneously **downloading a video file** on the *downstream channel*;
+	actual rate at which each user receives its video file will be lower than the aggregate downstream rate
+If there are a few active users and they are all Web surfing;
+	each user may receive Web pages at the full cable downstream rate
+*Upstream channel* is also shared thus, a distributed multiple access protocol is needed to coordinate transmission & avoid collisions
+### **Fiber to the home (FTTH)**
+provides an optical fiber path from the CO directly to the home in gigabits per second range.
+	The simplest optical distribution network is called direct fiber, one fiber leaving the CO for each home. Each fiber leaving the CO is shared by many homes until the fiber gets close to the homes
+Internet access looks like;
+	- Each home as an optical network terminator (ONT)
+	- ONT is connected by dedicated optical fiber to a neighborhood splitter
+	- Splitter combines a # of homes onto a single shared optical fiber.
+	- Optical fiber connects to an optical line terminator (OLT)
+	- OLT connects to the Internet via telco router
