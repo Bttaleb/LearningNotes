@@ -65,3 +65,6 @@ Internet access looks like;
 	- Splitter combines a # of homes onto a single shared optical fiber.
 	- Optical fiber connects to an optical line terminator (OLT)
 	- OLT connects to the Internet via telco router
+## Access in the Enterprise: Ethernet & WiFi
+are accessible through the **local area network (LAN)** which is used to connect an end system to the edge router.
+	Ethernet is more prevalent, providing 100 Mbps to tens of Gbps vs. the server's 1 Gbps to 10 Gbps accss
