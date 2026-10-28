@@ -73,3 +73,22 @@ are accessible through the **local area network (LAN)** which is used to connect
 By employing the same wireless infrastructure used for cell telephony to send/receive packets. Users need to be within a few tens of kilometers vs. WiFi's few tens of meters
 
 ## Physical Media
+What is meant by a physical medium?
+	HFC uses a combination of fiber and coaxial cable, DSL & Ethernet use copper wire, mobile access networks use radio spectrum
+Consider a bit traveling from one end system:
+- travels through a series of links & routers to another end system
+- with many routers transmitting and receiving the same bit
+- the bit is being sent across a **physical medium**
+Physical media fall into two categories:
+- **guided media** -> waves are guided along a solid medium (fiber optic, twisted pair copper wire, coaxial cable)
+- **unguided media** -> waves propagate in the atmosphere and in outer space (wireless LAN, digital satellite channel)
+
+## The Network Core
+the mesh of packet switches and links that interconnects the Internet's end systems
+To send a message from a source end system to a destination end system, the message must be broken into smaller chunks or **packets**
+	Between source & destination, packets travel through communication links & *packet switches*
+Packets are transmitted over comm. link at a rate equal to the *full* transmission rate of the link
+### How Are Packets Handled?
+The use of **store-and-forward transmission** at the inputs to the links
+	the packet switch must receive the entire packet before it can begin to transmit the first bit of the packet onto the outbound link.
+eg. a **router** will typically have many incident links, since its job is to swit
