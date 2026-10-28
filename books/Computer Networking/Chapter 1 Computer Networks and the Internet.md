@@ -16,7 +16,7 @@ How does one program running on one end system instruct the Internet to deliver 
 ### **Network Protocols**
 are the hardware or software components of some device that exchange messages and take actions. All activity in the Internet that involves two or more communicating remote entities is governed by a **[[protocol]]**
 eg. making a request to a Web server (typing the URL of a Web page into your Web server)
-## **The Network Edge**
+### **The Network Edge**
  describes the end systems that sit at the **edge of the network**
 *Hosts* and *end systems* are used interchangeably
 Hosts are sometimes further divided into: 
@@ -24,7 +24,6 @@ Hosts are sometimes further divided into:
 2. **servers**: powerful machines that store and distribute Web pages, stream video, relay emails
 ## **Access Networks**
  are networks that physically connects an end system to the first router (or edge router) on a path from the end system to any other distant end system 
-### **How a Home Connects to the Internet**
 is by using the two most prevalent types of broadband residential access;
 	1. **digital subscriber line (DSL)**
 	2. **cable**
@@ -72,4 +71,5 @@ are accessible through the **local area network (LAN)** which is used to connect
 ### **Wide-Area Wireless Access: 3G, LTE 4G, & 5G**
 	How do mobile devices message, share photos in social networks, make mobile payments, watch movies, stream music, and more?
 By employing the same wireless infrastructure used for cell telephony to send/receive packets. Users need to be within a few tens of kilometers vs. WiFi's few tens of meters
+
 ## Physical Media
