@@ -88,7 +88,7 @@ the mesh of packet switches and links that interconnects the Internet's end syst
 To send a message from a source end system to a destination end system, the message must be broken into smaller chunks or **packets**
 	Between source & destination, packets travel through communication links & *packet switches*
 Packets are transmitted over comm. link at a rate equal to the *full* transmission rate of the link
-### Store-and-Forward Transmission
+### Store-and-Forward Transmission (packet switching)
 for routers focuses on transmission at the inputs to the links
 	the packet switch must receive the entire packet before it can begin to transmit the first bit of the packet onto the outbound link.
 Calculating the amount of time from when the source begins to send the packet, until the destination has received the entire packet:
@@ -120,4 +120,17 @@ What would the delay be for P packets sent over a series of N links?
 Each packet switch has multiple links attached. For each link, the switch has an **output buffer/queue**, which stores packets that the router is about to send to that link.
 What if the packet finds the link busy with the transmission of another packet?
 	The arriving packet must wait in the output buffer. Thus, packets suffer output buffer **queuing delays**. 
-	**Packet loss** occurs when an arriving packet finds the buffer completely full with other waiting packets. Either arriving packets or already-queued pa
+	**Packet loss** occurs when an arriving packet finds the buffer completely full with other waiting packets. Either arriving packets or already-queued packets will be dropped.
+### Forwarding Tables and Routing Protocols
+How does the router determine which link it should forward the packet onto?
+When a source end system wants to send a packet to a destination end system:
+- the source includes the destination's IP address in the packet header
+- on packet arrival (router), examines a portion of the packet's destination address and forwards the packet to an adjacent router
+	More specifically, each router has a forwarding table that maps destination addresses to that router's outbound links. When a packet arrives, the router examines the address and searches the table, using this destination address to direct the packet to its appropriate outbound link
+End-to-end routing process is analogous to a car driver who does not use maps but instead prefers to ask for directions
+	The Internet has a number of special **routing protocols**, used to automatically set forwarding tables. A routing protocol may determine the shortest path from each router to each destination and use the shortest path results to configure the forwarding tables in the routers
+### Circuit Switching
+another fundamental approach to moving data through a network of links and switches.
+Resources are *reserved* for the duration of a communication session between end systems
+- buffers and link transmission rates provide the path for resources during the session
+In packet-switched networks, resources are *not reserved*;
