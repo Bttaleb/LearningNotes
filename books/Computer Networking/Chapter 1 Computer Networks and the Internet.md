@@ -88,7 +88,36 @@ the mesh of packet switches and links that interconnects the Internet's end syst
 To send a message from a source end system to a destination end system, the message must be broken into smaller chunks or **packets**
 	Between source & destination, packets travel through communication links & *packet switches*
 Packets are transmitted over comm. link at a rate equal to the *full* transmission rate of the link
-### How Are Packets Handled?
-The use of **store-and-forward transmission** at the inputs to the links
+### Store-and-Forward Transmission
+for routers focuses on transmission at the inputs to the links
 	the packet switch must receive the entire packet before it can begin to transmit the first bit of the packet onto the outbound link.
-eg. a **router** will typically have many incident links, since its job is to swit
+Calculating the amount of time from when the source begins to send the packet, until the destination has received the entire packet:
+- The source (end system) begins to transmit at time 0;
+- at time *L/R* seconds, the source has transmitted the entire packet, and the entire packet has been received and stored at the router
+- at time *2L/R*, the router transmitted the entire packet, and the entire packet has been received by the destination
+Routers need to receive, store, and process the entire packet before forwarding
+
+Calculating the amount of time from when the source begins to send the first packet until the destination has received all three packets:
+- at time *L/R*, router beings to forward the first packet
+- also at time *L/R*, source will begin to send the second packet
+- thus, at time *2L/R*, destination has received the first packet and the router has received the second packet
+- similarly, at time *3L/R*, destination has received the first two packets, router has received the third packet
+- at time *4L/R*, destination received all three packets
+
+**Key Contrast**:
+- *One packet* -> store-and-forward penalty is fully exposed. Half the time, one of the two links sits idle
+- Several packets -> pipelining. Only the first packet pays the extra hop delay to "full the pipe". After that, a packet arrives at the destination every *L/R*, as if the router weren't there
+
+General case of sending one packet from source to destination over a path consisting of N links each of rate R (thus, N-1 routers between source and destination). End-to-end delay is:
+	d<sub>end-to-end</sub> = N · L/R
+
+What would the delay be for P packets sent over a series of N links?
+	delay = (N + P - 1) · L/R
+- The first packet needs N · L/R to cross all N links
+- Each of the remaining P - 1 packets arrive L/R after the one before it
+
+### Queuing Delays and Packet Loss
+Each packet switch has multiple links attached. For each link, the switch has an **output buffer/queue**, which stores packets that the router is about to send to that link.
+What if the packet finds the link busy with the transmission of another packet?
+	The arriving packet must wait in the output buffer. Thus, packets suffer output buffer **queuing delays**. 
+	**Packet loss** occurs when an arriving packet finds the buffer completely full with other waiting packets. Either arriving packets or already-queued pa
