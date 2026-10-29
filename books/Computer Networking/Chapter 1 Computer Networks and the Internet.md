@@ -134,3 +134,11 @@ another fundamental approach to moving data through a network of links and switc
 Resources are *reserved* for the duration of a communication session between end systems
 - buffers and link transmission rates provide the path for resources during the session
 In packet-switched networks, resources are *not reserved*;
+Analogy:
+Consider two restaurants:
+1. requires reservations -> must call before leaving home, but may immediately be seated and order a meal
+2. neither requires reservations nor accepts them -> don't need to reserve a table, but must wait for a table before being seated
+Before the sender of a message can send the information, the network must establish a connection between the *sender* and *receiver*.
+	Also known as a **circuit**, in which the *network* reserves a constant transmission rate in the network's links for the duration of the connection
+When two hosts want to communicate, the network establishes a dedicated **end-to-end connection**
+### Establishing end-to-end connections (Circuit vs. Packet switching)
