@@ -324,3 +324,41 @@ How does recv_msg report each outcome?
 | EOF partway             | -1                  | from `read_exact`                        |
 | `len` too large (or 0)  | -1                  | `errno = EMSGSIZE`, channel now unusable |
 | Real read error         | -1                  | `errno` from `read()`                    |
+
+## The Worker
+Purpose -> repeatedly receive a JOB, count the words in its test, send back a RESULT, until the coordinator closes the JOB pipe, then exit cleanly
+```c
+worker(job_fd, result_fd):
+	loop:
+		n = receive_msg(job_fd, &type, buf, sizeof buf) <- protocol layer
+		n == 0 -> done (clean EOF = no more jobs)
+		n < 0 -> error, exit
+		pull job_id out of buf[0..3]
+		text = buf + 4, text_len = n - 4
+		start timer
+		count = count_words(text, text_len)
+		stop timer
+		fill struct result, encode_result
+		send_msg(result_fd, MSG_RESULT, bytes, 20)
+
+```
+
+| Input                                   | Count |
+| --------------------------------------- | ----- |
+| "hello world"                           | 11    |
+| "" (empty, len = 0)                     | 0     |
+| "     " (only spaces)                   | 5     |
+| "   hello   " (leading/trailing spaces) | 11    |
+| "hello   world" (multiple spaces)       | 14    |
+| "hello/tworld/nfoo" (tabs, newlines)    | 17    |
+| "don't stop" (puncation)                | 10    |
+### Key Observation
+DON'T count words, count word starts (moments you go from "not in a word" to "in a word").
+
+```
+"  hello   world  "
+ ^^      ^^       <- whitespace
+   ^^^^^   ^^^^   <- in a word
+   ^      ^       <- tansitions: whitespace -> letter
+```
+Track two states (IN_WORD, OUT_OF_WORD), and one counted transition
