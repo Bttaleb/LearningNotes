@@ -71,7 +71,6 @@ are accessible through the **local area network (LAN)** which is used to connect
 ### **Wide-Area Wireless Access: 3G, LTE 4G, & 5G**
 	How do mobile devices message, share photos in social networks, make mobile payments, watch movies, stream music, and more?
 By employing the same wireless infrastructure used for cell telephony to send/receive packets. Users need to be within a few tens of kilometers vs. WiFi's few tens of meters
-
 ## Physical Media
 What is meant by a physical medium?
 	HFC uses a combination of fiber and coaxial cable, DSL & Ethernet use copper wire, mobile access networks use radio spectrum
@@ -82,7 +81,6 @@ Consider a bit traveling from one end system:
 Physical media fall into two categories:
 - **guided media** -> waves are guided along a solid medium (fiber optic, twisted pair copper wire, coaxial cable)
 - **unguided media** -> waves propagate in the atmosphere and in outer space (wireless LAN, digital satellite channel)
-
 ## The Network Core
 the mesh of packet switches and links that interconnects the Internet's end systems
 To send a message from a source end system to a destination end system, the message must be broken into smaller chunks or **packets**
@@ -140,5 +138,9 @@ Consider two restaurants:
 2. neither requires reservations nor accepts them -> don't need to reserve a table, but must wait for a table before being seated
 Before the sender of a message can send the information, the network must establish a connection between the *sender* and *receiver*.
 	Also known as a **circuit**, in which the *network* reserves a constant transmission rate in the network's links for the duration of the connection
+
 When two hosts want to communicate, the network establishes a dedicated **end-to-end connection**
-### Establishing end-to-end connections (Circuit vs. Packet switching)
+
+A circuit switched network may look like; four circuit switches interconnected by four links. Each link has four circuits, so that each link can support four connections. The hosts are directly connected to one of the switches.
+	In order for Host A to communicate to Host B, the network reserves one circuit on each of the two links.
+In contrast, in packet-switched networks, such as the Internet, the packet is sent into the network without reserving any link resources whatsoever. So if congestion were to happen, the packet will have to wait in a buffer and suffer a delay
