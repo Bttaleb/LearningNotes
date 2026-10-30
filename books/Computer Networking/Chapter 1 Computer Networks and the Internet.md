@@ -144,3 +144,6 @@ When two hosts want to communicate, the network establishes a dedicated **end-to
 A circuit switched network may look like; four circuit switches interconnected by four links. Each link has four circuits, so that each link can support four connections. The hosts are directly connected to one of the switches.
 	In order for Host A to communicate to Host B, the network reserves one circuit on each of the two links.
 In contrast, in packet-switched networks, such as the Internet, the packet is sent into the network without reserving any link resources whatsoever. So if congestion were to happen, the packet will have to wait in a buffer and suffer a delay
+
+### Multiplexing
+A circuit in a link is implemented using either **Frequency-division multiplexing (FDM)** or **time-division multiplexing (TDM)** 
