@@ -149,3 +149,4 @@ In contrast, in packet-switched networks, such as the Internet, the packet is se
 is done with either: 
 - **[[frequency-division multiplexing (FDM)]]** or
 - **[[time-division multiplexing (TDM)]]**
+Packet switching is argued for as circuit switching is wasteful because the dedicated circuits are idle during **silent periods**
