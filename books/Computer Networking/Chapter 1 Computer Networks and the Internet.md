@@ -150,3 +150,8 @@ is done with either:
 - **[[frequency-division multiplexing (FDM)]]** or
 - **[[time-division multiplexing (TDM)]]**
 Packet switching is argued for as circuit switching is wasteful because the dedicated circuits are idle during **silent periods**
+
+How long might it take to send a file of 640,000 bits from Host A to Host B over a circuit switched network?
+Suppose all links use TDM with 24 slots and a bit rate of 1.536 Mbps
+Also, it takes 500 msec to establish an end to end circuit before Host A can transmit the file.
+Each circuit has a rate of 1.536 Mbps / 24 = 64 kbps
