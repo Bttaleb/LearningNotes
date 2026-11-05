@@ -149,7 +149,7 @@ Express using *subexpressions*:
    `a + b += ((c++) - d) + ((--e) / (-f))`
 4. `-` and `+` additive operators:
    `a + b += (((c++) - d) + ((--e) / (-f)))`
-5. `=` and `+=` assignment operators (group from right to left):
+5. = and `+=` assignment operators (group from right to left):
    `(a = b += (((c++) - d) + ((--e) / (-f))))`
 
 ---
