@@ -1,3 +1,10 @@
+---
+type: definition
+aliases:
+  - TDM
+source: ""
+description: "Time on a link is divided into frames of fixed slots; each connection gets one slot per frame"
+---
 for each link:
 divide time into frames of fixed duration,
 each frame is divided into a fixed number of time slots

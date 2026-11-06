@@ -1,3 +1,11 @@
+---
+type: definition
+aliases:
+  - socket
+  - sockets
+source: ""
+description: "Specifies how a program on one end system asks the Internet to deliver data to a program on another end system"
+---
 - Specifies how a program running on one end system asks the Internet infrastructure to deliver data to a specific destination program running on another end system
 
 - A set of rules that the sending program must follow so that the Internet can deliver the data to the destination program

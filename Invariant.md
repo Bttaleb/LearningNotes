@@ -1,1 +1,0 @@
-a property, value, or condition that remains constant and unchanging when a mathematical object, physical system, or piece of code undergoes a specific transformation or process

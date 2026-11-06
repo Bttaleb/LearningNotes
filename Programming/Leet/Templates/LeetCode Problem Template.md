@@ -2,17 +2,18 @@
 title: "{{title}}"
 number:
 link:
-difficulty:          # Easy | Medium | Hard
-patterns: []         # e.g. [two-pointers, sliding-window, dp, graph-bfs]
-data-structures: []  # e.g. [hashmap, heap, stack, trie]
-model:               # e.g. dfa | counter | pda | graph | dp-table
+difficulty:
+patterns: []
+data-structures: []
+model:
 language:
-status:              # solved | solved-with-hints | looked-at-solution | revisit
-time-spent:          # minutes
-date: {{date:YYYY-MM-DD}}
-next-review:         # date to re-solve from scratch
+status:
+time-spent:
+date: 2026-11-06
+next-review:
 attempts: 1
-tags: [leetcode]
+tags:
+  - leetcode
 ---
 
 # {{title}}
