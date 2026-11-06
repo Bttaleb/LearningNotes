@@ -5,6 +5,7 @@ link:
 difficulty:          # Easy | Medium | Hard
 patterns: []         # e.g. [two-pointers, sliding-window, dp, graph-bfs]
 data-structures: []  # e.g. [hashmap, heap, stack, trie]
+model:               # e.g. dfa | counter | pda | graph | dp-table
 language:
 status:              # solved | solved-with-hints | looked-at-solution | revisit
 time-spent:          # minutes
@@ -16,16 +17,35 @@ tags: [leetcode]
 
 # {{title}}
 
-## 🧩 Problem in My Own Words
-<!-- Restate it without copying the prompt. What is actually being asked? -->
+> **Pipeline:** Define → Classify → Choose model → Specify model → Pseudocode → Build → Reflect
+> Do not move to the next stage until the current one holds up.
 
+---
+
+## 1️⃣ Define (Understand)
+<!-- Restate it without copying the prompt. Turn every vague word ("valid", "correct order", "matching") into something a program can check. -->
+
+**Problem in my own words:**
+
+
+**Formal statement:**
+- Input: 
+- Output: 
+- Kind of problem: decision (yes/no) | search (find one) | optimization (find best) | counting
+<!-- For string problems: alphabet Σ = { }, language L = { w ∈ Σ* | ... }, question: is w ∈ L? -->
+
+**Rules / properties a correct answer must satisfy:**
+1. 
+2. 
+3. 
 
 **Constraints that matter:**
 - n ≤ 
 - Values: 
-- Edge cases implied: 
+- What the constraints change in practice (buffer sizes, which complexities pass): 
 
 **Examples I traced by hand:**
+<!-- Include at least one example per rule above that breaks only that rule -->
 ```
 Input:
 Output:
@@ -34,88 +54,118 @@ Why:
 
 ---
 
-## 📦 Boxes (Type-Level Decomposition)
-<!-- Break the solution into composable boxes: name / input type / output type / promise -->
+## 2️⃣ Classify
+<!-- The class tells you the minimum machinery you need. -->
 
-| Box | Input → Output | Promise |
+**Core question:** Can this be solved with a fixed amount of memory, no matter how large the input gets?
+- As n grows, does what I need to remember grow without limit? → 
+
+**For string / language problems (Chomsky hierarchy):**
+
+| Class | Machine | In code |
 |---|---|---|
-|  |  →  |  |
-|  |  →  |  |
+| Regular | DFA / bounded counter | O(1) extra space, a few flags or a state enum |
+| Context-free | PDA | a stack (O(n) space) |
+| Beyond | TM | general data structures |
 
-**Composition:** `box1 → box2 → box3`
+- Is L regular? → 
+- How I know (build a DFA/regex to show yes, or Myhill–Nerode / pumping lemma to show no): 
 
----
-
-## 🔍 Pattern Recognition
-- **Signal(s) in the problem that pointed to the pattern:**
-  - 
-- **Pattern used:** [[ ]]
-- **Similar problems:** [[ ]], [[ ]]
+**For other problems (problem family):**
+- Family: search | optimization | graph | counting | simulation | parsing
+- Structural property (optimal substructure, monotonic predicate, overlapping subproblems, ...): 
 
 ---
 
-## 🐢 Brute Force
-**Idea:**
+## 3️⃣ Choose the Model
+**Model / data structure:** [[ ]]
 
-**Complexity:** Time O( ) · Space O( )
+**Why the classification forces this choice:**
 
-**Why it's not enough:**
+
+**Signal(s) in the problem that pointed to it:**
+- 
+
+**Naive approach and why it's not enough:**
+- Idea: 
+- Complexity: Time O( ) · Space O( )
+
+**Similar problems:** [[ ]], [[ ]]
 
 ---
 
-## 🚀 Optimal Approach
-**Key insight (one sentence):**
-> 
+## 4️⃣ Specify the Model (Case Table)
+<!--
+1. What does the algorithm look at to decide each step?
+2. List the possible values of each.
+3. Cross them, then merge the cases that behave the same way.
+The table must be exhaustive (every situation covered) and mutually exclusive (each situation in exactly one row).
+Each row (or merged group of rows) becomes one branch in the code.
+-->
 
-**Algorithm:**
-1. 
-2. 
-3. 
+**What the machine sees at each step:** 
+
+| Input | State / top | Action |
+|---|---|---|
+|  |  |  |
+|  |  |  |
+
+---
+
+## 5️⃣ Pseudocode
+<!-- Translate the case table directly. No real syntax yet. -->
+```
+```
 
 **Invariant / why it's correct:**
 
 
 **Complexity:** Time O( ) · Space O( )
-<!-- Justify it — where does each factor come from? -->
+<!-- Justify each factor: where does it come from? -->
 
 ---
 
-## 💻 Code
-```python
+## 6️⃣ Build (Code)
+```c
 
 ```
 
+**Line purposes:**
+<!-- For each non-trivial line: what job it does and what breaks without it -->
+- 
+
 ---
 
-## 🧪 Edge Cases & Bugs
+## 7️⃣ Reflect
+
+### Edge cases
 - [ ] Empty input
 - [ ] Single element
-- [ ] Duplicates
-- [ ] Negative numbers / zero
+- [ ] One example per rule from stage 1
 - [ ] Max constraints (overflow, recursion depth)
 
 **Bugs I hit:**
 - 
 
----
+**Could a weaker model have worked?** (e.g. a counter instead of a stack: if not, why not?)
 
-## 🎓 Coursework Connections
-<!-- Link to Algorithm Design, Theory of Computation, OS, SWE notes where relevant -->
-- [[ ]] — 
 
----
+### Coursework connections
+<!-- Theory of Computation, Algorithm Design, OS, SWE -->
+- [[ ]]: 
 
-## 🧠 Takeaways
+### Takeaways
 **What I'd tell myself before attempting this again:**
 
 
 **Mistake to never repeat:**
 
 
-**Retrieval questions (answer these at next review without looking):**
-1. What's the key insight?
-2. What's the complexity and why?
-3. What signal identifies this pattern?
+**Retrieval questions (answer at next review without looking):**
+1. What class is this problem, and how do I know?
+2. Which model does that class require, and why can't a weaker one work?
+3. What are the rows of the case table?
+4. What's the complexity, and where does each factor come from?
 
 ---
 
