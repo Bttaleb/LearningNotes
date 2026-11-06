@@ -12,6 +12,10 @@
     {
       "folder": "Glossary",
       "template": "_templates/definition.md"
+    },
+    {
+      "folder": "Programming/Leet",
+      "template": "Programming/Leet/Templates/LeetCode Problem Template.md"
     }
   ],
   "file_templates": [],

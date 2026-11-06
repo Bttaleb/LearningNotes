@@ -1,5 +1,5 @@
 ---
-title: "{{title}}"
+title: <% tp.file.title %>
 number:
 link:
 difficulty:
@@ -9,14 +9,14 @@ model:
 language:
 status:
 time-spent:
-date: 2026-11-06
+date: <% tp.date.now("YYYY-MM-DD") %>
 next-review:
 attempts: 1
 tags:
   - leetcode
 ---
 
-# {{title}}
+# <% tp.file.title %>
 
 > **Pipeline:** Define → Classify → Choose model → Specify model → Pseudocode → Build → Reflect
 > Do not move to the next stage until the current one holds up.
@@ -173,4 +173,4 @@ Each row (or merged group of rows) becomes one branch in the code.
 ## 🔁 Review Log
 | Date | Solved from scratch? | Time | Notes |
 |---|---|---|---|
-| {{date:YYYY-MM-DD}} |  |  | First attempt |
+| <% tp.date.now("YYYY-MM-DD") %> |  |  | First attempt |
