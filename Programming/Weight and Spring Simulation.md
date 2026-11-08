@@ -40,14 +40,14 @@ description: "Real-time spring/string weight simulation in C with raylib: design
 - Yes → **field** in a struct
 - No, it's shared by everything → **constant** (`#define`)
 
-| Value | Kind | Changes per frame? | Where it lives |
-| ----- | ---- | ------------------ | -------------- |
-| position | **state** | yes | `Ball` field (`Vector2`) |
-| velocity | **state** | yes | `Ball` field (`Vector2`) |
-| mass, radius | parameter | no | `Ball` field (`float`) |
-| anchor | parameter | no | `Spring` field (`Vector2`, it's a **place**) |
-| restLength, stiffness | parameter | no | `Spring` field (`float`, a **distance** / a number) |
-| gravity, time step, scale | world constant | no | `#define` |
+| Value                     | Kind           | Changes per frame? | Where it lives                                      |
+| ------------------------- | -------------- | ------------------ | --------------------------------------------------- |
+| position                  | **state**      | yes                | `Ball` field (`Vector2`)                            |
+| velocity                  | **state**      | yes                | `Ball` field (`Vector2`)                            |
+| mass, radius              | parameter      | no                 | `Ball` field (`float`)                              |
+| anchor                    | parameter      | no                 | `Spring` field (`Vector2`, it's a **place**)        |
+| restLength, stiffness     | parameter      | no                 | `Spring` field (`float`, a **distance** / a number) |
+| gravity, time step, scale | world constant | no                 | `#define`                                           |
 
 - **State** = exactly what must be carried from one frame to the next. Freeze the sim, keep only the state, and you can continue it exactly
 	- Position alone is **not enough**: a ball at y=300 just dropped vs. flying upward after a bounce look identical. **Velocity** (speed + direction) tells them apart
