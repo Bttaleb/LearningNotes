@@ -23,11 +23,11 @@ tags:
 <!-- Restate it without copying the prompt. Turn every vague word ("valid", "correct order", "matching") into something a program can check. -->
 
 **Problem in my own words:**
-
+A prefix is a letter or a group of letters added to the beginning of a root word. Given an array of strings, return the longest prefix shared amongst the strings
 
 **Formal statement:**
-- Input: 
-- Output: 
+- Input: an array of `n >= 1` strings , each a length `0...m`, over alphabet Σ = {a-z}
+- Output: a single string,
 - Kind of problem: decision (yes/no) | search (find one) | optimization (find best) | counting
 <!-- For string problems: alphabet Σ = { }, language L = { w ∈ Σ* | ... }, question: is w ∈ L? -->
 
@@ -37,7 +37,7 @@ tags:
 3. 
 
 **Constraints that matter:**
-- n ≤ 
+- n ≤ 200 (most possible elements)
 - Values: 
 - What the constraints change in practice (buffer sizes, which complexities pass): 
 
@@ -153,7 +153,9 @@ Each row (or merged group of rows) becomes one branch in the code.
 
 ### Takeaways
 **What I'd tell myself before attempting this again:**
-
+- When answering our **formal statement**'s input field, precision lies in asking:
+	How small can `n` be? (is our array guaranteed non-empty?  )
+	Can an individual string be empty
 
 **Mistake to never repeat:**
 
