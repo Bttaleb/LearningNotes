@@ -27,7 +27,7 @@ A prefix is a letter or a group of letters added to the beginning of a root word
 
 **Formal statement:**
 - Input: an array of `n >= 1` strings , each a length `0...m`, over alphabet Σ = {a-z}
-- Output: a single string,
+- Output: a single string, 
 - Kind of problem: decision (yes/no) | search (find one) | optimization (find best) | counting
 <!-- For string problems: alphabet Σ = { }, language L = { w ∈ Σ* | ... }, question: is w ∈ L? -->
 
