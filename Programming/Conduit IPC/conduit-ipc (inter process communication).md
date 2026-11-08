@@ -13,7 +13,7 @@ What makes it **IPC**?
 A [[protocol]] is needed as 
 - two `write()`s of 100 bytes each can come out as one `read()` of 200 bytes,
 - or as reads of 37 and 163
-Messages are imposed **on top** of the steam
+Messages are imposed **on top** of the stream
 
 ## Polya Step 1: Understand the problem
 1. Topology -> You have 1 coordinator and N workers. Jobs flow **down** to workers and results flow **back up**. How many pipes needed total? Why can't a single pipe carry traffic in both directions?
@@ -157,7 +157,7 @@ if (pid == 0) {
 }
 // PARENT process (scripted reader)
 if (pid > 0) {
-	close(fds[`]); // close wrie end
+	close(fds[1]); // close write end
 	char buf[10]; // allocate a 10 byte buffer
 	ssize_t ret = read_exact(fds[0], buf, 10); // caller for a return value
 	

@@ -68,13 +68,13 @@ printf("Hello %s, you are %d years old\n", name, age);
 %[flags][width][.precision][length]conversion
 ```
 
-| Part | Example | Meaning |
-|------|---------|---------|
-| flag | `-` | left-justify (see [[#Justification]]) |
-| width | `5` | minimum total characters (see [[#Field width and precision]]) |
-| `.precision` | `.3` | digits after decimal / max chars / min digits — depends on type |
-| length | `l`, `ll`, `h`, `z` | size modifier (e.g. `%ld` for `long`) |
-| conversion | `d`, `f`, `e`, `g`, `s`, `c`, `x` | the actual type |
+| Part         | Example                           | Meaning                                                         |
+| ------------ | --------------------------------- | --------------------------------------------------------------- |
+| flag         | `-`                               | left-justify (see [[#Justification]])                           |
+| width        | `5`                               | minimum total characters (see [[#Field width and precision]])   |
+| `.precision` | `.3`                              | digits after decimal / max chars / min digits — depends on type |
+| length       | `l`, `ll`, `h`, `z`               | size modifier (e.g. `%ld` for `long`)                           |
+| conversion   | `d`, `f`, `e`, `g`, `s`, `c`, `x` | the actual type                                                 |
 
 ## Field width and precision
 
