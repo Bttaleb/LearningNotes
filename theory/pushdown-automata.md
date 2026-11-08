@@ -101,12 +101,12 @@ The stack works as an unbounded counter. With one symbol type, a plain integer c
 
 ## In code
 
-| PDA part | Code |
-|---|---|
-| Stack | array + `top` index (or pointer) |
-| Push | `stack[++top] = c` |
-| Pop | `stack[top--]` |
-| Empty stack | `top == -1` |
+| PDA part            | Code                                                 |
+| ------------------- | ---------------------------------------------------- |
+| Stack               | array + `top` index (or pointer)                     |
+| Push                | `stack[++top] = c`                                   |
+| Pop                 | `stack[top--]`                                       |
+| Empty stack         | `top == -1`                                          |
 | Transition function | `if`/`else` branches, often driven by a lookup table |
 
 ## Where this shows up
