@@ -16,11 +16,6 @@ tags:
   - leetcode
 ---
 
-# <% tp.file.title %>
-
-> **Pipeline:** Define → Classify → Choose model → Specify model → Pseudocode → Build → Reflect
-> Do not move to the next stage until the current one holds up.
-
 ---
 
 ## 1️⃣ Define (Understand)
