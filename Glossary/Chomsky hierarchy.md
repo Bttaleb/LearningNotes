@@ -25,9 +25,9 @@ NOT a language problem (optimization/search/counting)
 # Gate 2: *If* it's membership - regular or not?
 	How much must I remember to check the pattern, as the string grows?
 - Bounded state - fixed set of flags or a counter that wraps (mod k) - read left to right once, remember a constant amount -> **Regular (DFA, O(1))**. Signals: "contains substring x", "even number of a's", "starts/ends with..."
-- Unbounded matching/nesting - must remember arbitrarily far back to match later -> **Context Free (PDA, Stack)**. Signals: balances/nested everything, `(a^n)(b^n)`, match-to-a-mirror
+- Unbounded matching/nesting - must remember arbitrarily far back to match later -> **Context Free (PDA, Stack)**. Signals: balanced/nested anything, `(a^n)(b^n)`, match-to-a-mirror
 
-"Can a fixed number of states handle *any* length?" -> If count is needed without a bound or math something arbitrarily far away, a DFA can't -> not regular
+"Can a fixed number of states handle *any* length?" -> If count is needed without a bound or match something arbitrarily far away, a DFA can't -> not regular
 
 ### Insight
 "Am I *deciding* yes/no from one string, or *producing* something from strings"
