@@ -153,7 +153,7 @@ Tree as given:
 
 **Algorithm.**
 1. Sort all edges by increasing weight.
-2. Go through them in order. Add an edge **iff** it does **not** create a cycle (its two endpoints are in different components — track with union-find).
+2. Go through them in order. Add an edge **if** it does **not** create a cycle (its two endpoints are in different components — track with union-find).
 3. Stop when you have |V| − 1 edges. That set is the MST.
 
 **Why it's correct** (the [[Cyclic vs Acyclic Graph#Why it matters for MSTs|cut/cycle argument]]): if adding an edge closes a cycle, the heaviest edge in that cycle is never needed, so a minimum-weight connected subgraph is always acyclic.
