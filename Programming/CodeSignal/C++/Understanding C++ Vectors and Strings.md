@@ -51,11 +51,43 @@ Allows us to craft more complex operations
 - = `{1, 2, 3, 4}` → an initializer list, where the starting values are handed to the vector
 - `my_vector[0] = 100` → overwrites the element at index 0 to 100
 
-**Vectors** are dynamic arrays that also provide several built-in functions for managing the stored data
-- `push_back()`
-- `insert()`
-- `erase()`
-- `find()`
+## **Vectors** 
+are dynamic arrays that also provide several built-in functions for managing the stored data
+- `push_back()`-> add a new element to the end of the vector
+- `insert()` -> add an element at a specific position in the vector
+- `erase()` -> removes a specific element or range of elements
+- `find()` -> find the position of a specific element within a vector
+
+```cpp
+#include <vector>
+#include <algorithm> // needed for find
+
+int main() {
+	// create a vector
+	std::vector<std::string> fruits = {"apple", "banana", "cherry"};
+	
+	// add new element at the end
+	fruits.push_back("date");
+	
+	// insert element @ specific position
+	fruits.insert(fruits.begin() + 1, "bilberry");
+	
+	// finding position of 'banana' & removing it using erase
+	auto pos = std::find(fruits.begin(), fruits.end(), "banana");
+	if (pos != fruits.end()) {
+		fruits.erase(pos);
+	}
+	
+	// accessing elements using indexing
+	std::string first_fruit = fruits[0]; // "apple"
+	std::string last_fruit = fruits[fruits.size() - 1]; // "date"
+	
+	// now, fruits equals {"apple", "bilberry", "cherry", "date"}
+	return 0;
+
+}
+```
+
 
 ---
 
