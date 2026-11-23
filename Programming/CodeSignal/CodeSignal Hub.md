@@ -35,7 +35,8 @@ TABLE WITHOUT ID
   file.link AS Lesson,
   course AS Course,
   status AS Status,
-  practices-done + "/" + practices-total AS Practices,
+  default(type, "lesson") AS Type,
+  default(practices-done, levels-done) + "/" + default(practices-total, levels-total) AS Progress,
   next-review AS "Next review"
 FROM "Programming/CodeSignal"
 WHERE platform = "CodeSignal" AND file.name != "CodeSignal Lesson Template"
