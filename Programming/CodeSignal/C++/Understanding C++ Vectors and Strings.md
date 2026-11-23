@@ -45,11 +45,17 @@ Containers are **mutable**, meaning we can alter their contents after creation.
 Allows us to craft more complex operations
 
 **Line by line — what each piece does:**
-- `#include <vector>` → 
-- `std::` → 
-- `vector<int>` → 
-- = `{1, 2, 3, 4}` → 
-- `my_vector[0] = 100` → 
+- `#include <vector>` → allows us to use vector type
+- `std::` →look inside the standard libraries namespace
+- `vector<int>` → declares our vector, made up of integers
+- = `{1, 2, 3, 4}` → an initializer list, where the starting values are handed to the vector
+- `my_vector[0] = 100` → overwrites the element at index 0 to 100
+
+**Vectors** are dynamic arrays that also provide several built-in functions for managing the stored data
+- `push_back()`
+- `insert()`
+- `erase()`
+- `find()`
 
 ---
 
