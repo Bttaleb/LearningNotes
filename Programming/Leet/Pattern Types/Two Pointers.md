@@ -182,7 +182,7 @@ Two pointers do no always start at opposite ends, they can move in several ways
 ```dataview
 TABLE difficulty, status, next-review
 FROM "Programming/Leet"
-WHERE contains(patterns, this.file.link)
+WHERE contains(patterns, this.file.link) OR contains(patterns, this.file.name)
 SORT date ASC
 ```
 
