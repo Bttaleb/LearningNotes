@@ -80,6 +80,7 @@ step | state of pointers / window / structure | decision
 - asked to use *constant extra space*
 
 **Strongest signal:**
+Nested loops
 
 **The question to ask myself:**
 > e.g. "Can one pointer replace the inner loop?"
@@ -98,37 +99,49 @@ step | state of pointers / window / structure | decision
 ## 4️⃣ The Template (Skeleton)
 <!-- The loop shape that stays the same across problems. Write it from memory, then check. -->
 ```
-function solve(input):
-    // setup
+function findPair(array, target):
+	// setup
+    left = 0
+    right = length(array) - 1
 
-    while ( ):
+    while (left < right):
         // test
-
+		sum = array[left] + array[right]
+		if sum == target
+			return [left, right]
+			
         // move rule
+        if sum < target
+	        left = left + 1
+	    if sum > target
+		    right = right - 1
 
-    return
+    return []
 ```
 
 **What changes between problems:**
 
-| Part | Stays the same | Changes per problem |
-|---|---|---|
-| Setup |  |  |
-| Loop condition |  |  |
-| Test |  |  |
-| Move rule |  |  |
-| Return value |  |  |
+| Part           | Stays the same | Changes per problem |
+| -------------- | -------------- | ------------------- |
+| Setup          |                |                     |
+| Loop condition |                |                     |
+| Test           |                |                     |
+| Move rule      |                |                     |
+| Return value   |                |                     |
 
 ---
 
 ## 5️⃣ Variants
 <!-- One row per variant. The problems column links to my solved notes. -->
+Two pointers do no always start at opposite ends, they can move in several ways
 
-| Variant | How the pieces move | Signal | Problems |
-|---|---|---|---|
-|  |  |  | [[ ]] |
-|  |  |  | [[ ]] |
-|  |  |  | [[ ]] |
+| Variant                 | How the pieces move                                          | Signal | Problems                                                                                                   |
+| ----------------------- | ------------------------------------------------------------ | ------ | ---------------------------------------------------------------------------------------------------------- |
+| Converging              | start @ opposite ends, move inward                           |        | [[pair with target sum]], [[squaring a sorted array]], [[minimum window sort]]                             |
+| Same direction          | fast pointer reads, slow pointer writes                      |        | [[find non-duplicate number instances]]                                                                    |
+| fixed value plus a pair | one loop fixes a value while two pointers find the remaining |        | [[triplet sum to zero]], [[triplet sum close to target]], [[triplets with smaller sum]], [[quadruple sum]] |
+| partitioning            | pointers divide the array into different regions             |        | [[dutch national flag]]                                                                                    |
+| one pointer per input   | one pointer moves through each input                         |        | [[comparing strings containing backspaces]]                                                                |
 
 **Start with:**
 
@@ -136,19 +149,24 @@ function solve(input):
 
 ## 6️⃣ Watch Out For
 <!-- Mistakes the course warns about, plus ones I actually made. Mark mine with (me). -->
-- [ ]
-- [ ]
-- [ ]
+- **Moving the wrong pointer**
+- **Moving both pointers after a failed comparison**
+- **Using the wrong stopping condition** -> use `left < right` when one value cannot be used twice
+- **Forgetting duplicate values** -> skip repeated values when a problem requires unique pairs or triplets
+- **Sorting without checking output requirement** -> sorting changes original indices
+- **Ignoring the cost of sorting** -> takes O(NlongN) time
 
 ---
 
 ## 7️⃣ Compare With Nearby Patterns
 <!-- The point isn't to list them; it's to know the one difference that decides between them. -->
 
-| Pattern | What it shares with this one | The deciding difference |
-|---|---|---|
-| [[ ]] |  |  |
-| [[ ]] |  |  |
+| Problem Needs:                      | Use:                   |
+| ----------------------------------- | ---------------------- |
+| pair or triplet in a sorted array   | two pointers           |
+| contiguous range that grows/shrinks | sliding window         |
+| cycle or midpoint in linked list    | fast and slow pointers |
+| one specific value in sorted array  | modified binary search |
 
 ---
 
@@ -176,7 +194,10 @@ SORT date ASC
 
 ## 🔟 Takeaways
 **The pattern in one line:**
-
+- Pointer is an *index* that shows a position in an array or string
+- Two pointers processes two positions at the same time
+- Sorted order tells you which pointer to move
+- Each move must safely remove values that cannot be part of the answer
 
 **Connections to coursework:**
 <!-- Algorithm Design, Theory of Computation, OS -->
