@@ -49,3 +49,31 @@ The result of the extraction process is:
 	`std::cout << 4` moves value 4 to console
 	`>>` is used with `std::cin`, and shows the direction that data is moving
 	`std::cin >> x` moves the value the user entered from the keyboard to variable `x`
+
+## Quiz
+
+```cpp
+#include <iostream>
+
+int main() {
+	std::cout << "Enter a number: ";
+	int x{};
+	std::cin >> x;
+	std::cout << "You entered " << x << `\n`;
+	
+	return 0;
+}
+```
+
+**a)** A letter, such as `h`
+Result: 0, integers can't hold letters so *extraction* fails. `x` is assigned value 0
+b) A number with a fractional part 3.2, or numbers less than 0.5 and greater than 0.5
+Result: The whole number, the fraction/decimal is dropped (NOT rounded)
+c) A small negative integer, -3
+Result: -3
+d) A word, such as `hello`
+Result: 0, integers can't hold strings
+e) A really big number (at least 3 billion)
+Result: likely the number 2147483647, entering a value larger than the largest number `x` can hold will be set to the largest number `x` can hold
+f) A few letters followed by a small number `abc123`
+Result: 0, integers can't hold letters, *extraction* fails
