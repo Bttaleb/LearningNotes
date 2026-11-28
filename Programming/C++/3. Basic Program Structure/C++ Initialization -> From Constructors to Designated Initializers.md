@@ -71,3 +71,13 @@ When aggregate initialization has labels:
 Date d{ 2050, 4, 10 };     // aggregate init, matched by position
 Date d{ .year = 2050, .month = 4, .day = 10 } // aggregate init, labeled
 ```
+
+With an **aggregate**, braces guarantee that every member gets a value
+```cpp
+Date a{2050, 4, 10}; // all three set
+Date b{2050};        // year = 2050, month and day are set to 0
+Date c{};            // all three set to 0
+Date d;              // no braces: all three are GARBAGE, same as int x;
+```
+
+### Members must be initialized in the same order in which they are declared in the struct
